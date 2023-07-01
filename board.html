@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/board.css">
+    <title>board</title>
+    <script src="./script.js"></script>
+</head>
+
+<body onload="includeHTML()">
+    <div w3-include-html="assets/templates/desktop_templates.html"></div>
+    <div class="main-div">
+        <div w3-include-html="assets/templates/top_templates.html"></div>
+
+        <div id="main-board">
+            <div>
+                <div id="search-board-bar">
+                    <div>
+                        <div id="board-headline">
+                            <span>Board</span>
+                        </div>
+                        <div id="search-add-board-container">
+                            <div id="search-task-board">
+                                <div>
+                                    <div>
+                                        <input id="input-search-task-board" placeholder="Find Task" type="text">
+                                    </div>
+                                    <div>
+                                        <img id="search-line-board" src="./assets/img/vertical-line-search.png">
+                                        <div id="img-search-task-board">
+                                            <img src="./assets/img/search-icon.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="btn-add-task-board">
+                                <span>Add task</span>
+                                <img src="./assets/img/plus-task-icon.png">
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="board-content">
+                    <div class="b-c-container" id="todo-container">
+                        <div class="b-c-headline" id="todo-headline">
+                            <span>To do</span>
+                            <button>
+                                <img src="./assets/img/plus-capa.png">
+                                <img src="./assets/img/plus-capa-blue.png">
+                                <img src="./assets/img/plus-capa-gray.png">
+                            </button>
+                        </div>
+                        <div class="tasks-container">
+                            <!-- task-card -->
+                            <div class="task-card">
+                                <div>
+                                    <div class="task-type bg-color-type-1">
+                                        <span>Design</span>
+                                    </div>
+                                    <div class="task-content">
+                                        <div>
+                                            <span class="task-title">Website redesign</span>
+                                            <span class="task-text">Modify the contents of the main website...</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-progress">
+                                        <div class="task-progress-bar"></div>
+                                        <span>1/2 Done</span>
+                                    </div>
+                                    <div class="task-footer">
+                                        <div class="task-responsible">
+                                            <div class="responsible bg-color-1">
+                                                <span>SM</span>
+                                            </div>
+                                            <div class="responsible bg-color-2">
+                                                <span>MW</span>
+                                            </div>
+                                            <div class="responsible bg-color-3">
+                                                <span>EF</span>
+                                            </div>
+                                        </div>
+                                        <div class="prio-symbol">
+                                            <img src="./assets/img/prio-baja-green.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!-- empty-space-task -->
+                            <div class="empty-space-task d-none"></div>
+                            <!--  -->
+                        </div>
+                    </div>
+
+                    <div class="b-c-container" id="in-progress-container">
+                        <div class="b-c-headline" id="in-progress-headline">
+                            <span>In progress</span>
+                            <button>
+                                <img src="./assets/img/plus-capa.png">
+                                <img src="./assets/img/plus-capa-blue.png">
+                                <img src="./assets/img/plus-capa-gray.png">
+                            </button>
+                        </div>
+                        <div class="tasks-container">
+                            <!-- task-card -->
+                            <div class="task-card">
+                                <div>
+                                    <div class="task-type bg-color-type-2">
+                                        <span>Sales</span>
+                                    </div>
+                                    <div class="task-content">
+                                        <div>
+                                            <span class="task-title">Call potential clients</span>
+                                            <span class="task-text">Make the product presen-tation to prospective
+                                                buyers</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-footer">
+                                        <div class="task-responsible">
+                                            <div class="responsible bg-color-4">
+                                                <span>AS</span>
+                                            </div>
+                                            <div class="responsible bg-color-5">
+                                                <span>DE</span>
+                                            </div>
+                                            <div class="responsible bg-color-6">
+                                                <span>+2</span>
+                                            </div>
+                                        </div>
+                                        <div class="prio-symbol">
+                                            <img src="./assets/img/prio-baja-vivid-red-orange.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!-- empty-space-task -->
+                            <div class="empty-space-task d-none"></div>
+                            <!--  -->
+                        </div>
+                    </div>
+
+                    <div class="b-c-container" id="awaiting-feedback-container">
+                        <div class="b-c-headline" id="awaiting-feedback-headline">
+                            <span>Awaiting Feedback</span>
+                            <button>
+                                <img src="./assets/img/plus-capa.png">
+                                <img src="./assets/img/plus-capa-blue.png">
+                                <img src="./assets/img/plus-capa-gray.png">
+                            </button>
+                        </div>
+                        <div class="tasks-container">
+                            <!-- task-card -->
+                            <div class="task-card">
+                                <div>
+                                    <div class="task-type bg-color-type-3">
+                                        <span>Backoffice</span>
+                                    </div>
+                                    <div class="task-content">
+                                        <div>
+                                            <span class="task-title">Accounting invoices </span>
+                                            <span class="task-text">Write open invoices for customer</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-footer">
+                                        <div class="task-responsible">
+                                            <div class="responsible bg-color-7">
+                                                <span>MB</span>
+                                            </div>
+                                            <div class="responsible bg-color-5">
+                                                <span>AM</span>
+                                            </div>
+                                            <div class="responsible bg-color-6">
+                                                <span>+3</span>
+                                            </div>
+                                        </div>
+                                        <div class="prio-symbol">
+                                            <img class="height-media-icon"
+                                                src="./assets/img/prio-media-orange-yellow.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+
+                            <!-- task-card -->
+                            <div class="task-card">
+                                <div>
+                                    <div class="task-type bg-color-type-4">
+                                        <span>Media</span>
+                                    </div>
+                                    <div class="task-content">
+                                        <div>
+                                            <span class="task-title">Video cut</span>
+                                            <span class="task-text">Edit the new company video</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-footer">
+                                        <div class="task-responsible">
+                                            <div class="responsible bg-color-8">
+                                                <span>HK</span>
+                                            </div>
+                                        </div>
+                                        <div class="prio-symbol">
+                                            <img class="height-media-icon"
+                                                src="./assets/img/prio-media-orange-yellow.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!-- empty-space-task -->
+                            <div class="empty-space-task d-none"></div>
+                            <!--  -->
+                        </div>
+                    </div>
+
+                    <div class="b-c-container" id="done-container">
+                        <div class="b-c-headline" id="done-headline">
+                            <span>Done</span>
+                            <button>
+                                <img src="./assets/img/plus-capa.png">
+                                <img src="./assets/img/plus-capa-blue.png">
+                                <img src="./assets/img/plus-capa-gray.png">
+                            </button>
+                        </div>
+                        <div class="tasks-container">
+                            <!-- task-card -->
+                            <div class="task-card">
+                                <div>
+                                    <div class="task-type bg-color-type-6">
+                                        <span>Marketing</span>
+                                    </div>
+                                    <div class="task-content">
+                                        <div>
+                                            <span class="task-title">Social media strategy</span>
+                                            <span class="task-text">Develop an ad campaign for brand positioning</span>
+                                        </div>
+                                    </div>
+                                    <div class="task-progress">
+                                        <div class="task-progress-bar bg-color-progress-bar"></div>
+                                        <span>3/3 Done</span>
+                                    </div>
+                                    <div class="task-footer">
+                                        <div class="task-responsible">
+                                            <div class="responsible bg-color-9">
+                                                <span>BZ</span>
+                                            </div>
+                                            <div class="responsible bg-color-10">
+                                                <span>RS</span>
+                                            </div>
+                                        </div>
+                                        <div class="prio-symbol">
+                                            <img src="./assets/img/prio-baja-lime-green.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!-- empty-space-task -->
+                            <div class="empty-space-task d-none"></div>
+                            <!--  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="opened-task-container">
+        <!-- opened task -->
+        <div id="opened-task" class="d-none">
+            <div id="o-t-type">
+                <span>Sales</span>
+            </div>
+
+            <!-- opened-task-content -->
+            <div id="opened-task-content">
+                <div id="o-t-title">
+                    <span>Call potential clients</span>
+                </div>
+                <span id="o-t-text">Make the product presentation to prospective buyers</span>
+                <div id="o-t-date">
+                    <span>Due date: </span>
+                    <span>05-08-2022</span>
+                </div>
+                <div id="o-t-prio">
+                    <span>Priority: </span>
+                    <img src="./assets/img/btn-prio-urgent.png">
+                    <img class="d-none" src="./assets/img/btn-prio-low.png">
+                    <img class="d-none" src="./assets/img/btn-prio-medium.png">
+                </div>
+                <span id="o-t-assigned">Assigned To:</span>
+                <!-- user -->
+                <div class="o-t-user">
+                    <div class="bg-color-4">
+                        <span>DE</span>
+                    </div>
+                    <span>David Eisenberg</span>
+                </div>
+                <!--  -->
+
+                <!-- user -->
+                <div class="o-t-user">
+                    <div class="bg-color-5">
+                        <span>BE</span>
+                    </div>
+                    <span>Benedikt Ziegler</span>
+                </div>
+                <!--  -->
+
+                <!-- user -->
+                <div class="o-t-user">
+                    <div class="bg-color-6">
+                        <span>MB</span>
+                    </div>
+                    <span>Marcel Bauer</span>
+                </div>
+                <!--  -->
+
+                <!-- user -->
+                <div class="o-t-user">
+                    <div class="bg-color-7">
+                        <span>SF</span>
+                    </div>
+                    <span>Stefanie Farber</span>
+                </div>
+                <!--  -->
+
+                <!--  -->
+            </div>
+
+            <img class="o-t-close-img" src="./assets/img/o-t-close.png">
+            <div id="o-t-btns-container">
+                <button id="o-t-btn-delete">
+                    <img src="./assets/img/img-delete.png">
+                    <img src="./assets/img/delete-icon-blue.png">
+                    <img src="./assets/img/delete-icon-black.png">
+                </button>
+                <button id="o-t-btn-edit">
+                    <img src="./assets/img/img-edit.png">
+                </button>
+            </div>
+        </div>
+        <!--  -->
+
+        <!-- opened task edit -->
+        <div id="opened-task-edit">
+            <div>
+                <img class="o-t-close-img" src="./assets/img/o-t-close.png">
+                <div id="o-t-btn-confirm">
+                    <span>OK</span>
+                    <img src="./assets/img/ok-icon.png" alt="">
+                </div>
+                <!-- edit content -->
+                <div id="o-t-edit-content">
+                    <div id="o-t-edit-title">
+                        <label for="o-t-input-title">Title</label>
+                        <input id="o-t-input-title" type="text" placeholder="Enter a title">
+                        <p>This field is required</p>
+                    </div>
+                    <div id="o-t-description">
+                        <label for="o-t-textarea-description">Description</label>
+                        <textarea name="" id="o-t-textarea-description" cols="" rows=""
+                            placeholder="Enter a Description"></textarea>
+                        <p>This field is required</p>
+                    </div>
+                    <div id="o-t-edit-date">
+                        <label for="o-t-date-input">Due date</label>
+                        <input date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" type="date" id="o-t-date-input" name=""
+                            required />
+                        <p>This field is required</p>
+
+                    </div>
+                    <div id="o-t-edit-prio">
+                        <span>Prio</span>
+                        <div class="o-t-edit-button-container">
+                            <div>
+                                <button class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
+                                    <span>Urgent</span>
+                                    <img src="./assets/img/prio-baja-vivid-red-orange.png">
+                                    <img src="./assets/img/prio-urgent-white.png">
+                                </button>
+                            </div>
+
+                            <div>
+                                <button class="o-t-edit-priority-button o-t-edit-medium" data-priority="medium">
+                                    <span>Medium</span>
+                                    <img src="./assets/img/prio-media-orange-yellow.png">
+                                    <img src="./assets/img/prio-media-white.png">
+                                </button>
+                            </div>
+
+                            <div>
+                                <button class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
+                                    <span>Low</span>
+                                    <img src="./assets/img/prio-baja-green.png">
+                                    <img src="./assets/img/prio-low-white.png">
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="o-t-edit-assigned">
+                        <div id="o-t-e-label">Assigned to</div>
+                        <div class="o-t-e-custom-select">
+                            <!-- User Invite to Assigned -->
+                            <div id="user-invite-div">
+                                <input type="text" placeholder="Contact email">
+                                <div>
+                                    <button id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
+                                    <img src="./assets/img/vertical-line-gray.png">
+                                    <button id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
+                                </div>
+                            </div>
+                            <div class="o-t-e-select-trigger">
+                                <!-- <span>Select contacts to assign</span> -->
+                                <input id="selected-assigned-input" type="text" placeholder="Select contacts to assign"
+                                    required readonly>
+                                <img src="./assets/img/select-icon.png" alt="">
+                            </div>
+                            <ul class="o-t-e-select-options">
+                                <li data-value="option1">
+                                    <span>Option 1</span>
+                                    <div class="check-container">
+                                        <label>
+                                            <input type="checkbox" class="assigned-check">
+                                            <img class="image-1" src="./assets/img/unchecked.png">
+                                            <img class="image-2 d-none" src="./assets/img/checked.png">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li data-value="option2">
+                                    <span>Option 2</span>
+                                    <div class="check-container">
+                                        <label>
+                                            <input type="checkbox" class="assigned-check">
+                                            <img class="image-1" src="./assets/img/unchecked.png">
+                                            <img class="image-2 d-none" src="./assets/img/checked.png">
+                                        </label>
+                                    </div>
+                                </li>
+                                <li data-value="option3">
+                                    <span>Option 3</span>
+                                    <div class="check-container">
+                                        <label>
+                                            <input type="checkbox" class="assigned-check">
+                                            <img class="image-1" src="./assets/img/unchecked.png">
+                                            <img class="image-2 d-none" src="./assets/img/checked.png">
+                                        </label>
+                                    </div>
+                                </li>
+                                <!-- Invite new Contact -->
+                                <li class="user-invite" data-value="option3">
+                                    <span>Invite new contact </span>
+                                    <div class="user-icon">
+                                        <img src="./assets/img/user-icon.png">
+                                    </div>
+                                </li>
+                                <!--  -->
+                            </ul>
+                        </div>
+                        <div id="o-t-e-a-users">
+                            <div class="bg-color-1">
+                                <span>SM</span>
+                            </div>
+                            <div class="bg-color-2">
+                                <span>AE</span>
+                            </div>
+                            <div class="bg-color-3">
+                                <span>LF</span>
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+
+
+                    </div>
+
+
+
+                </div>
+                <!--  -->
+            </div>
+        </div>
+        <!--  -->
+    </div>
+
+    <script src="./js/board.js"></script>
+</body>
+
+</html>
