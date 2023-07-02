@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Log in</title>
+    <script src="./script.js"></script>
+</head>
+
+<body>
+
+    <div class="main-div">
+        <div id="login-container">
+
+            <div id="login" class="login-div-style d-none">
+                <div class="login-headline">
+                    <span>Log in</span>
+                    <img src="./assets/img/orizontal-line-blue.png">
+                </div>
+                <div class="login-inputs">
+                    <!-- Input DIV for all -->
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Email" required>
+                                <img src="./assets/img/email.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                    <!--  -->
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Password" required>
+                                <img class="img-password" src="./assets/img/password.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                </div>
+                <div id="login-subtitle">
+                    <div>
+                        <div>
+                            <!-- Check Container -->
+                            <div class="check-container r0-t0">
+                                <label class="label-style">
+                                    <input type="checkbox" class="assigned-check t2-r2">
+                                    <img class="image-1 w16-h16" src="./assets/img/check-default.png">
+                                    <img class="image-2 d-none w16-h16" src="./assets/img/check-valid.png">
+                                </label>
+                            </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
+                            <!-- ----------- -->
+                        </div>
+                        <p>Remember me</p>
+                    </div>
+                    <button id="btn-to-forgot">Forgot my password</button>
+                </div>
+                <div id="login-btns">
+                    <button id="btn-login">Log in</button>
+                    <button id="btn-guest-login">Guest Log in</button>
+                </div>
+            </div>
+
+            <div id="signup" class="login-div-style d-none">
+                <div class="login-headline">
+                    <span>Sign up</span>
+                    <img src="./assets/img/orizontal-line-blue.png">
+                </div>
+                <div class="login-inputs">
+                    <!-- Input DIV for all -->
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Name" required>
+                                <img class="w24-h24" src="./assets/img/user-line.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                    <!--  -->
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Email" required>
+                                <img class="" src="./assets/img/email.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Password" required>
+                                <img class="img-password" src="./assets/img/password.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                </div>
+                <button id="btn-sign-up">Sign up</button>
+                <img src="./assets/img/arrow-left-blue.png">
+            </div>
+
+            <div id="forgot-password" class="login-div-style password-div-style d-none">
+                <div class="login-headline">
+                    <span>I forgot my password</span>
+                    <img src="./assets/img/orizontal-line-blue.png">
+                </div>
+                <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
+                <div class="login-inputs">
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Email" required>
+                                <img class="" src="./assets/img/email.png">
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+                </div>
+                <button id="btn-forgot-password">Send me the email</button>
+                <img src="./assets/img/arrow-left-blue.png">
+            </div>
+
+            <div id="reset-password" class="login-div-style password-div-style">
+                <div class="login-headline">
+                    <span>Reset your password</span>
+                    <img src="./assets/img/orizontal-line-blue.png">
+                </div>
+                <span>Change your account password</span>
+                <div class="login-inputs">
+
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="New password" required>
+                                <!-- <img class="" src="./assets/img/email.png"> -->
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+
+                    <div class="input-div">
+                        <div>
+                            <div class="input-imitation">
+                                <input type="text" placeholder="Confirm password" required>
+                                <!-- <img class="" src="./assets/img/email.png"> -->
+                            </div>
+                        </div>
+                        <p>This field is required</p>
+                    </div>
+
+                </div>
+                <button id="btn-reset-password">Continue</button>
+                <img src="./assets/img/arrow-left-blue.png">
+            </div>
+
+            <img src="./assets/img/join-logo.png"><!--position absolut left top-->
+            <div id="not-user">
+                <span>Not a Join user?</span>
+                <button>Sign up</button>
+            </div><!--position absolut right top-->
+        </div>
+        <div id="pop-up-login" class="d-none">
+            <div>
+                <div id="message-reset-password" class="d-none">
+                    <span>You reset your password</span>
+                </div>
+                <div id="message-confirmation">
+                    <img src="./assets/img/send-check-confirm.png">
+                    <span>An E-Mail has been sent to you</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

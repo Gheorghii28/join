@@ -1411,6 +1411,7 @@
     line-height: 120%;
 }
 
+/* Check Container */
 .check-container {
     position: absolute;
     right: 16px;
@@ -1432,6 +1433,7 @@
     right: -1px;
     cursor: pointer;
 }
+/* -------------- */
 
 .user-icon {
     display: flex;
