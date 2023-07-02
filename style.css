@@ -31,48 +31,6 @@ body {
     background-color: #F6F7F8;
 }
 
-#desktop_templates {
-    position: absolute;
-    height: 100vh;
-    background-color: #2A3647;
-    width: 232px;
-    left: 0px;
-    top: 0px;
-    border-radius: 0px;
-    padding: 66px 20px 66px 20px;
-    z-index: 10;
-}
-
-#top {
-    height: 89px;
-    width: 100%;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    border-radius: 0px;
-    padding: 20px 36px 20px 348px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    display: flex;
-    z-index: 5;
-}
-
-#top-right {
-    display: flex;
-}
-
-.img-avatar {
-    height: 49px;
-    width: 49px;
-    border-radius: 50%;
-}
-
-.img-avatar img {
-    width: 100%;
-    object-fit: contain;
-    border-radius: 50%;
-}
-
 /*  --------------------  */
 
 #login-container {

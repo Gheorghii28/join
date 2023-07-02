@@ -17,7 +17,7 @@ buttons.forEach(button => {
 });
 
 
-
+// ----------------
 const selectTrigger = document.querySelector('.o-t-e-select-trigger');
 
 selectTrigger.addEventListener('click', function (event) {

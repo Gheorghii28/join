@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/top_templates.css">
+    <link rel="stylesheet" href="./css/desktop_templates.css">
+    <link rel="stylesheet" href="./css/help.css">
+    <title>Help</title>
+    <script src="./script.js"></script>
+</head>
+
+<body onload="includeHTML()">
+    <div w3-include-html="assets/templates/desktop_templates.html"></div>
+    <div class="main-div">
+        <div w3-include-html="assets/templates/top_templates.html"></div>
+        <img id="help-back" src="./assets/img/help-back.png">
+        <div id="help-headline">
+            <h1>Help</h1>
+        </div>
+        <div id="help-content">
+            <div id="help-text-1">
+                <h2>What is Join?</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa
+                    eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis.
+                    Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum,
+                    condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae,
+                    feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent
+                    tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                </p>
+            </div>
+            <h2>How to use it</h2>
+            <div id="help-text-2">
+                <div>
+                    <span>1.</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
+                        massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla
+                        convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. </p>
+                </div>
+                <div>
+                    <span>2.</span>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
+                        massa eget, ornare lacinia urna. </p>
+                </div>
+                <div>
+                    <span>3.</span>
+                    <p>Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris
+                        ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque libero erat, pharetra a
+                        neque et, imperdiet semper justo.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/desktop_templates.js"></script>
+</body>
+
+</html>
