@@ -11,4 +11,5 @@ async function includeHTML() {
         }
     }
     activeBtn();
+    setMinDate();
 }

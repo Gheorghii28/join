@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <link rel="stylesheet" href="./css/board.css">
+    <link rel="stylesheet" href="./css/add_task.css">
     <title>board</title>
     <script src="./script.js"></script>
 </head>
 
 <body onload="includeHTML()">
     <div w3-include-html="assets/templates/desktop_templates.html"></div>
+    <div w3-include-html="assets/templates/task_form_templates.html" class="task-delivery"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
 
@@ -362,27 +364,31 @@
                 </div>
                 <!-- edit content -->
                 <div id="o-t-edit-content">
-                    <div id="o-t-edit-title">
+
+                    <div id="o-t-edit-title" class="edit-task-title"> <!-- TITLE-INPUT -->
                         <label for="o-t-input-title">Title</label>
                         <input id="o-t-input-title" type="text" placeholder="Enter a title">
                         <p>This field is required</p>
                     </div>
-                    <div id="o-t-description">
+
+                    <div id="o-t-description" class="task-description"> <!--    DESCRIPTION-INPUT -->
                         <label for="o-t-textarea-description">Description</label>
                         <textarea name="" id="o-t-textarea-description" cols="" rows=""
                             placeholder="Enter a Description"></textarea>
                         <p>This field is required</p>
                     </div>
-                    <div id="o-t-edit-date">
+
+                    <div id="o-t-edit-date" class="task-date"> <!--    DATE-INPUT -->
                         <label for="o-t-date-input">Due date</label>
                         <input date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" type="date" id="o-t-date-input" name=""
                             required />
                         <p>This field is required</p>
-
                     </div>
-                    <div id="o-t-edit-prio">
+
+                    <div id="o-t-edit-prio" class="task-prio-choise"> <!--    PRIO-CHOISE -->
                         <span>Prio</span>
                         <div class="o-t-edit-button-container">
+
                             <div>
                                 <button class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
                                     <span>Urgent</span>
@@ -406,28 +412,33 @@
                                     <img src="./assets/img/prio-low-white.png">
                                 </button>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                    <div id="o-t-edit-assigned">
-                        <div id="o-t-e-label">Assigned to</div>
+
+                    <div id="o-t-edit-assigned" class="task-assigned"> <!--     ASSIGNED-INPUT -->
+
+                        <div id="o-t-e-label" class="assigned-label">Assigned to</div>
+
                         <div class="o-t-e-custom-select">
                             <!-- User Invite to Assigned -->
-                            <div id="user-invite-div">
+                            <div id="user-invite-div" class="task-invite-input">
                                 <input type="text" placeholder="Contact email">
                                 <div>
-                                    <button id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
+                                    <button class="btn-invite" id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
                                     <img src="./assets/img/vertical-line-gray.png">
-                                    <button id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
+                                    <button class="btn-invite" id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
                                 </div>
                             </div>
+
                             <div class="o-t-e-select-trigger">
                                 <!-- <span>Select contacts to assign</span> -->
                                 <input id="selected-assigned-input" type="text" placeholder="Select contacts to assign"
                                     required readonly>
                                 <img src="./assets/img/select-icon.png" alt="">
                             </div>
-                            <ul class="o-t-e-select-options">
+
+                            <ul class="o-t-e-select-options"><!-- OPTIONS -->
                                 <li data-value="option1">
                                     <span>Option 1</span>
                                     <!-- Check Container -->
@@ -470,6 +481,7 @@
                                 <!--  -->
                             </ul>
                         </div>
+
                         <div id="o-t-e-a-users">
                             <div class="bg-color-1">
                                 <span>SM</span>
@@ -481,8 +493,8 @@
                                 <span>LF</span>
                             </div>
                         </div>
-                        <p>This field is required</p>
 
+                        <p>This field is required</p>
 
                     </div>
 
@@ -497,6 +509,7 @@
 
     <script src="./js/board.js"></script>
     <script src="./js/desktop_templates.js"></script>
+    <script src="./js/add_task.js"></script>
 </body>
 
 </html>
