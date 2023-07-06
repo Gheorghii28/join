@@ -9,170 +9,167 @@
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <title>Log in</title>
+    <script src="js/utils.js"></script>
+    <script src="js/pageTransitionUtils.js"></script>
     <script src="./script.js"></script>
 </head>
 
-<body>
-
+<body onload="init()">
     <div class="main-div">
         <div id="login-container">
-
-            <div id="login" class="login-div-style d-none">
-                <div class="login-headline">
-                    <span>Log in</span>
-                    <img src="./assets/img/orizontal-line-blue.png">
-                </div>
-                <div class="login-inputs">
-                    <!-- Input DIV for all -->
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Email" required>
-                                <img src="./assets/img/email.png">
+            <div id="login" class="login-div-style animation-opacity">
+                <form onsubmit="login(); return false;">
+                    <div class="login-headline">
+                        <span>Log in</span>
+                        <img src="./assets/img/orizontal-line-blue.png">
+                    </div>
+                    <div class="login-inputs">
+                        <div class="input-div" onclick="focusInput(event)">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="email" type="email" placeholder="Email" required>
+                                    <img src="./assets/img/email.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
-                    </div>
-                    <!--  -->
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Password" required>
-                                <img class="img-password" src="./assets/img/password.png">
+                        <div class="input-div" onclick="focusInput(event)">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="password" type="password" placeholder="Password" required>
+                                    <img class="img-password" src="./assets/img/password.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
+                            <p id="wrong-password" class="wrong d-none">Wrong password</p>
                         </div>
-                        <p>This field is required</p>
                     </div>
-                </div>
-                <div id="login-subtitle">
-                    <div>
+                    <div id="login-subtitle">
                         <div>
-                            <!-- Check Container -->
-                            <div class="check-container r0-t0">
-                                <label class="label-style">
-                                    <input type="checkbox" class="assigned-check t2-r2">
-                                    <img class="image-1 w16-h16" src="./assets/img/check-default.png">
-                                    <img class="image-2 d-none w16-h16" src="./assets/img/check-valid.png">
-                                </label>
-                            </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
-                            <!-- ----------- -->
+                            <div>
+                                <div class="check-container r0-t0">
+                                    <label class="label-style">
+                                        <input onclick="toggleImage('remember-check')" id="remember-check"
+                                            type="checkbox" class="assigned-check t2-r2">
+                                        <img class="image-1 w16-h16" src="./assets/img/check-default.png">
+                                        <img class="image-2 d-none w16-h16" src="./assets/img/check-valid.png">
+                                    </label>
+                                </div>
+                            </div>
+                            <p>Remember me</p>
                         </div>
-                        <p>Remember me</p>
+                        <button onclick="toForgot()" type="button" id="btn-to-forgot">Forgot my password</button>
                     </div>
-                    <button id="btn-to-forgot">Forgot my password</button>
-                </div>
-                <div id="login-btns">
-                    <button id="btn-login">Log in</button>
-                    <button id="btn-guest-login">Guest Log in</button>
-                </div>
+                    <div id="login-btns">
+                        <button id="btn-login">Log in</button>
+                        <button type="button" id="btn-guest-login" onclick="guestLogin()">Guest Log in</button>
+                    </div>
+                </form>
             </div>
-
             <div id="signup" class="login-div-style d-none">
                 <div class="login-headline">
                     <span>Sign up</span>
                     <img src="./assets/img/orizontal-line-blue.png">
                 </div>
-                <div class="login-inputs">
-                    <!-- Input DIV for all -->
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Name" required>
-                                <img class="w24-h24" src="./assets/img/user-line.png">
+                <form onsubmit="register(); return false;">
+                    <div class="login-inputs">
+                        <div class="input-div" onclick="focusInput(event)">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="register-name" type="text" placeholder="Name" required>
+                                    <img class="w24-h24" src="./assets/img/user-line.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
-                    </div>
-                    <!--  -->
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Email" required>
-                                <img class="" src="./assets/img/email.png">
+                        <div class="input-div" onclick="focusInput(event)">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="register-email" type="email" placeholder="Email" required>
+                                    <img class="" src="./assets/img/email.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
-                    </div>
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Password" required>
-                                <img class="img-password" src="./assets/img/password.png">
+                        <div class="input-div" onclick="focusInput(event)">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="register-password" type="password" placeholder="Password" required>
+                                    <img class="img-password" src="./assets/img/password.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
                     </div>
-                </div>
-                <button id="btn-sign-up">Sign up</button>
-                <img src="./assets/img/arrow-left-blue.png">
+                    <button id="btn-register">Sign up</button>
+                </form>
+                <img onclick="toLogin()" class="back-blue-position" src="./assets/img/arrow-left-blue.png">
             </div>
-
             <div id="forgot-password" class="login-div-style password-div-style d-none">
                 <div class="login-headline">
                     <span>I forgot my password</span>
                     <img src="./assets/img/orizontal-line-blue.png">
                 </div>
-                <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
-                <div class="login-inputs">
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Email" required>
-                                <img class="" src="./assets/img/email.png">
+                <span class="action-info">Don't worry! We will send you an email with the instructions to reset your
+                    password.</span>
+                <form onsubmit="sendEmail(); return false;">
+                    <div class="login-inputs">
+                        <div class="input-div">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="email-send" type="email" placeholder="Email" required>
+                                    <img class="" src="./assets/img/email.png">
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
                     </div>
-                </div>
-                <button id="btn-forgot-password">Send me the email</button>
-                <img src="./assets/img/arrow-left-blue.png">
+                    <button id="btn-forgot-password">Send me the email</button>
+                </form>
+                <img onclick="toLogin()" class="back-blue-position" src="./assets/img/arrow-left-blue.png">
             </div>
-
-            <div id="reset-password" class="login-div-style password-div-style">
+            <div id="reset-password" class="login-div-style password-div-style d-none">
                 <div class="login-headline">
                     <span>Reset your password</span>
                     <img src="./assets/img/orizontal-line-blue.png">
                 </div>
-                <span>Change your account password</span>
-                <div class="login-inputs">
-
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="New password" required>
-                                <!-- <img class="" src="./assets/img/email.png"> -->
+                <span class="action-info">Change your account password</span>
+                <form onsubmit="resetPassword(); return false;">
+                    <div class="login-inputs">
+                        <div class="input-div">
+                            <div>
+                                <div class="input-imitation">
+                                    <input id="new-password" type="text" placeholder="New password" required>
+                                </div>
                             </div>
+                            <p class="d-none">This field is required</p>
                         </div>
-                        <p>This field is required</p>
-                    </div>
-
-                    <div class="input-div">
-                        <div>
-                            <div class="input-imitation">
-                                <input type="text" placeholder="Confirm password" required>
-                                <!-- <img class="" src="./assets/img/email.png"> -->
+                        <div class="input-div">
+                            <div id="div-confirm-password">
+                                <div class="input-imitation">
+                                    <input id="confirm-password" type="text" placeholder="Confirm password" required>
+                                </div>
                             </div>
+                            <p id="wrong-not-matches" class="not-matches d-none">Make sure the second password you typed
+                                matches the first.</p>
                         </div>
-                        <p>This field is required</p>
                     </div>
-
-                </div>
-                <button id="btn-reset-password">Continue</button>
-                <img src="./assets/img/arrow-left-blue.png">
+                    <button id="btn-reset-password">Continue</button>
+                </form>
+                <img onclick="toForgot()" class="back-blue-position" src="./assets/img/arrow-left-blue.png">
             </div>
-
-            <img src="./assets/img/join-logo.png"><!--position absolut left top-->
-            <div id="not-user">
+            <img src="./assets/img/join-logo.png">
+            <div id="not-user" class="animation-opacity">
                 <span>Not a Join user?</span>
-                <button>Sign up</button>
-            </div><!--position absolut right top-->
+                <button type="button" onclick="toSignUp()">Sign up</button>
+            </div>
         </div>
         <div id="pop-up-login" class="d-none">
             <div>
                 <div id="message-reset-password" class="d-none">
                     <span>You reset your password</span>
                 </div>
-                <div id="message-confirmation">
+                <div id="message-confirmation" class="d-none">
                     <img src="./assets/img/send-check-confirm.png">
                     <span>An E-Mail has been sent to you</span>
                 </div>
@@ -180,6 +177,8 @@
         </div>
     </div>
 
+    <script src="js/storage.js"></script>
+    <script src="js/register.js"></script>
 </body>
 
 </html>

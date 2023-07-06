@@ -46,20 +46,6 @@ selectTrigger.addEventListener('click', function (event) {
 // }); anpassen
 
 
-// const checkbox = document.getElementById('myCheckbox');
-// const image1 = document.querySelector('.image-1');
-// const image2 = document.querySelector('.image-2');
 
-// image1.addEventListener('click', function() {
-//   checkbox.checked = true;
-//   image1.style.display = 'none';
-//   image2.style.display = 'inline';
-// });
-
-// image2.addEventListener('click', function() {
-//   checkbox.checked = false;
-//   image1.style.display = 'inline';
-//   image2.style.display = 'none';
-// }); anpassen
 
 

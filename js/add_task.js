@@ -1,4 +1,3 @@
-
 // JavaScript
 const buttons = document.querySelectorAll('.o-t-edit-priority-button');
 
