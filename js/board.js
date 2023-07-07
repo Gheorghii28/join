@@ -1,20 +1,4 @@
 
-// JavaScript
-const buttons = document.querySelectorAll('.o-t-edit-priority-button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Entferne die aktive Klasse von allen Buttons
-        buttons.forEach(btn => btn.classList.remove('active'));
-
-        // Füge die aktive Klasse zum angeklickten Button hinzu
-        button.classList.add('active');
-
-        // Rufe die Information über den aktiven Button ab
-        const priority = button.getAttribute('data-priority');
-        console.log(`Aktiver Button: ${priority}`);
-    });
-});
 
 
 // ----------------

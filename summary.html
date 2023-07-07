@@ -13,9 +13,12 @@
     <title>summary</title>
     <script src="js/utils.js"></script>
     <script src="./script.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/summary.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <div w3-include-html="assets/templates/desktop_templates.html"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
@@ -32,74 +35,86 @@
                     <div id="taskSummary">
                         <div id="tasksContainer">
                             <div>
-                                <div id="tasksInBoard" class="task-btn">
-                                    <!-- Hier kommt der Inhalt für "Tasks in Board" -->
-                                    <div>
-                                        <span>5</span>
-                                        <span>Tasks in Board</span>
+                                <a href="board.html">
+                                    <div id="tasksInBoard" class="task-btn">
+                                        <!-- Hier kommt der Inhalt für "Tasks in Board" -->
+                                        <div>
+                                            <span>5</span>
+                                            <span>Tasks in Board</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div>
-                                <div id="tasksInProgress" class="task-btn">
-                                    <!-- Hier kommt der Inhalt für "Tasks in Progress" -->
-                                    <div>
-                                        <span>2</span>
-                                        <span>Tasks In Progress</span>
+                                <a href="board.html">
+                                    <div id="tasksInProgress" class="task-btn">
+                                        <!-- Hier kommt der Inhalt für "Tasks in Progress" -->
+                                        <div>
+                                            <span>2</span>
+                                            <span>Tasks In Progress</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div>
-                                <div id="awaitingFeedback" class="task-btn">
-                                    <!-- Hier kommt der Inhalt für "Awaiting Feedback" -->
-                                    <div>
-                                        <span>2</span>
-                                        <span>Awaiting Feedback</span>
+                                <a href="board.html">
+                                    <div id="awaitingFeedback" class="task-btn">
+                                        <!-- Hier kommt der Inhalt für "Awaiting Feedback" -->
+                                        <div>
+                                            <span>2</span>
+                                            <span>Awaiting Feedback</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div id="urgentContainer">
                             <div>
-                                <div id="urgent">
-                                    <!-- Hier kommt der Inhalt für "Urgent" -->
-                                    <div id="urgent-left">
-                                        <img src="./assets/img/ellipse 4.png">
-                                        <div>
-                                            <span>1</span>
-                                            <span>Urgent</span>
+                                <a href="board.html">
+                                    <div id="urgent">
+                                        <!-- Hier kommt der Inhalt für "Urgent" -->
+                                        <div id="urgent-left">
+                                            <img src="./assets/img/ellipse 4.png">
+                                            <div>
+                                                <span>1</span>
+                                                <span>Urgent</span>
+                                            </div>
+                                        </div>
+                                        <img src="./assets/img/vertical-line-gray.png">
+                                        <div id="urgent-right">
+                                            <span>October 16, 2022</span>
+                                            <span>Upcoming Deadline</span>
                                         </div>
                                     </div>
-                                    <img src="./assets/img/vertical-line-gray.png">
-                                    <div id="urgent-right">
-                                        <span>October 16, 2022</span>
-                                        <span>Upcoming Deadline</span>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <div id="statusContainer">
                             <div>
-                                <div id="todo-sumarry">
-                                    <!-- Hier kommt der Inhalt für "To-do" -->
-                                    <img src="./assets/img/todo.png">
-                                    <img src="./assets/img/todo-white.png">
-                                    <div>
-                                        <span>1</span>
-                                        <span>To-do</span>
+                                <a href="board.html">
+                                    <div id="todo-sumarry">
+                                        <!-- Hier kommt der Inhalt für "To-do" -->
+                                        <img src="./assets/img/todo.png">
+                                        <img src="./assets/img/todo-white.png">
+                                        <div>
+                                            <span>1</span>
+                                            <span>To-do</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div>
-                                <div id="done-summary">
-                                    <!-- Hier kommt der Inhalt für "Done" -->
-                                    <img src="./assets/img/done.png">
-                                    <img src="./assets/img/done-white.png">
-                                    <div>
-                                        <span>1</span>
-                                        <span>Done</span>
+                                <a href="board.html">
+                                    <div id="done-summary">
+                                        <!-- Hier kommt der Inhalt für "Done" -->
+                                        <img src="./assets/img/done.png">
+                                        <img src="./assets/img/done-white.png">
+                                        <div>
+                                            <span>1</span>
+                                            <span>Done</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -108,14 +123,15 @@
                 <div id="greeting-container">
                     <div>
                         <span>Good morning, </span>
-                        <span>Sofia Müller</span>
+                        <span id="greeting-name"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="./js/desktop_templates.js"></script>
+    
 </body>
 
 </html>

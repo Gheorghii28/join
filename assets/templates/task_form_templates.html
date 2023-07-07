@@ -1,6 +1,6 @@
 <div id="addtask-form">
 
-        <img id="close-task-form" src="/assets/img/close-form.png">
+    <img id="close-task-form" src="/assets/img/close-form.png">
 
     <div id="a-t-form-headline">
         <h1>Add Task</h1>
@@ -14,15 +14,77 @@
                 <div id="o-t-edit-title" class="edit-task-title"> <!-- TITLE-INPUT -->
                     <label for="o-t-input-title">Title</label>
                     <input id="o-t-input-title" type="text" placeholder="Enter a title" required>
-                    <p>This field is required</p>
+                    <p class="d-none">This field is required</p>
                 </div>
 
                 <div id="o-t-description" class="task-description"> <!--    DESCRIPTION-INPUT -->
                     <label for="o-t-textarea-description">Description</label>
-                    <textarea name="" id="o-t-textarea-description" cols="" rows=""
-                        placeholder="Enter a Description" required></textarea>
-                    <p>This field is required</p>
+                    <textarea name="" id="o-t-textarea-description" cols="" rows="" placeholder="Enter a Description"
+                        required></textarea>
+                    <p class="d-none">This field is required</p>
                 </div>
+
+                <div id="o-t-edit-category" class="task-assigned"> <!--CATEGORY-INPUT-->
+                    <div id="o-t-e-label" class="assigned-label">Category</div>
+                    <div class="o-t-e-custom-select">
+                        <div id="new-category-div" class="task-invite-input d-none">
+                            <input oninput="showCategoryColor(event)" id="new-category-input" type="text"
+                                placeholder="New category name">
+                            <div>
+                                <button onclick="closeSelectCatergory()" type="button" class="btn-invite"
+                                    id="btn-cancel-select-category"><img src="./assets/img/cancel-input.png"></button>
+                                <img src="./assets/img/vertical-line-gray.png">
+                                <button onclick="confirmCreateCategory()" type="button" class="btn-invite"
+                                    id="btn-confirm-select-category"><img src="./assets/img/confirm-user.png"></button>
+                            </div>
+                        </div>
+                        <div id="selected-category-div" onclick="toggleCategoryHidden(event)"
+                            class="o-t-e-select-trigger">
+                            <input id="selected-category-input" type="text" placeholder="Select task category" required
+                                readonly>
+                            <img src="./assets/img/select-icon.png" alt="">
+                            <div id="selected-category-color" class="d-none"></div>
+                        </div>
+                        <ul id="category-option" class="o-t-e-select-options d-none">
+                            <li class="new-category" data-value="New Category">
+                                <span>New Category</span>
+                                <div class="user-icon">
+                                </div>
+                            </li>
+                            <li data-value="Sales" data-color="65, 90, 10">
+                                <span>Sales</span>
+                                <div style="background-color: rgb(65, 90, 10);" class="category-color"></div>
+                            </li>
+                            <li data-value="BackOffice" data-color="200, 43, 7">
+                                <span>BackOffice</span>
+                                <div style="background-color: rgb(200, 43, 7);" class="category-color"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="category-color-div" class="d-none">
+                        <ul>
+                            <li>
+                                <div data-color="12, 34, 111" style="background-color: rgb(12, 34, 111);"></div>
+                            </li>
+                            <li>
+                                <div data-color="120, 34, 111" style="background-color: rgb(120, 34, 111);"></div>
+                            </li>
+                            <li>
+                                <div data-color="12, 3, 111" style="background-color: rgb(12, 3, 111);"></div>
+                            </li>
+                            <li>
+                                <div data-color="12, 34, 11" style="background-color: rgb(12, 34, 11);"></div>
+                            </li>
+                            <li>
+                                <div data-color="120, 4, 11" style="background-color: rgb(120, 4, 11);"></div>
+                            </li>
+                            <li>
+                                <div data-color="2, 200, 111" style="background-color: rgb(2, 200, 111);"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <p id="category-wrong" class="d-none">This field is required</p>
+                </div><!--CATEGORY-INPUT-->
 
                 <div id="o-t-edit-assigned" class="task-assigned"> <!--     ASSIGNED-INPUT -->
 
@@ -41,14 +103,14 @@
                             </div>
                         </div>
 
-                        <div class="o-t-e-select-trigger">
+                        <div onclick="toggleAssignedHidden(event)" class="o-t-e-select-trigger">
                             <!-- <span>Select contacts to assign</span> -->
-                            <input id="selected-assigned-input" type="text"
-                                placeholder="Select contacts to assign" required readonly>
+                            <input id="selected-assigned-input" type="text" placeholder="Select contacts to assign"
+                                required readonly>
                             <img src="./assets/img/select-icon.png" alt="">
                         </div>
 
-                        <ul class="o-t-e-select-options d-none"><!-- OPTIONS -->
+                        <ul id="assigned-option" class="o-t-e-select-options d-none"><!-- OPTIONS -->
                             <li data-value="option1">
                                 <span>Option 1</span>
                                 <!-- Check Container -->
@@ -92,79 +154,7 @@
                         </ul>
                     </div>
 
-                    <p>This field is required</p>
-
-                </div>
-
-                <div id="o-t-edit-assigned" class="task-assigned"> <!--     ASSIGNED-INPUT -->
-
-                    <div id="o-t-e-label" class="assigned-label">Assigned to</div>
-
-                    <div class="o-t-e-custom-select">
-                        <!-- User Invite to Assigned -->
-                        <div id="user-invite-div" class="task-invite-input d-none">
-                            <input type="text" placeholder="Contact email">
-                            <div>
-                                <button type="button" class="btn-invite" id="btn-cancel-user-invite"><img
-                                        src="./assets/img/cancel-input.png"></button>
-                                <img src="./assets/img/vertical-line-gray.png">
-                                <button type="button" class="btn-invite" id="btn-confirm-user-invite"><img
-                                        src="./assets/img/confirm-user.png"></button>
-                            </div>
-                        </div>
-
-                        <div class="o-t-e-select-trigger">
-                            <!-- <span>Select contacts to assign</span> -->
-                            <input id="selected-assigned-input" type="text"
-                                placeholder="Select contacts to assign" required readonly>
-                            <img src="./assets/img/select-icon.png" alt="">
-                        </div>
-
-                        <ul class="o-t-e-select-options d-none"><!-- OPTIONS -->
-                            <li data-value="option1">
-                                <span>Option 1</span>
-                                <!-- Check Container -->
-                                <div class="check-container">
-                                    <label>
-                                        <input type="checkbox" class="assigned-check">
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
-                                <!-- ----------- -->
-                            </li>
-                            <li data-value="option2">
-                                <span>Option 2</span>
-                                <div class="check-container">
-                                    <label>
-                                        <input type="checkbox" class="assigned-check">
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div>
-                            </li>
-                            <li data-value="option3">
-                                <span>Option 3</span>
-                                <div class="check-container">
-                                    <label>
-                                        <input type="checkbox" class="assigned-check">
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div>
-                            </li>
-                            <!-- Invite new Contact -->
-                            <li class="user-invite" data-value="option3">
-                                <span>Invite new contact </span>
-                                <div class="user-icon">
-                                    <img src="./assets/img/user-icon.png">
-                                </div>
-                            </li>
-                            <!--  -->
-                        </ul>
-                    </div>
-
-                    <p>This field is required</p>
+                    <p class="d-none">This field is required</p>
 
                 </div>
 
@@ -176,9 +166,8 @@
 
                 <div id="o-t-edit-date" class="task-date"> <!--    DATE-INPUT -->
                     <label for="o-t-date-input">Due date</label>
-                    <input placeholder="dd/mm/yyyy" type="date" id="o-t-date-input"
-                        name="" min="yyyy-mm-dd" required />
-                    <p>This field is required</p>
+                    <input placeholder="dd/mm/yyyy" type="date" id="o-t-date-input" name="" min="yyyy-mm-dd" required />
+                    <p class="d-none">This field is required</p>
                 </div>
 
                 <div id="o-t-edit-prio" class="task-prio-choise"> <!--    PRIO-CHOISE -->
@@ -186,7 +175,8 @@
                     <div class="o-t-edit-button-container">
 
                         <div>
-                            <button type="button" class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
+                            <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
+                                data-priority="urgent">
                                 <span>Urgent</span>
                                 <img src="./assets/img/prio-baja-vivid-red-orange.png">
                                 <img src="./assets/img/prio-urgent-white.png">
@@ -194,7 +184,8 @@
                         </div>
 
                         <div>
-                            <button type="button" class="o-t-edit-priority-button o-t-edit-medium" data-priority="medium">
+                            <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
+                                data-priority="medium">
                                 <span>Medium</span>
                                 <img src="./assets/img/prio-media-orange-yellow.png">
                                 <img src="./assets/img/prio-media-white.png">

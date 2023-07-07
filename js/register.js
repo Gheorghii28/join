@@ -11,6 +11,20 @@ let users = [];
 
 /**
 
+This variable stores the current user.
+*/
+let currentUser;
+
+/**
+
+A guest object that contains the name of the guest.
+*/
+let guest = {
+    name: "Guest"
+}
+
+/**
+
 Initializes the application by loading users.
 */
 async function init() {
@@ -24,6 +38,21 @@ Loads user data from storage and assigns it to the 'users' array.
 async function loadUsers() {
     try {
         users = JSON.parse(await getItem('users'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
+/**
+
+An asynchronous function that loads the current user.
+Calls the 'getItem' function to retrieve the current user from storage.
+The retrieved user is stored in the 'currentUser' variable.
+In case of an error, an error message is logged to the console.
+*/
+async function loadCurrentUser() {
+    try {
+        currentUser = JSON.parse(await getItem('currentUser'));
     } catch (e) {
         console.error('Loading error:', e);
     }
@@ -62,12 +91,13 @@ function resetForm(btn) {
 
 Logs in a user by checking the entered email and password against the stored user data. If a match is found, the user is redirected to the summary page; otherwise, appropriate error handling is performed.
 */
-function login() {
+async function login() {
     const loginBtn = document.getElementById("btn-login");
     const userEmail = document.getElementById("email");
     const userPassword = document.getElementById("password");
     const user = users.find(u => u.email == userEmail.value && u.password == userPassword.value);
     if (user) {
+        await setItem('currentUser', JSON.stringify(user));
         window.location.href = "summary.html";
         resetForm(loginBtn);
     } else {
@@ -81,7 +111,8 @@ function login() {
 
 Logs in a user as a guest by redirecting them to the summary page.
 */
-function guestLogin() {
+async function guestLogin() {
+    await setItem('currentUser', JSON.stringify(guest));
     window.location.href = "summary.html";
 }
 

@@ -48,6 +48,6 @@ function toggleImage(inputId) {
 
 This function toggles the visibility of the logout button by adding or removing the "d-none" class based on its current state.
 */
-function toggleLogOut() {
+async function toggleLogOut() {
     modifyClassById("toggle", "d-none", ["btn-log-out"]);
 }
