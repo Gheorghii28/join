@@ -33,3 +33,13 @@
         bottom: calc(100vh / 2);
     }
 }
+
+@keyframes addedTaskAnimation {
+    from {
+        bottom: -74px;
+    }
+
+    to {
+        bottom: calc((100vh - 74px) / 2);
+    }
+}

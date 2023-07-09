@@ -6,25 +6,21 @@
         <h1>Add Task</h1>
     </div>
 
-    <form>
-
+    <form onsubmit="saveTask(); return false;">
         <div id="a-t-form-content" class="wrap">
             <div id="a-t-left">
-
-                <div id="o-t-edit-title" class="edit-task-title"> <!-- TITLE-INPUT -->
+                <div id="o-t-edit-title" class="edit-task-title">
                     <label for="o-t-input-title">Title</label>
                     <input id="o-t-input-title" type="text" placeholder="Enter a title" required>
                     <p class="d-none">This field is required</p>
                 </div>
-
-                <div id="o-t-description" class="task-description"> <!--    DESCRIPTION-INPUT -->
+                <div id="o-t-description" class="task-description">
                     <label for="o-t-textarea-description">Description</label>
                     <textarea name="" id="o-t-textarea-description" cols="" rows="" placeholder="Enter a Description"
                         required></textarea>
                     <p class="d-none">This field is required</p>
                 </div>
-
-                <div id="o-t-edit-category" class="task-assigned"> <!--CATEGORY-INPUT-->
+                <div id="o-t-edit-category" class="task-assigned">
                     <div id="o-t-e-label" class="assigned-label">Category</div>
                     <div class="o-t-e-custom-select">
                         <div id="new-category-div" class="task-invite-input d-none">
@@ -51,13 +47,25 @@
                                 <div class="user-icon">
                                 </div>
                             </li>
-                            <li data-value="Sales" data-color="65, 90, 10">
+                            <li data-value="Sales" data-color="252, 113, 255">
                                 <span>Sales</span>
-                                <div style="background-color: rgb(65, 90, 10);" class="category-color"></div>
+                                <div style="background-color: rgb(252, 113, 255);" class="category-color"></div>
                             </li>
-                            <li data-value="BackOffice" data-color="200, 43, 7">
+                            <li data-value="BackOffice" data-color="21, 215, 193">
                                 <span>BackOffice</span>
-                                <div style="background-color: rgb(200, 43, 7);" class="category-color"></div>
+                                <div style="background-color: rgb(31, 215, 193);" class="category-color"></div>
+                            </li>
+                            <li data-value="Design" data-color="255, 122, 0">
+                                <span>Design</span>
+                                <div style="background-color: rgb(255, 122, 0);" class="category-color"></div>
+                            </li>
+                            <li data-value="Marketing" data-color="0, 56, 255">
+                                <span>Marketing</span>
+                                <div style="background-color: rgb(0, 56, 255);" class="category-color"></div>
+                            </li>
+                            <li data-value="Media" data-color="255, 199, 1">
+                                <span>Media</span> 
+                                <div style="background-color: rgb(255, 199, 1);" class="category-color"></div>
                             </li>
                         </ul>
                     </div>
@@ -84,96 +92,78 @@
                         </ul>
                     </div>
                     <p id="category-wrong" class="d-none">This field is required</p>
-                </div><!--CATEGORY-INPUT-->
-
-                <div id="o-t-edit-assigned" class="task-assigned"> <!--     ASSIGNED-INPUT -->
-
+                </div>
+                <div id="o-t-edit-assigned" class="task-assigned">
                     <div id="o-t-e-label" class="assigned-label">Assigned to</div>
-
                     <div class="o-t-e-custom-select">
-                        <!-- User Invite to Assigned -->
                         <div id="user-invite-div" class="task-invite-input d-none">
-                            <input type="text" placeholder="Contact email">
+                            <input id="user-invite-input" type="email" placeholder="Contact email">
                             <div>
-                                <button type="button" class="btn-invite" id="btn-cancel-user-invite"><img
-                                        src="./assets/img/cancel-input.png"></button>
+                                <button onclick="closeUserInviteField()" type="button" class="btn-invite"
+                                    id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
                                 <img src="./assets/img/vertical-line-gray.png">
-                                <button type="button" class="btn-invite" id="btn-confirm-user-invite"><img
+                                <button onclick="confirmUserInvite()" type="button" class="btn-invite" id="btn-confirm-user-invite"><img
                                         src="./assets/img/confirm-user.png"></button>
                             </div>
                         </div>
-
-                        <div onclick="toggleAssignedHidden(event)" class="o-t-e-select-trigger">
-                            <!-- <span>Select contacts to assign</span> -->
+                        <div id="selected-assigned-div" onclick="toggleAssignedHidden(event)"
+                            class="o-t-e-select-trigger">
                             <input id="selected-assigned-input" type="text" placeholder="Select contacts to assign"
                                 required readonly>
                             <img src="./assets/img/select-icon.png" alt="">
                         </div>
-
-                        <ul id="assigned-option" class="o-t-e-select-options d-none"><!-- OPTIONS -->
-                            <li data-value="option1">
-                                <span>Option 1</span>
-                                <!-- Check Container -->
+                        <ul id="assigned-option" class="o-t-e-select-options d-none">
+                            <li data-value="Jens Wald" data-custom-status="false">
+                                <span>Jens Wald</span>
                                 <div class="check-container">
                                     <label>
-                                        <input type="checkbox" class="assigned-check">
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
-                                <!-- ----------- -->
-                            </li>
-                            <li data-value="option2">
-                                <span>Option 2</span>
-                                <div class="check-container">
-                                    <label>
-                                        <input type="checkbox" class="assigned-check">
                                         <img class="image-1" src="./assets/img/unchecked.png">
                                         <img class="image-2 d-none" src="./assets/img/checked.png">
                                     </label>
                                 </div>
                             </li>
-                            <li data-value="option3">
-                                <span>Option 3</span>
+                            <li data-value="Alex Zimmerman" data-custom-status="false">
+                                <span>Alex Zimmerman</span>
                                 <div class="check-container">
                                     <label>
-                                        <input type="checkbox" class="assigned-check">
                                         <img class="image-1" src="./assets/img/unchecked.png">
                                         <img class="image-2 d-none" src="./assets/img/checked.png">
                                     </label>
                                 </div>
                             </li>
-                            <!-- Invite new Contact -->
-                            <li class="user-invite" data-value="option3">
+                            <li data-value="Max Musterman" data-custom-status="false">
+                                <span>Max Musterman</span>
+                                <div class="check-container">
+                                    <label>
+                                        <img class="image-1" src="./assets/img/unchecked.png">
+                                        <img class="image-2 d-none" src="./assets/img/checked.png">
+                                    </label>
+                                </div>
+                            </li>
+                            <li data-value="user-invite" data-custom-status="false"  class="user-invite">
                                 <span>Invite new contact </span>
                                 <div class="user-icon">
                                     <img src="./assets/img/user-icon.png">
                                 </div>
                             </li>
-                            <!--  -->
                         </ul>
                     </div>
-
+                    <div id="task-assigned-div" class="d-none">
+                        <ul id="task-assigned-ul"></ul>
+                    </div>
                     <p class="d-none">This field is required</p>
-
                 </div>
-
             </div>
-
             <img src="/assets/img/form-line-1.png" alt="">
-
             <div id="a-t-right">
-
-                <div id="o-t-edit-date" class="task-date"> <!--    DATE-INPUT -->
+                <div id="o-t-edit-date" class="task-date">
                     <label for="o-t-date-input">Due date</label>
                     <input placeholder="dd/mm/yyyy" type="date" id="o-t-date-input" name="" min="yyyy-mm-dd" required />
                     <p class="d-none">This field is required</p>
                 </div>
-
-                <div id="o-t-edit-prio" class="task-prio-choise"> <!--    PRIO-CHOISE -->
+                <div id="o-t-edit-prio" class="task-prio-choise">
                     <span>Prio</span>
                     <div class="o-t-edit-button-container">
-
                         <div>
                             <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
                                 data-priority="urgent">
@@ -182,7 +172,6 @@
                                 <img src="./assets/img/prio-urgent-white.png">
                             </button>
                         </div>
-
                         <div>
                             <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
                                 data-priority="medium">
@@ -191,7 +180,6 @@
                                 <img src="./assets/img/prio-media-white.png">
                             </button>
                         </div>
-
                         <div>
                             <button type="button" class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
                                 <span>Low</span>
@@ -199,72 +187,32 @@
                                 <img src="./assets/img/prio-low-white.png">
                             </button>
                         </div>
-
                     </div>
                 </div>
-
-                <div id="o-t-edit-assigned" class="task-assigned"> <!--         SUBTASKS-INPUT -->
-
+                <div id="o-t-edit-subtask" class="task-assigned">
                     <div id="o-t-e-label" class="assigned-label">Subtasks</div>
-
                     <div class="o-t-e-custom-select">
-                        <!-- Create new subtasks -->
-                        <div id="user-invite-div" class="task-invite-input">
-                            <input type="text" placeholder="Add new subtask">
+                        <div onclick="subTaskInputFocus()" id="new-subtask-div" class="task-invite-input">
+                            <input id="subtask-input" oninput="showBtns(event)" type="text" placeholder="Add new subtask">
                             <div>
-                                <button type="button" class="btn-invite d-none" id="btn-cancel-subtask"><img
+                                <button onclick="cancelInputSubTask()" type="button" class="btn-invite d-none" id="btn-cancel-subtask"><img
                                         src="./assets/img/cancel-input.png"></button>
-                                <img src="./assets/img/vertical-line-gray.png" class="d-none">
-                                <button type="button" class="btn-invite d-none" id="btn-confirm-subtask"><img
+                                <img id="img-separate-line" src="./assets/img/vertical-line-gray.png" class="d-none">
+                                <button onclick="showSubTask()" type="button" class="btn-invite d-none" id="btn-confirm-subtask"><img
                                         src="./assets/img/confirm-user.png"></button>
-
-                                <button type="button" class="btn-invite" id="plus-subtask"><img
+                                <button onclick="subTaskInputFocus()" type="button" class="btn-invite" id="plus-subtask"><img
                                         src="./assets/img/plus-subtask.png"></button>
                             </div>
                         </div>
-
                     </div>
-
-                    <ul class="ul-subtasks"><!-- SUBTASKS -->
-
-                        <!-- subtask -->
-                        <li>
-                            <!-- Check Container -->
-                            <div class="">
-                                <label class="label-style">
-                                    <input type="checkbox" class="assigned-check t12-r1">
-                                    <img class="image-1 w16-h16" src="./assets/img/check-default.png">
-                                    <img class="image-2 d-none w16-h16" src="./assets/img/check-valid.png">
-                                </label>
-                            </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
-                            <!-- ----------- -->
-                            <span>Subtask 1</span>
-                        </li>
-
-                        <!-- subtask -->
-                        <li>
-                            <!-- Check Container -->
-                            <div class="">
-                                <label class="label-style">
-                                    <input type="checkbox" class="assigned-check t12-r1">
-                                    <img class="image-1 w16-h16" src="./assets/img/check-default.png">
-                                    <img class="image-2 d-none w16-h16" src="./assets/img/check-valid.png">
-                                </label>
-                            </div> <!-- -----------dafür es gibt auch board.js die passende code  -->
-                            <!-- ----------- -->
-                            <span>Subtask 2</span>
-                        </li>
-                    </ul>
-
+                    <ul id="subtask-ul" class="ul-subtasks"></ul>
                 </div>
-
             </div>
         </div>
-
         <div id="form-btns">
             <div>
                 <div>
-                    <button type="button" id="btn-clear-task">
+                    <button onclick="clearTaskForm()" type="button" id="btn-clear-task">
                         <span>Cancel</span>
                         <img src="/assets/img/cancel-normal.png">
                         <img src="/assets/img/cancel-hover.png">
@@ -277,7 +225,6 @@
                 </div>
             </div>
         </div>
-
     </form>
 
 </div>

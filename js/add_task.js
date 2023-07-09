@@ -1,14 +1,10 @@
-/**
-
-This variable stores the color of a task.
-*/
+let task;
 let taskColor;
-
-/**
-
-This variable stores the category of a task.
-*/
 let taskCategory;
+let assignedPersons = [];
+let taskPrio;
+let subTasks = [];
+let isAssignedOptionOpen = false;
 
 /**
 
@@ -30,6 +26,7 @@ function initializePage() {
     handlePriorityButtonClick();
     selectCategoryOption();
     selectCategoryColor();
+    selectAssigned();
     setMinDate();
 }
 
@@ -59,7 +56,7 @@ function handlePriorityButtonClick() {
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             const priority = button.getAttribute('data-priority');
-            console.log(`Aktiver Button: ${priority}`);
+            taskPrio = priority;
         });
     });
 }
@@ -87,7 +84,22 @@ effectively hiding or showing the assigned option depending on its current state
 */
 function toggleAssignedHidden(event) {
     event.preventDefault();
+    if (isAssignedOptionOpen && assignedPersons.length !== 0) {
+        modifyClassById("remove", "d-none", ["task-assigned-div"]);
+        showTaskAssigned();
+    } else {
+        modifyClassById("add", "d-none", ["task-assigned-div"]);
+    }
+    isAssignedOptionOpen = !isAssignedOptionOpen;
     modifyClassById("toggle", "d-none", ["assigned-option"]);
+}
+
+function showTaskAssigned() {
+    document.getElementById("task-assigned-ul").innerHTML = "";
+    assignedPersons.forEach(obj => {
+        const initials = getInitials(obj.name)
+        document.getElementById("task-assigned-ul").innerHTML += taskAssigned(initials, obj.color);
+    });
 }
 
 /**
@@ -268,4 +280,181 @@ function showCategoryColor(event) {
     } else if (event.target.value.length == 0) {
         modifyClassById("add", "d-none", ["category-color-div"]);
     }
+}
+
+function filterAssignedPersons(array, personName) {
+    return array.filter(obj => obj.name !== personName);
+}
+
+
+function selectAssigned() {
+    const optionBtns = document.getElementById("assigned-option").childNodes;
+    optionBtns.forEach(option => {
+        if (option.attributes) {
+            let isChecked;
+            option.addEventListener("click", event => {
+                event.preventDefault();
+                isChecked = JSON.parse(`${option.getAttribute("data-custom-status")}`);
+                const optionValue = event.target.attributes[0].value;
+                const optionColor = getRandomRGBColor();
+                const assignedPerson = {
+                    name: optionValue,
+                    color: optionColor
+                }
+                if (optionValue == "user-invite") {
+                    openUserInviteField();
+                } else {
+                    isChecked = !isChecked;
+                    option.setAttribute("data-custom-status", `${isChecked}`);
+                    saveAssignedOption(isChecked, event, assignedPerson);
+                }
+            });
+        }
+    });
+}
+
+function saveAssignedOption(isChecked, event, assignedPerson) {
+    const imgUnchecked = event.target.children[1].children[0].children[0];
+    const imgChecked = event.target.children[1].children[0].children[1];
+    imgUnchecked.classList.toggle("d-none");
+    imgChecked.classList.toggle("d-none");
+    assignedPersons = filterAssignedPersons(assignedPersons, assignedPerson.name);
+    if (isChecked) {
+        assignedPersons.push(assignedPerson);
+    }
+}
+
+function openUserInviteField() {
+    modifyClassById("add", "d-none", ["selected-assigned-div", "assigned-option"]);
+    modifyClassById("remove", "d-none", ["user-invite-div"]);
+    document.getElementById("user-invite-input").focus();
+}
+
+function closeUserInviteField() {
+    modifyClassById("add", "d-none", ["user-invite-div"]);
+    modifyClassById("remove", "d-none", ["selected-assigned-div"]);
+}
+
+function confirmUserInvite() {
+    closeUserInviteField();
+    clearInputValues(["user-invite-input"]);
+}
+
+function showBtns(event) {
+    if (event.target.value.length > 0) {
+        modifyClassById("remove", "d-none", ["btn-cancel-subtask", "img-separate-line", "btn-confirm-subtask"]);
+        modifyClassById("add", "d-none", ["plus-subtask"]);
+    } else if (event.target.value.length == 0) {
+        modifyClassById("add", "d-none", ["btn-cancel-subtask", "img-separate-line", "btn-confirm-subtask"]);
+        modifyClassById("remove", "d-none", ["plus-subtask"]);
+    }
+}
+
+function subTaskInputFocus() {
+    document.getElementById("subtask-input").focus();
+}
+
+function showSubTask() {
+    saveSubTask();
+    document.getElementById("subtask-ul").innerHTML = "";
+    subTasks.forEach((subTask, index) => {
+        document.getElementById("subtask-ul").innerHTML += subTaskAssigned(subTask, index);
+    });
+}
+
+function saveSubTask() {
+    let subTask = document.getElementById("subtask-input").value;
+    if (subTask.length > 0) {
+        addUniqueElement(subTasks, subTask);
+    }
+    clearInputValues(["subtask-input"]);
+}
+
+function cancelInputSubTask() {
+    clearInputValues(["subtask-input"]);
+    document.getElementById("subtask-input").blur();
+    modifyClassById("add", "d-none", ["btn-cancel-subtask", "img-separate-line", "btn-confirm-subtask"]);
+    modifyClassById("remove", "d-none", ["plus-subtask"]);
+}
+
+
+function filterSubTasks(array, subTask) {
+    return array.filter(el => el !== subTask);
+}
+
+function removeSubTask(subTask, index) {
+    subTasks = filterSubTasks(subTasks, subTask);
+    modifyClassById("add", "d-none", [`img-valid-${index}`]);
+    modifyClassById("remove", "d-none", [`img-default-${index}`]);
+}
+
+function addSubtask(subTask, index) {
+    subTasks.push(subTask);
+    modifyClassById("remove", "d-none", [`img-valid-${index}`]);
+    modifyClassById("add", "d-none", [`img-default-${index}`]);
+}
+
+function resetInputCategory() {
+    taskCategory = undefined;
+    taskColor = undefined;
+    document.getElementById("selected-category-input").placeholder = "Select task category";
+    modifyClassById("add", "d-none", ["new-category-div", "category-option", "category-color-div", "selected-category-color"]);
+    modifyClassById("remove", "d-none", ["selected-category-div"]);
+}
+
+function resetInputAssigned() {
+    assignedPersons = [];
+    isAssignedOptionOpen = false;
+    document.getElementById("selected-assigned-input").placeholder = "Select contacts to assign";
+    modifyClassById("add", "d-none", ["user-invite-div", "assigned-option", "task-assigned-div"]);
+    modifyClassById("remove", "d-none", ["selected-assigned-div"]);
+    const uncheckedImg = document.getElementById("assigned-option").querySelectorAll(".image-1");
+    const checkedImg = document.getElementById("assigned-option").querySelectorAll(".image-2");
+    uncheckedImg.forEach(img => img.classList.remove("d-none"));
+    checkedImg.forEach(img => img.classList.add("d-none"));
+    const assignedListe = document.getElementById("assigned-option").childNodes;
+    assignedListe.forEach(option => {
+        if (option.attributes) {
+            option.setAttribute("data-custom-status", `${false}`);
+        }
+    });
+
+}
+
+function resetTaskPrio() {
+    taskPrio = undefined;
+    const prioBtns = document.querySelectorAll(".o-t-edit-priority-button");
+    prioBtns.forEach(btn => {
+        btn.classList.remove("active");
+    });
+}
+
+function resetSubTask() {
+    subTasks = [];
+    document.getElementById("subtask-ul").innerHTML = "";
+    cancelInputSubTask();
+}
+
+function clearTaskForm() {
+    clearInputValues(["o-t-input-title", "o-t-textarea-description", "o-t-date-input"]);
+    resetInputCategory();
+    resetInputAssigned();
+    resetTaskPrio();
+    resetSubTask();
+}
+
+function saveTask() {
+    let newTask = {
+        assigned: assignedPersons,
+        color: taskColor,
+        category: taskCategory,
+        prio: taskPrio,
+        subTasks: subTasks
+    };
+    task = newTask;
+    modifyClassById("add", "animation-added-task", ["pop-up-added-task"]);
+    setTimeout(() => {
+        window.location.href = "board.html";
+        clearTaskForm();
+     }, 900)
 }
