@@ -91,7 +91,7 @@
                             </li>
                         </ul>
                     </div>
-                    <p id="category-wrong" class="d-none">This field is required</p>
+                    <p id="category-wrong" class="wrong d-none">This field is required</p>
                 </div>
                 <div id="o-t-edit-assigned" class="task-assigned">
                     <div id="o-t-e-label" class="assigned-label">Assigned to</div>
@@ -112,46 +112,12 @@
                                 required readonly>
                             <img src="./assets/img/select-icon.png" alt="">
                         </div>
-                        <ul id="assigned-option" class="o-t-e-select-options d-none">
-                            <li data-value="Jens Wald" data-custom-status="false">
-                                <span>Jens Wald</span>
-                                <div class="check-container">
-                                    <label>
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div>
-                            </li>
-                            <li data-value="Alex Zimmerman" data-custom-status="false">
-                                <span>Alex Zimmerman</span>
-                                <div class="check-container">
-                                    <label>
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div>
-                            </li>
-                            <li data-value="Max Musterman" data-custom-status="false">
-                                <span>Max Musterman</span>
-                                <div class="check-container">
-                                    <label>
-                                        <img class="image-1" src="./assets/img/unchecked.png">
-                                        <img class="image-2 d-none" src="./assets/img/checked.png">
-                                    </label>
-                                </div>
-                            </li>
-                            <li data-value="user-invite" data-custom-status="false"  class="user-invite">
-                                <span>Invite new contact </span>
-                                <div class="user-icon">
-                                    <img src="./assets/img/user-icon.png">
-                                </div>
-                            </li>
-                        </ul>
+                        <ul id="assigned-option" class="o-t-e-select-options d-none"></ul>
                     </div>
                     <div id="task-assigned-div" class="d-none">
                         <ul id="task-assigned-ul"></ul>
                     </div>
-                    <p class="d-none">This field is required</p>
+                    <p id="assigned-wrong" class="wrong d-none">This field is required</p>
                 </div>
             </div>
             <img src="/assets/img/form-line-1.png" alt="">
@@ -168,26 +134,27 @@
                             <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
                                 data-priority="urgent">
                                 <span>Urgent</span>
-                                <img src="./assets/img/prio-baja-vivid-red-orange.png">
-                                <img src="./assets/img/prio-urgent-white.png">
+                                <img src="./assets/img/prio-baja-urgent.png">
+                                <img src="./assets/img/prio-baja-white-urgent.png">
                             </button>
                         </div>
                         <div>
                             <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
                                 data-priority="medium">
                                 <span>Medium</span>
-                                <img src="./assets/img/prio-media-orange-yellow.png">
-                                <img src="./assets/img/prio-media-white.png">
+                                <img src="./assets/img/prio-baja-medium.png">
+                                <img src="./assets/img/prio-baja-white-medium.png">
                             </button>
                         </div>
                         <div>
                             <button type="button" class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
                                 <span>Low</span>
-                                <img src="./assets/img/prio-baja-green.png">
-                                <img src="./assets/img/prio-low-white.png">
+                                <img src="./assets/img/prio-baja-low.png">
+                                <img src="./assets/img/prio-baja-white-low.png">
                             </button>
                         </div>
                     </div>
+                    <p id="prio-wrong" class="wrong d-none">This field is required</p>
                 </div>
                 <div id="o-t-edit-subtask" class="task-assigned">
                     <div id="o-t-e-label" class="assigned-label">Subtasks</div>

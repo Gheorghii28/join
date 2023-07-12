@@ -19,3 +19,133 @@ function subTaskAssigned(subTask, index) {
         <span>${subTask}</span>
     </li>`;
 }
+
+function generateTaskHTML(task) {
+    const assigneds = generateAssignedHtml(task[`assigned`]);
+    return `
+    <div onclick="openTask(${task[`id`]})" draggable="true" ondragstart="startDragging(${task[`id`]})" class="task-card">
+        <div>
+            <div class="task-type" style="background-color: ${task[`color`]};">
+                <span>${task[`category`]}</span>
+            </div>
+            <div class="task-content">
+                <div>
+                    <span class="task-title">${task[`title`]}</span>
+                    <span class="task-text">${task[`description`]}</span>
+                </div>
+            </div>
+            <div class="task-progress">
+                <div class="task-progress-bar"></div>
+                <span>1/2 Done</span>
+            </div>
+            <div class="task-footer">
+                <div class="task-responsible">
+                    ${assigneds}
+                </div>
+                <div class="prio-symbol">
+                    <img class="height-${task[`prio`]}" src="./assets/img/prio-baja-${task[`prio`]}.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
+function generateAssignedHtml(assigneds) {
+    let assignedHtml = "";
+    assigneds.forEach(assigned => {
+        const initials = getInitials(`${assigned[`name`]}`);
+        assignedHtml += `
+        <div class="responsible" style="background-color: ${assigned[`color`]};">
+            <span>${initials}</span>
+        </div>`;
+    });
+    return assignedHtml;
+}
+
+function generateEmtptySpaceForTask(taskStatus) {
+    return `
+    <div class="empty-space-task d-none" ondrop="moveTo('${taskStatus}')" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>`;
+}
+
+function generateOpenedTaskHtml(task) {
+    const date = task[`date`];
+    const parts = date.split("-");
+    const formattedDate = parts.reverse().join("-");
+    const assigneds = generateOpenedTaskAssignedHtml(task[`assigned`]);
+    return `            
+    <div id="o-t-type" style="background-color: ${task[`color`]};">
+        <span>${task[`category`]}</span>
+    </div>
+    <div id="opened-task-content">
+        <div id="o-t-title">
+            <span>${task[`title`]}</span>
+        </div>
+        <span id="o-t-text">${task[`description`]}</span>
+        <div id="o-t-date">
+            <span>Due date: </span>
+            <span>${formattedDate}</span>
+        </div>
+        <div id="o-t-prio">
+            <span>Priority: </span>
+            <img src="./assets/img/btn-prio-${task[`prio`]}.png">
+        </div>
+        <span id="o-t-assigned">Assigned To:</span>
+        ${assigneds}
+    </div>
+    <img onclick="closeOpenedTask()" class="o-t-close-img" src="./assets/img/o-t-close.png">
+    <div id="o-t-btns-container">
+        <button onclick="deleteTask(${task[`id`]})" id="o-t-btn-delete">
+            <img src="./assets/img/img-delete.png">
+            <img src="./assets/img/delete-icon-blue.png">
+            <img src="./assets/img/delete-icon-black.png">
+        </button>
+        <button onclick="openEditTask(${task[`id`]})" id="o-t-btn-edit">
+            <img src="./assets/img/img-edit.png">
+        </button>
+    </div>`;
+}
+
+function generateOpenedTaskAssignedHtml(assigneds) {
+    let assignedHtml = "";
+    assigneds.forEach(assigned => {
+        const initials = getInitials(`${assigned[`name`]}`);
+        assignedHtml += `
+        <div class="o-t-user">
+            <div style="background-color: ${assigned[`color`]};">
+                <span>${initials}</span>
+            </div>
+            <span>${assigned[`name`]}</span>
+        </div>`;
+    });
+    return assignedHtml;
+}
+
+function generateAssignedListHtml() {
+    const assigned = generateAssigned();
+    return `
+    <li data-value="user-invite" data-custom-status="false"  class="user-invite">
+        <span>Invite new contact </span>
+        <div class="user-icon">
+            <img src="./assets/img/user-icon.png">
+        </div>
+    </li>
+    ${assigned}`;
+}
+
+function generateAssigned() {
+    const contacts = currentUser[`contacts`];
+    let assignedListeHtml = "";
+    contacts.forEach(contact => {
+        assignedListeHtml += `
+        <li data-value="${contact[`name`]}" data-custom-status="false">
+            <span>${contact[`name`]}</span>
+            <div class="check-container">
+                <label>
+                    <img class="image-1" src="./assets/img/unchecked.png">
+                    <img class="image-2 d-none" src="./assets/img/checked.png">
+                </label>
+            </div>
+        </li>`;
+    });
+    return assignedListeHtml;
+}

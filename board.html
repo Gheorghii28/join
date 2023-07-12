@@ -12,10 +12,16 @@
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/add_task.css">
     <title>board</title>
+    <script src="./js/utils.js"></script>
+    <script src="./js/templates.js"></script>
     <script src="./script.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/add_task.js"></script>
+    <script src="./js/board.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <div w3-include-html="assets/templates/desktop_templates.html"></div>
     <div w3-include-html="assets/templates/task_form_templates.html" class="task-delivery d-none"></div>
     <div class="main-div">
@@ -61,46 +67,7 @@
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div class="tasks-container">
-                            <!-- task-card -->
-                            <div class="task-card">
-                                <div>
-                                    <div class="task-type bg-color-type-1">
-                                        <span>Design</span>
-                                    </div>
-                                    <div class="task-content">
-                                        <div>
-                                            <span class="task-title">Website redesign</span>
-                                            <span class="task-text">Modify the contents of the main website...</span>
-                                        </div>
-                                    </div>
-                                    <div class="task-progress">
-                                        <div class="task-progress-bar"></div>
-                                        <span>1/2 Done</span>
-                                    </div>
-                                    <div class="task-footer">
-                                        <div class="task-responsible">
-                                            <div class="responsible bg-color-1">
-                                                <span>SM</span>
-                                            </div>
-                                            <div class="responsible bg-color-2">
-                                                <span>MW</span>
-                                            </div>
-                                            <div class="responsible bg-color-3">
-                                                <span>EF</span>
-                                            </div>
-                                        </div>
-                                        <div class="prio-symbol">
-                                            <img src="./assets/img/prio-baja-green.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <!-- empty-space-task -->
-                            <div class="empty-space-task d-none"></div>
-                            <!--  -->
-                        </div>
+                        <div id="to-do" class="tasks-container"></div>
                     </div>
 
                     <div class="b-c-container" id="in-progress-container">
@@ -112,43 +79,7 @@
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div class="tasks-container">
-                            <!-- task-card -->
-                            <div class="task-card">
-                                <div>
-                                    <div class="task-type bg-color-type-2">
-                                        <span>Sales</span>
-                                    </div>
-                                    <div class="task-content">
-                                        <div>
-                                            <span class="task-title">Call potential clients</span>
-                                            <span class="task-text">Make the product presen-tation to prospective
-                                                buyers</span>
-                                        </div>
-                                    </div>
-                                    <div class="task-footer">
-                                        <div class="task-responsible">
-                                            <div class="responsible bg-color-4">
-                                                <span>AS</span>
-                                            </div>
-                                            <div class="responsible bg-color-5">
-                                                <span>DE</span>
-                                            </div>
-                                            <div class="responsible bg-color-6">
-                                                <span>+2</span>
-                                            </div>
-                                        </div>
-                                        <div class="prio-symbol">
-                                            <img src="./assets/img/prio-baja-vivid-red-orange.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <!-- empty-space-task -->
-                            <div class="empty-space-task d-none"></div>
-                            <!--  -->
-                        </div>
+                        <div id="in-progress" class="tasks-container"></div>
                     </div>
 
                     <div class="b-c-container" id="awaiting-feedback-container">
@@ -160,70 +91,7 @@
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div class="tasks-container">
-                            <!-- task-card -->
-                            <div class="task-card">
-                                <div>
-                                    <div class="task-type bg-color-type-3">
-                                        <span>Backoffice</span>
-                                    </div>
-                                    <div class="task-content">
-                                        <div>
-                                            <span class="task-title">Accounting invoices </span>
-                                            <span class="task-text">Write open invoices for customer</span>
-                                        </div>
-                                    </div>
-                                    <div class="task-footer">
-                                        <div class="task-responsible">
-                                            <div class="responsible bg-color-7">
-                                                <span>MB</span>
-                                            </div>
-                                            <div class="responsible bg-color-5">
-                                                <span>AM</span>
-                                            </div>
-                                            <div class="responsible bg-color-6">
-                                                <span>+3</span>
-                                            </div>
-                                        </div>
-                                        <div class="prio-symbol">
-                                            <img class="height-media-icon"
-                                                src="./assets/img/prio-media-orange-yellow.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-
-                            <!-- task-card -->
-                            <div class="task-card">
-                                <div>
-                                    <div class="task-type bg-color-type-4">
-                                        <span>Media</span>
-                                    </div>
-                                    <div class="task-content">
-                                        <div>
-                                            <span class="task-title">Video cut</span>
-                                            <span class="task-text">Edit the new company video</span>
-                                        </div>
-                                    </div>
-                                    <div class="task-footer">
-                                        <div class="task-responsible">
-                                            <div class="responsible bg-color-8">
-                                                <span>HK</span>
-                                            </div>
-                                        </div>
-                                        <div class="prio-symbol">
-                                            <img class="height-media-icon"
-                                                src="./assets/img/prio-media-orange-yellow.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--  -->
-                            <!-- empty-space-task -->
-                            <div class="empty-space-task d-none"></div>
-                            <!--  -->
-                        </div>
+                        <div id="awaiting-feedback" class="tasks-container"></div>
                     </div>
 
                     <div class="b-c-container" id="done-container">
@@ -235,9 +103,9 @@
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div class="tasks-container">
+                        <div id="done" class="tasks-container">
                             <!-- task-card -->
-                            <div class="task-card">
+                            <!-- <div class="task-card">
                                 <div>
                                     <div class="task-type bg-color-type-6">
                                         <span>Marketing</span>
@@ -266,10 +134,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!--  -->
                             <!-- empty-space-task -->
-                            <div class="empty-space-task d-none"></div>
+                            <!-- <div class="empty-space-task d-none"></div> -->
                             <!--  -->
                         </div>
                     </div>
@@ -277,239 +145,101 @@
             </div>
         </div>
     </div>
-    <div id="opened-task-container">
-        <!-- opened task -->
-        <div id="opened-task" class="d-none">
-            <div id="o-t-type">
-                <span>Sales</span>
-            </div>
+    <div id="opened-task-container" class="d-none">
 
-            <!-- opened-task-content -->
-            <div id="opened-task-content">
-                <div id="o-t-title">
-                    <span>Call potential clients</span>
-                </div>
-                <span id="o-t-text">Make the product presentation to prospective buyers</span>
-                <div id="o-t-date">
-                    <span>Due date: </span>
-                    <span>05-08-2022</span>
-                </div>
-                <div id="o-t-prio">
-                    <span>Priority: </span>
-                    <img src="./assets/img/btn-prio-urgent.png">
-                    <img class="d-none" src="./assets/img/btn-prio-low.png">
-                    <img class="d-none" src="./assets/img/btn-prio-medium.png">
-                </div>
-                <span id="o-t-assigned">Assigned To:</span>
-                <!-- user -->
-                <div class="o-t-user">
-                    <div class="bg-color-4">
-                        <span>DE</span>
-                    </div>
-                    <span>David Eisenberg</span>
-                </div>
-                <!--  -->
+        <div id="opened-task" class="d-none"></div><!-- opened task -->
 
-                <!-- user -->
-                <div class="o-t-user">
-                    <div class="bg-color-5">
-                        <span>BE</span>
-                    </div>
-                    <span>Benedikt Ziegler</span>
-                </div>
-                <!--  -->
-
-                <!-- user -->
-                <div class="o-t-user">
-                    <div class="bg-color-6">
-                        <span>MB</span>
-                    </div>
-                    <span>Marcel Bauer</span>
-                </div>
-                <!--  -->
-
-                <!-- user -->
-                <div class="o-t-user">
-                    <div class="bg-color-7">
-                        <span>SF</span>
-                    </div>
-                    <span>Stefanie Farber</span>
-                </div>
-                <!--  -->
-
-                <!--  -->
-            </div>
-
-            <img class="o-t-close-img" src="./assets/img/o-t-close.png">
-            <div id="o-t-btns-container">
-                <button id="o-t-btn-delete">
-                    <img src="./assets/img/img-delete.png">
-                    <img src="./assets/img/delete-icon-blue.png">
-                    <img src="./assets/img/delete-icon-black.png">
-                </button>
-                <button id="o-t-btn-edit">
-                    <img src="./assets/img/img-edit.png">
-                </button>
-            </div>
-        </div>
-        <!--  -->
 
         <!-- opened task edit -->
-        <div id="opened-task-edit">
-            <div>
-                <img class="o-t-close-img" src="./assets/img/o-t-close.png">
-                <div id="o-t-btn-confirm">
+        <div id="opened-task-edit" class="d-none">
+            <form id="form-edit-task" onsubmit="saveEditedTask(); return false;">
+                <img onclick="closeEditedTask()" class="o-t-close-img" src="./assets/img/o-t-close.png">
+                <button id="o-t-btn-confirm">
                     <span>OK</span>
                     <img src="./assets/img/ok-icon.png" alt="">
-                </div>
-                <!-- edit content -->
+                </button>
                 <div id="o-t-edit-content">
-
-                    <div id="o-t-edit-title" class="edit-task-title"> <!-- TITLE-INPUT -->
-                        <label for="o-t-input-title">Title</label>
-                        <input id="o-t-input-title" type="text" placeholder="Enter a title">
-                        <p>This field is required</p>
+                    <div id="o-t-edit-title" class="edit-task-title">
+                        <label for="o-t-input-edit-title">Title</label>
+                        <input id="o-t-input-edit-title" type="text" placeholder="Enter a title" required>
+                        <p class="d-none">This field is required</p>
                     </div>
-
-                    <div id="o-t-description" class="task-description"> <!--    DESCRIPTION-INPUT -->
+                    <div id="o-t-edit-description" class="task-description">
                         <label for="o-t-textarea-description">Description</label>
-                        <textarea name="" id="o-t-textarea-description" cols="" rows=""
-                            placeholder="Enter a Description"></textarea>
-                        <p>This field is required</p>
+                        <textarea name="" id="o-t-textarea-edit-description" cols="" rows=""
+                            placeholder="Enter a Description" required></textarea>
+                        <p class="d-none">This field is required</p>
                     </div>
-
-                    <div id="o-t-edit-date" class="task-date"> <!--    DATE-INPUT -->
-                        <label for="o-t-date-input">Due date</label>
-                        <input date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" type="date" id="o-t-date-input" name=""
+                    <div id="o-t-edit-date" class="task-date">
+                        <label for="o-t-edit-date-input">Due date</label>
+                        <input placeholder="dd/mm/yyyy" type="date" id="o-t-edit-date-input" name="" min="yyyy-mm-dd"
                             required />
-                        <p>This field is required</p>
+                        <p class="d-none">This field is required</p>
                     </div>
-
-                    <div id="o-t-edit-prio" class="task-prio-choise"> <!--    PRIO-CHOISE -->
+                    <div id="o-t-edit-prio" class="task-prio-choise">
                         <span>Prio</span>
                         <div class="o-t-edit-button-container">
-
                             <div>
-                                <button class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
+                                <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
+                                    data-priority-edit="urgent">
                                     <span>Urgent</span>
-                                    <img src="./assets/img/prio-baja-vivid-red-orange.png">
-                                    <img src="./assets/img/prio-urgent-white.png">
+                                    <img src="./assets/img/prio-baja-urgent.png">
+                                    <img src="./assets/img/prio-baja-white-urgent.png">
                                 </button>
                             </div>
-
                             <div>
-                                <button class="o-t-edit-priority-button o-t-edit-medium" data-priority="medium">
+                                <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
+                                    data-priority-edit="medium">
                                     <span>Medium</span>
-                                    <img src="./assets/img/prio-media-orange-yellow.png">
-                                    <img src="./assets/img/prio-media-white.png">
+                                    <img src="./assets/img/prio-baja-medium.png">
+                                    <img src="./assets/img/prio-baja-white-medium.png">
                                 </button>
                             </div>
-
                             <div>
-                                <button class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
+                                <button type="button" class="o-t-edit-priority-button o-t-edit-low"
+                                    data-priority-edit="low">
                                     <span>Low</span>
-                                    <img src="./assets/img/prio-baja-green.png">
-                                    <img src="./assets/img/prio-low-white.png">
+                                    <img src="./assets/img/prio-baja-low.png">
+                                    <img src="./assets/img/prio-baja-white-low.png">
                                 </button>
                             </div>
-
                         </div>
+                        <p id="prio-wrong" class="wrong d-none">This field is required</p>
                     </div>
-
-                    <div id="o-t-edit-assigned" class="task-assigned"> <!--     ASSIGNED-INPUT -->
-
+                    <div id="o-t-edit-assigned" class="task-assigned">
                         <div id="o-t-e-label" class="assigned-label">Assigned to</div>
-
                         <div class="o-t-e-custom-select">
-                            <!-- User Invite to Assigned -->
-                            <div id="user-invite-div" class="task-invite-input">
-                                <input type="text" placeholder="Contact email">
+                            <div id="user-invite-div" class="task-invite-input d-none">
+                                <input id="user-invite-input" type="email" placeholder="Contact email">
                                 <div>
-                                    <button class="btn-invite" id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
+                                    <button onclick="closeUserInviteField()" type="button" class="btn-invite"
+                                        id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
                                     <img src="./assets/img/vertical-line-gray.png">
-                                    <button class="btn-invite" id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
+                                    <button onclick="confirmUserInvite()" type="button" class="btn-invite"
+                                        id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
                                 </div>
                             </div>
-
-                            <div class="o-t-e-select-trigger">
-                                <!-- <span>Select contacts to assign</span> -->
-                                <input id="selected-assigned-input" type="text" placeholder="Select contacts to assign"
-                                    required readonly>
+                            <div id="selected-assigned-edit-div" onclick="toggleEditAssignedHidden(event)"
+                                class="o-t-e-select-trigger">
+                                <input id="selected-assigned-edit-input" type="text"
+                                    placeholder="Select contacts to assign" required readonly>
                                 <img src="./assets/img/select-icon.png" alt="">
                             </div>
-
-                            <ul class="o-t-e-select-options"><!-- OPTIONS -->
-                                <li data-value="option1">
-                                    <span>Option 1</span>
-                                    <!-- Check Container -->
-                                    <div class="check-container">
-                                        <label>
-                                            <input type="checkbox" class="assigned-check">
-                                            <img class="image-1" src="./assets/img/unchecked.png">
-                                            <img class="image-2 d-none" src="./assets/img/checked.png">
-                                        </label>
-                                    </div>  <!-- -----------dafür es gibt auch board.js die passende code  --> 
-                                    <!-- ----------- --> 
-                                </li>
-                                <li data-value="option2">
-                                    <span>Option 2</span>
-                                    <div class="check-container">
-                                        <label>
-                                            <input type="checkbox" class="assigned-check">
-                                            <img class="image-1" src="./assets/img/unchecked.png">
-                                            <img class="image-2 d-none" src="./assets/img/checked.png">
-                                        </label>
-                                    </div>
-                                </li>
-                                <li data-value="option3">
-                                    <span>Option 3</span>
-                                    <div class="check-container">
-                                        <label>
-                                            <input type="checkbox" class="assigned-check">
-                                            <img class="image-1" src="./assets/img/unchecked.png">
-                                            <img class="image-2 d-none" src="./assets/img/checked.png">
-                                        </label>
-                                    </div>
-                                </li>
-                                <!-- Invite new Contact -->
-                                <li class="user-invite" data-value="option3">
-                                    <span>Invite new contact </span>
-                                    <div class="user-icon">
-                                        <img src="./assets/img/user-icon.png">
-                                    </div>
-                                </li>
-                                <!--  -->
-                            </ul>
+                            <ul id="assigned-edit-option" class="o-t-e-select-options d-none"></ul>
                         </div>
-
-                        <div id="o-t-e-a-users">
-                            <div class="bg-color-1">
-                                <span>SM</span>
-                            </div>
-                            <div class="bg-color-2">
-                                <span>AE</span>
-                            </div>
-                            <div class="bg-color-3">
-                                <span>LF</span>
-                            </div>
+                        <div id="task-assigned-edit-div" class="">
+                            <ul id="task-assigned-edit-ul" class="assigned-edit-ul"></ul>
                         </div>
-
-                        <p>This field is required</p>
-
+                        <p id="assigned-edit-wrong" class="wrong d-none">This field is required</p>
                     </div>
-
-
-
                 </div>
-                <!--  -->
-            </div>
+            </form>
         </div>
         <!--  -->
     </div>
 
-    <script src="./js/board.js"></script>
+
     <script src="./js/desktop_templates.js"></script>
-    <script src="./js/add_task.js"></script>
 </body>
 
 </html>

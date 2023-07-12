@@ -13,6 +13,7 @@ Calls the functions 'includeHTML()', 'loadCurrentUser()', and 'initializePage()'
 */
 async function init() {
     await includeHTML();
+    await loadUsers();
     await loadCurrentUser();
     initializePage();
 }
@@ -23,24 +24,12 @@ This function initializes the application by calling various other functions.
 It is responsible for setting up the initial state and behavior of the application.
 */
 function initializePage() {
-    handlePriorityButtonClick();
+    handlePriorityButtonClick("data-priority");
+    addContactsToAssignedList("assigned-option");
     selectCategoryOption();
     selectCategoryColor();
-    selectAssigned();
-    setMinDate();
-}
-
-/**
-
-This function sets the minimum date for a date input element.
-It retrieves the date input element by its ID, then creates a new Date object representing the current date.
-The current date is formatted as a string in ISO 8601 format (yyyy-mm-dd) and assigned to the 'min' attribute of the date input element.
-*/
-function setMinDate() {
-    const dateInput = document.getElementById('o-t-date-input');
-    const currentDate = new Date();
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    dateInput.setAttribute('min', formattedDate);
+    selectAssigned("assigned-option");
+    setMinDate("o-t-date-input");
 }
 
 /**
@@ -49,13 +38,14 @@ This function handles the click event for priority buttons.
 It selects all elements with the class '.o-t-edit-priority-button' and adds a click event listener to each button.
 When a button is clicked, it removes the 'active' class from all buttons and adds the 'active' class to the clicked button.
 */
-function handlePriorityButtonClick() {
+function handlePriorityButtonClick(data) {
     const buttons = document.querySelectorAll('.o-t-edit-priority-button');
     buttons.forEach(button => {
         button.addEventListener('click', () => {
+            modifyClassById("add", "d-none", ["prio-wrong"]);
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
-            const priority = button.getAttribute('data-priority');
+            const priority = button.getAttribute(data);
             taskPrio = priority;
         });
     });
@@ -91,13 +81,14 @@ function toggleAssignedHidden(event) {
         modifyClassById("add", "d-none", ["task-assigned-div"]);
     }
     isAssignedOptionOpen = !isAssignedOptionOpen;
+    modifyClassById("add", "d-none", ["assigned-wrong"]);
     modifyClassById("toggle", "d-none", ["assigned-option"]);
 }
 
 function showTaskAssigned() {
     document.getElementById("task-assigned-ul").innerHTML = "";
     assignedPersons.forEach(obj => {
-        const initials = getInitials(obj.name)
+        const initials = getInitials(obj.name);
         document.getElementById("task-assigned-ul").innerHTML += taskAssigned(initials, obj.color);
     });
 }
@@ -229,6 +220,7 @@ function confirmCreateCategory() {
     deleteClassSelected();
     if (newCategory.length > 0) {
         createNewCategory(selectInput, newCategory, selectColor);
+        modifyClassById("add", "d-none", ["category-wrong"]);
     } else if (newCategory.length == 0) {
         showCategoryWrong();
     }
@@ -246,6 +238,7 @@ Updates the background color of the selected color element.
 @param {HTMLElement} selectColor - The color element for the selected category.
 */
 function createNewCategory(selectInput, newCategory, selectColor) {
+    // debugger
     selectInput.placeholder = newCategory;
     taskCategory = newCategory;
     modifyClassById("add", "d-none", ["new-category-div"]);
@@ -287,8 +280,8 @@ function filterAssignedPersons(array, personName) {
 }
 
 
-function selectAssigned() {
-    const optionBtns = document.getElementById("assigned-option").childNodes;
+function selectAssigned(ulListeId) {
+    const optionBtns = document.getElementById(ulListeId).childNodes;
     optionBtns.forEach(option => {
         if (option.attributes) {
             let isChecked;
@@ -443,18 +436,79 @@ function clearTaskForm() {
     resetSubTask();
 }
 
-function saveTask() {
-    let newTask = {
+async function saveTask() {
+    let title = document.getElementById("o-t-input-title").value;
+    let description = document.getElementById("o-t-textarea-description").value;
+    let date = document.getElementById("o-t-date-input").value;
+    if (checkTaskField()) {
+        task = newTask(title, description, date);
+        await addNewTask();
+    } else {
+        showWrong();
+    }
+}
+
+function checkTaskField() {
+    return taskCategory && taskPrio && assignedPersons.length > 0;
+}
+
+async function addNewTask() {
+    await updateAddedTaskCurrentUser(task, currentUser);
+    await updateCurrentUserFromUsers(users, currentUser);
+    modifyClassById("remove", "d-none", ["pop-up-added-task"]);
+    modifyClassById("add", "animation-added-task", ["pop-up-added-task"]);
+    setTimeout(() => {
+        modifyClassById("add", "d-none", ["pop-up-added-task"]);
+        window.location.href = "board.html";
+        clearTaskForm();
+    }, 900)
+}
+
+function showWrong() {
+    if (!taskCategory) {
+        modifyClassById("remove", "d-none", ["category-wrong"]);
+        window.location.href = "#o-t-e-label";
+    }
+    if (!taskPrio) {
+        modifyClassById("remove", "d-none", ["prio-wrong"]);
+        window.location.href = "#o-t-edit-prio";
+    }
+    if (assignedPersons.length == 0) {
+        modifyClassById("remove", "d-none", ["assigned-wrong"]);
+        window.location.href = "#o-t-edit-assigned";
+    }
+}
+
+function newTask(title, description, date) {
+    return {
         assigned: assignedPersons,
         color: taskColor,
         category: taskCategory,
+        date: date,
+        description: description,
         prio: taskPrio,
-        subTasks: subTasks
+        subTasks: subTasks,
+        title: title,
+        status: "to-do"
     };
-    task = newTask;
-    modifyClassById("add", "animation-added-task", ["pop-up-added-task"]);
-    setTimeout(() => {
-        window.location.href = "board.html";
-        clearTaskForm();
-     }, 900)
+}
+
+async function updateAddedTaskCurrentUser(task, currentUser) {
+    currentUser.tasks.push(task);
+    await setItem('currentUser', JSON.stringify(currentUser));
+}
+
+async function updateCurrentUserFromUsers(users, currentUser) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].email === currentUser.email && users[i].password === currentUser.password) {
+            users[i] = currentUser;
+            break;
+        }
+    }
+    await setItem('users', JSON.stringify(users));
+}
+
+function addContactsToAssignedList(listId) {
+    const list = document.getElementById(listId);
+    list.innerHTML = generateAssignedListHtml();
 }

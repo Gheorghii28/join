@@ -59,3 +59,20 @@ function addUniqueElement(array, element) {
         array.push(element);
     }
 }
+
+/**
+
+This function sets the minimum date for a date input element.
+It retrieves the date input element by its ID, then creates a new Date object representing the current date.
+The current date is formatted as a string in ISO 8601 format (yyyy-mm-dd) and assigned to the 'min' attribute of the date input element.
+*/
+function setMinDate(inputId) {
+    const dateInput = document.getElementById(inputId);
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split("T")[0];
+    dateInput.setAttribute("min", formattedDate);
+}
+
+function setInputValue(inputId, inputValue) {
+    document.getElementById(inputId).value = inputValue;
+}

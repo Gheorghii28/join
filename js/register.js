@@ -67,11 +67,14 @@ async function register() {
     const userEmail = document.getElementById("register-email");
     const userPassword = document.getElementById("register-password");
     const registrBtn = document.getElementById("btn-register");
+    const userContacts = createContacts();
     registrBtn.disabled = true;
     users.push({
         name: userName.value,
         email: userEmail.value,
         password: userPassword.value,
+        contacts: userContacts,
+        tasks: []
     });
     await setItem('users', JSON.stringify(users));
     resetForm(registrBtn);

@@ -699,6 +699,30 @@ body {
     resize: both;
 }
 
+.task-description>textarea::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background-color: #F5F5F5;
+}
+
+.task-description>textarea::-webkit-scrollbar-thumb {
+    background-color: var(--color-primare);
+    border-radius: 10px;
+}
+
+.task-description>textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.task-description>textarea::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.task-description>textarea::-webkit-scrollbar-track-piece {
+    height: 2px;
+}
+
 .task-description>textarea::-webkit-resizer {
     display: none;
 }
@@ -868,8 +892,36 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     background: var(--white, #FFF);
+    max-height: 300px;
+    overflow-y: scroll;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.o-t-e-select-options::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background-color: #F5F5F5;
+}
+
+.o-t-e-select-options::-webkit-scrollbar-thumb {
+    background-color: var(--color-primare);
+    border-radius: 10px;
+}
+
+.o-t-e-select-options::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.o-t-e-select-options::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.o-t-e-select-options::-webkit-scrollbar-track-piece {
+    height: 5px;
 }
 
 .o-t-e-select-options>li {
@@ -933,6 +985,7 @@ body {
 }
 
 .task-date>input {
+    cursor: pointer;
     display: flex;
     width: 422px;
     height: 51px;
@@ -980,6 +1033,10 @@ body {
 
 .task-date>input:required:invalid>#o-t-date>p {
     display: flex;
+}
+
+.height-medium {
+    height: 6.333px !important;
 }
 
 .task-prio-choise {
@@ -1130,8 +1187,8 @@ body {
 
 .user-invite,
 .new-category {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    /* border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; */
     justify-content: space-between;
 }
 
@@ -1210,8 +1267,8 @@ body {
 
 #category-color-div>ul::-webkit-scrollbar,
 #task-assigned-div>ul::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 2px;
+    height: 2px;
     background-color: #F5F5F5;
 }
 
@@ -1234,7 +1291,7 @@ body {
 
 #category-color-div>ul::-webkit-scrollbar-track-piece,
 #task-assigned-div>ul::-webkit-scrollbar-track-piece {
-    height: 5px;
+    height: 2px;
 }
 
 #selected-category-color {
