@@ -149,3 +149,93 @@ function generateAssigned() {
     });
     return assignedListeHtml;
 }
+
+function generateLetterHTML(letter) {
+    return `
+    <li class="letter">
+        <span>${letter}</span>
+    </li>
+    <li class="separate-line">
+        <img src="./assets/img/separate-line.png">
+    </li>`;
+}
+
+function generateContactHTML(contact) {
+    return `
+      <li onclick="showChosenContact(${contact[`id`]})" onclick="showChosenContact()" class="contact">
+        <div class="initials" style="background-color: ${contact[`color`]}">
+            <div>
+                <span>${contact[`initials`]}</span>
+            </div>
+        </div>
+        <div class="contact-name">
+            <span>${contact[`name`]}</span>
+            <span>${contact[`email`]}</span>
+        </div>
+      </li>
+    `;
+}
+
+function generateInfoContainerHtml(contactId) {
+    const headline = generateContactHeadlineHtml(contactId);
+    const edit = generateContactEditHtml(contactId);
+    const contactInfo = generateContactInfoHtml(contactId);
+    return `
+    ${headline}
+    ${edit}
+    ${contactInfo}`;
+}
+
+function generateContactHeadlineHtml(contactId) {
+    const contact = currentUser[`contacts`][contactId];
+    return `
+    <div>
+        <div id="contact-initials">
+            <div>
+                <span>${contact[`initials`]}</span>
+            </div>
+        </div>
+        <div id="contact-name">
+            <div>
+                <span>${contact[`name`]}</span>
+            </div>
+            <div>
+                <button id="btn-add-task" type="button">
+                    <img src="./assets/img/add-contact.png">
+                    <img src="./assets/img/add-contact-hover.png">
+                    <span>Add Task</span>
+                </button>
+            </div>
+        </div>
+    </div>`;
+}
+
+function generateContactEditHtml(contactId) {
+    const contact = currentUser[`contacts`][contactId];
+    return `            
+    <div>
+        <span>Contact Information</span>
+        <div>
+            <button id="btn-edit-info">
+                <img src="./assets/img/edit.png">
+                <img src="./assets/img/edit-blue.png">
+                <span>Edit</span>
+            </button>
+        </div>
+    </div>`;
+}
+
+function generateContactInfoHtml(contactId) {
+    const contact = currentUser[`contacts`][contactId];
+    return `
+    <div>
+        <div id="email-info">
+            <span>Email</span>
+            <span>${contact[`email`]}</span>
+        </div>
+        <div id="phone-info">
+            <span>Phone</span>
+            <span>${contact[`phone`]}</span>
+        </div>
+    </div>`;
+}

@@ -137,7 +137,7 @@
 #btn-clear-task>span {
     color: var(--version-2-main-color, #2A3647);
     font-size: 21px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     line-height: 120%;
 }
 

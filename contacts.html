@@ -1,22 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/animations.css">
+    <link rel="stylesheet" href="./css/contacts.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <title>contacts</title>
     <script src="./script.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/register.js"></script>
+    <script src="./js/templates.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/contacts.js"></script>
 </head>
-<body onload="includeHTML()">
+
+<body onload="initContact()">
     <div w3-include-html="assets/templates/desktop_templates.html"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
+        <div id="contacts-div">
+            <ul id="contactList"></ul>
+        </div>
+        <div id="contact-headline">
+            <h1>Contacts</h1>
+            <img src="./assets/img/line-vertical-blue.png">
+            <span>Better with a team</span>
+        </div>
+        <button id="btn-new-contact" type="button">
+            <span>New contact</span>
+            <img src="./assets/img/new-contact.png">
+        </button>
+        <div id="container-detailed-info"></div>
+        <div id="pop-up-contact">
+            <div id="p-u-add-contact" class="d-none">
+                <div class="pop-up-headline">
+                    <img src="./assets/img/logo-joi-white.png">
+                    <h2>Add contact</h2>
+                    <span>Tasks are better with a team!</span>
+                    <img src="assets/img/contact-line.png">
+                </div>
+                <div class="p-u-contact-form">
+                    <img src="./assets/img/close-form.png">
+                    <div class="div-user-icon">
+                        <div>
+                            <img src="./assets/img/user-white.png">
+                        </div>
+                    </div>
+                    <form>
+                        <div class="form-inputs">
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="text" placeholder="Name">
+                                    <img class="input-img-1" src="./assets/img/user-line.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="email" placeholder="Email">
+                                    <img class="input-img-2" src="./assets/img/email.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="text" placeholder="Phone">
+                                    <img class="input-img-3" src="./assets/img/phone-line.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-btns">
+                            <div>
+                                <button type="button" class="btn-default">
+                                    <span>Cancel</span>
+                                    <img src="/assets/img/cancel-normal.png">
+                                    <img src="/assets/img/cancel-hover.png">
+                                    <img src="/assets/img/cancel-active.png">
+                                </button>
+                                <button class="btn-valid">
+                                    <span>Create contact</span>
+                                    <img src="assets/img/akar-icons-check.png">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="p-u-edit-contact">
+                <div class="pop-up-headline">
+                    <img src="assets/img/logo-joi-white.png" alt="">
+                    <h2>Edit contact</h2>
+                    <img src="assets/img/contact-line.png" alt="">
+                </div>
+                <div class="p-u-contact-form">
+                    <img src="./assets/img/close-form.png">
+                    <div class="div-user-icon">
+                        <div class="user-bg">
+                            <span>AW</span>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="form-inputs">
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="text" placeholder="Name">
+                                    <img class="input-img-1" src="./assets/img/user-line.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="email" placeholder="Email">
+                                    <img class="input-img-2" src="./assets/img/email.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="div-input">
+                                    <input class="input" type="text" placeholder="Phone">
+                                    <img class="input-img-3" src="./assets/img/phone-line.png">
+                                </div>
+                                <div class="span">
+                                    <span class="d-none">This field is required</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-btns">
+                            <div>
+                                <button type="button" class="btn-default btn-delete">
+                                    <span>Delete</span>
+                                </button>
+                                <button class="btn-valid btn-save">
+                                    <span>Save</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="./js/desktop_templates.js"></script>
 </body>
+
 </html>

@@ -43,3 +43,13 @@
         bottom: calc((100vh - 74px) / 2);
     }
 }
+
+@keyframes contactMoveLeft {
+    from {
+        right: 0px;
+    }
+
+    to {
+        left: 750px;
+    }
+}
