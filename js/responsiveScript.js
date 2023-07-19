@@ -8,7 +8,11 @@ function bgAnimation() {
 
 function logoAnimation() {
     const logoImg = document.getElementById("img-logo");
-    logoImg.setAttribute("src", "./assets/img/logo-joi-white.png");
+    if (window.innerWidth <= 1100) {
+        logoImg.setAttribute("src", "./assets/img/logo-joi-white.png")
+    } else {
+        logoImg.setAttribute("src", "./assets/img/join-logo.png")
+    }
     setTimeout(() => {
         logoImg.setAttribute("src", "./assets/img/join-logo.png");
     }, 900);
