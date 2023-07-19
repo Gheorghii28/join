@@ -9,13 +9,13 @@ let isAssignedOptionOpen = false;
 /**
 
 Asynchronous function that initializes the application.
-Calls the functions 'includeHTML()', 'loadCurrentUser()', and 'initializePage()' in sequence.
+Calls the functions 'includeHTML()', 'loadCurrentUser()', and 'initializeAddTaskForm()' in sequence.
 */
-async function init() {
+async function initAddTask() {
     await includeHTML();
     await loadUsers();
     await loadCurrentUser();
-    initializePage();
+    initializeAddTaskForm();
 }
 
 /**
@@ -23,8 +23,7 @@ async function init() {
 This function initializes the application by calling various other functions.
 It is responsible for setting up the initial state and behavior of the application.
 */
-function initializePage() {
-    handlePriorityButtonClick("data-priority");
+function initializeAddTaskForm() {
     addContactsToAssignedList("assigned-option");
     selectCategoryOption();
     selectCategoryColor();
@@ -32,23 +31,13 @@ function initializePage() {
     setMinDate("o-t-date-input");
 }
 
-/**
-
-This function handles the click event for priority buttons.
-It selects all elements with the class '.o-t-edit-priority-button' and adds a click event listener to each button.
-When a button is clicked, it removes the 'active' class from all buttons and adds the 'active' class to the clicked button.
-*/
-function handlePriorityButtonClick(data) {
+function settaskPrioValue(event) {
     const buttons = document.querySelectorAll('.o-t-edit-priority-button');
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            modifyClassById("add", "d-none", ["prio-wrong"]);
-            buttons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            const priority = button.getAttribute(data);
-            taskPrio = priority;
-        });
-    });
+    buttons.forEach(btn => btn.classList.remove('active'));
+    modifyClassById("add", "d-none", ["prio-wrong"]);
+    event.currentTarget.classList.add("active");
+    const priority = event.currentTarget.getAttribute("data-priority");
+    taskPrio = priority;
 }
 
 /**
@@ -74,7 +63,7 @@ effectively hiding or showing the assigned option depending on its current state
 */
 function toggleAssignedHidden(event) {
     event.preventDefault();
-    if (isAssignedOptionOpen && assignedPersons.length !== 0) {
+    if (isAssignedOptionOpen && assignedPersons.length > 0) {
         modifyClassById("remove", "d-none", ["task-assigned-div"]);
         showTaskAssigned();
     } else {
@@ -104,7 +93,9 @@ function selectCategoryOption() {
     const categoryInput = document.getElementById("selected-category-input");
     const categorys = document.getElementById("category-option").childNodes;
     categorys.forEach(category => {
-        categoryBtnEvent(category, categoryInput, selectedColor);
+        if (category.nodeName == "LI") {
+            categoryBtnEvent(category, categoryInput, selectedColor);
+        }
     });
 }
 
@@ -238,7 +229,6 @@ Updates the background color of the selected color element.
 @param {HTMLElement} selectColor - The color element for the selected category.
 */
 function createNewCategory(selectInput, newCategory, selectColor) {
-    // debugger
     selectInput.placeholder = newCategory;
     taskCategory = newCategory;
     modifyClassById("add", "d-none", ["new-category-div"]);
@@ -288,18 +278,16 @@ function selectAssigned(ulListeId) {
             option.addEventListener("click", event => {
                 event.preventDefault();
                 isChecked = JSON.parse(`${option.getAttribute("data-custom-status")}`);
-                const optionValue = event.target.attributes[0].value;
-                const optionColor = getRandomRGBColor();
-                const assignedPerson = {
-                    name: optionValue,
-                    color: optionColor
-                }
-                if (optionValue == "user-invite") {
-                    openUserInviteField();
-                } else {
+                const contactId = parseInt(event.target.attributes[0].value);
+                const contatIndex = getContactIndex(contactId, currentUser);
+                const assignedPerson = currentUser[`contacts`][contatIndex];
+                if (contactId >= 0) {
                     isChecked = !isChecked;
                     option.setAttribute("data-custom-status", `${isChecked}`);
                     saveAssignedOption(isChecked, event, assignedPerson);
+                } else {
+                    openUserInviteField();
+                    isAssignedOptionOpen = !isAssignedOptionOpen;
                 }
             });
         }
@@ -326,11 +314,13 @@ function openUserInviteField() {
 function closeUserInviteField() {
     modifyClassById("add", "d-none", ["user-invite-div"]);
     modifyClassById("remove", "d-none", ["selected-assigned-div"]);
+    modifyClassById("remove", "d-none", ["task-assigned-div"]);
 }
 
 function confirmUserInvite() {
     closeUserInviteField();
     clearInputValues(["user-invite-input"]);
+    modifyClassById("remove", "d-none", ["task-assigned-div"]);
 }
 
 function showBtns(event) {
@@ -411,7 +401,6 @@ function resetInputAssigned() {
             option.setAttribute("data-custom-status", `${false}`);
         }
     });
-
 }
 
 function resetTaskPrio() {
@@ -491,21 +480,6 @@ function newTask(title, description, date) {
         title: title,
         status: "to-do"
     };
-}
-
-async function updateAddedTaskCurrentUser(task, currentUser) {
-    currentUser.tasks.push(task);
-    await setItem('currentUser', JSON.stringify(currentUser));
-}
-
-async function updateCurrentUserFromUsers(users, currentUser) {
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].email === currentUser.email && users[i].password === currentUser.password) {
-            users[i] = currentUser;
-            break;
-        }
-    }
-    await setItem('users', JSON.stringify(users));
 }
 
 function addContactsToAssignedList(listId) {

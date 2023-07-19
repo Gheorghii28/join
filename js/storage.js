@@ -28,3 +28,27 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
+
+async function updateAddedContactToCurrentUser(contact, currentUser) {
+    currentUser.contacts.push(contact);
+    await setItem('currentUser', JSON.stringify(currentUser));
+}
+
+async function updateAddedTaskCurrentUser(task, currentUser) {
+    currentUser.tasks.push(task);
+    await setItem('currentUser', JSON.stringify(currentUser));
+}
+
+async function updateCurrentUserFromUsers(users, currentUser) {
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].email === currentUser.email && users[i].password === currentUser.password) {
+            users[i] = currentUser;
+            break;
+        }
+    }
+    await setItem('users', JSON.stringify(users));
+}
+
+async function updateCurrentUser(currentUser) {
+    await setItem('currentUser', JSON.stringify(currentUser));
+}

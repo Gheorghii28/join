@@ -16,15 +16,16 @@
     width: 21.648px;
     height: 21.648px;
     flex-shrink: 0;
-    top: 70px;
-    right: 142px;
-    display: none;
+    top: 26px;
+    right: 29px;
+    cursor: pointer;
 }
 
 #addtask-form>form {
     display: flex;
     flex-direction: column;
     gap: 41px;
+    padding-bottom: 20px !important;
 }
 
 #addtask-form::-webkit-scrollbar {
@@ -51,11 +52,15 @@
     height: 5px;
 }
 
-.form-position>div {
+.form-position>#addtask-form {
     position: absolute;
     top: 89px;
     left: 232px;
     padding: 82px 110px 80px 123px;
+}
+
+.form-position #close-task-form {
+    display: none;
 }
 
 #a-t-form-headline {
@@ -71,10 +76,8 @@
     height: 78px;
     flex-direction: column;
     color: #000;
-
-    /* Version 2/t1 */
     font-size: 61px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
@@ -154,8 +157,6 @@
 
 #btn-clear-task:active {
     border: 1px solid #091931;
-
-    /* stronger */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -189,8 +190,6 @@
     display: initial;
 }
 
-/* -------------------- */
-
 #btn-create-task {
     display: inline-flex;
     height: 55px;
@@ -208,7 +207,7 @@
 #btn-create-task>span {
     color: #FFF;
     font-size: 21px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }

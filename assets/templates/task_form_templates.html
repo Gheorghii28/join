@@ -1,11 +1,10 @@
 <div id="addtask-form">
-
-    <img id="close-task-form" src="/assets/img/close-form.png">
-
+    <div id="img-close-res">
+        <img onclick="closeTaskForm()" id="close-task-form" src="/assets/img/close-form.png">
+    </div>
     <div id="a-t-form-headline">
         <h1>Add Task</h1>
     </div>
-
     <form onsubmit="saveTask(); return false;">
         <div id="a-t-form-content" class="wrap">
             <div id="a-t-left">
@@ -64,7 +63,7 @@
                                 <div style="background-color: rgb(0, 56, 255);" class="category-color"></div>
                             </li>
                             <li data-value="Media" data-color="255, 199, 1">
-                                <span>Media</span> 
+                                <span>Media</span>
                                 <div style="background-color: rgb(255, 199, 1);" class="category-color"></div>
                             </li>
                         </ul>
@@ -72,22 +71,25 @@
                     <div id="category-color-div" class="d-none">
                         <ul>
                             <li>
-                                <div data-color="12, 34, 111" style="background-color: rgb(12, 34, 111);"></div>
+                                <div data-color="252, 113, 255" style="background-color: rgb(252, 113, 255);"></div>
                             </li>
                             <li>
-                                <div data-color="120, 34, 111" style="background-color: rgb(120, 34, 111);"></div>
+                                <div data-color="31, 215, 193" style="background-color: rgb(31, 215, 193);"></div>
                             </li>
                             <li>
-                                <div data-color="12, 3, 111" style="background-color: rgb(12, 3, 111);"></div>
+                                <div data-color="255, 122, 0" style="background-color: rgb(255, 122, 0);"></div>
                             </li>
                             <li>
-                                <div data-color="12, 34, 11" style="background-color: rgb(12, 34, 11);"></div>
+                                <div data-color="12, 200, 11" style="background-color: rgb(12, 200, 11);"></div>
                             </li>
                             <li>
-                                <div data-color="120, 4, 11" style="background-color: rgb(120, 4, 11);"></div>
+                                <div data-color="0, 56, 255" style="background-color: rgb(0, 56, 255);"></div>
                             </li>
                             <li>
                                 <div data-color="2, 200, 111" style="background-color: rgb(2, 200, 111);"></div>
+                            </li>
+                            <li>
+                                <div data-color="255, 199, 1" style="background-color: rgb(255, 199, 1);"></div>
                             </li>
                         </ul>
                     </div>
@@ -102,8 +104,8 @@
                                 <button onclick="closeUserInviteField()" type="button" class="btn-invite"
                                     id="btn-cancel-user-invite"><img src="./assets/img/cancel-input.png"></button>
                                 <img src="./assets/img/vertical-line-gray.png">
-                                <button onclick="confirmUserInvite()" type="button" class="btn-invite" id="btn-confirm-user-invite"><img
-                                        src="./assets/img/confirm-user.png"></button>
+                                <button onclick="confirmUserInvite()" type="button" class="btn-invite"
+                                    id="btn-confirm-user-invite"><img src="./assets/img/confirm-user.png"></button>
                             </div>
                         </div>
                         <div id="selected-assigned-div" onclick="toggleAssignedHidden(event)"
@@ -131,7 +133,7 @@
                     <span>Prio</span>
                     <div class="o-t-edit-button-container">
                         <div>
-                            <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
+                            <button onclick="settaskPrioValue(event)" type="button" class="o-t-edit-priority-button o-t-edit-urgent"
                                 data-priority="urgent">
                                 <span>Urgent</span>
                                 <img src="./assets/img/prio-baja-urgent.png">
@@ -139,7 +141,7 @@
                             </button>
                         </div>
                         <div>
-                            <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
+                            <button onclick="settaskPrioValue(event)" type="button" class="o-t-edit-priority-button o-t-edit-medium"
                                 data-priority="medium">
                                 <span>Medium</span>
                                 <img src="./assets/img/prio-baja-medium.png">
@@ -147,7 +149,7 @@
                             </button>
                         </div>
                         <div>
-                            <button type="button" class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
+                            <button onclick="settaskPrioValue(event)" type="button" class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
                                 <span>Low</span>
                                 <img src="./assets/img/prio-baja-low.png">
                                 <img src="./assets/img/prio-baja-white-low.png">
@@ -160,15 +162,16 @@
                     <div id="o-t-e-label" class="assigned-label">Subtasks</div>
                     <div class="o-t-e-custom-select">
                         <div onclick="subTaskInputFocus()" id="new-subtask-div" class="task-invite-input">
-                            <input id="subtask-input" oninput="showBtns(event)" type="text" placeholder="Add new subtask">
+                            <input id="subtask-input" oninput="showBtns(event)" type="text"
+                                placeholder="Add new subtask">
                             <div>
-                                <button onclick="cancelInputSubTask()" type="button" class="btn-invite d-none" id="btn-cancel-subtask"><img
-                                        src="./assets/img/cancel-input.png"></button>
+                                <button onclick="cancelInputSubTask()" type="button" class="btn-invite d-none"
+                                    id="btn-cancel-subtask"><img src="./assets/img/cancel-input.png"></button>
                                 <img id="img-separate-line" src="./assets/img/vertical-line-gray.png" class="d-none">
-                                <button onclick="showSubTask()" type="button" class="btn-invite d-none" id="btn-confirm-subtask"><img
-                                        src="./assets/img/confirm-user.png"></button>
-                                <button onclick="subTaskInputFocus()" type="button" class="btn-invite" id="plus-subtask"><img
-                                        src="./assets/img/plus-subtask.png"></button>
+                                <button onclick="showSubTask()" type="button" class="btn-invite d-none"
+                                    id="btn-confirm-subtask"><img src="./assets/img/confirm-user.png"></button>
+                                <button onclick="subTaskInputFocus()" type="button" class="btn-invite"
+                                    id="plus-subtask"><img src="./assets/img/plus-subtask.png"></button>
                             </div>
                         </div>
                     </div>
@@ -193,5 +196,4 @@
             </div>
         </div>
     </form>
-
 </div>

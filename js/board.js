@@ -2,13 +2,13 @@ let currentDraggedElement;
 let isLoading = false;
 let taskAssignedName;
 
-async function init() {
-    debugger
+async function initBoard() {
     await includeHTML();
     await loadUsers();
     await loadCurrentUser();
     updateHTML();
     initializeEditTask();
+    initializeAddTaskForm();
 }
 
 function updateHTML() {
@@ -20,7 +20,6 @@ function updateHTML() {
 }
 
 function initializeEditTask() {
-    handlePriorityButtonClick("data-priority-edit");
     addContactsToAssignedList("assigned-edit-option");
     selectAssigned("assigned-edit-option");
     setMinDate("o-t-edit-date-input");
@@ -57,6 +56,7 @@ function showEmptyBoxs() {
 function moveTo(taskStatus) {
     const tasks = currentUser[`tasks`];
     tasks[currentDraggedElement]['status'] = taskStatus;
+    updateEditedTasks();
     updateHTML();
 }
 
@@ -149,7 +149,6 @@ function setTaskInputsValue(taskId) {
 
 function setPrioBtn(taskId) {
     let btns = document.querySelectorAll('[data-priority-edit]');
-    console.log(btns)
     btns.forEach(btn => {
         const attributValue = btn.getAttribute("data-priority-edit");
         const taskPrio = currentUser[`tasks`][taskId][`prio`];
@@ -191,7 +190,6 @@ function changeDataStatus(userContacts, assignedContacts, taskAssignedName) {
                 li.attributes[`data-custom-status`].value = true;
                 taskAssignedName.push(assigned.name);
                 showAssignedContact(li);
-                console.log(li)
             }
         }
     }
@@ -241,3 +239,23 @@ function closeEditedTask() {
     modifyClassById("add", "d-none", ["opened-task-edit"]);
     modifyClassById("remove", "d-none", ["opened-task"]);
 }
+
+function searchText() {
+    const searchInput = document.getElementById("input-search-task-board");
+    const searchText = searchInput.value.toLowerCase();
+    const taskTitles = document.querySelectorAll(".task-card .task-title");
+    const taskTexts = document.querySelectorAll(".task-card .task-text");
+
+    const taskElements = Array.from(taskTitles).concat(Array.from(taskTexts));
+
+    taskElements.forEach(element => {
+        const elementText = element.textContent.toLowerCase();
+
+        if (elementText.includes(searchText)) {
+            element.closest(".task-card").style.display = "block";
+        } else {
+            element.closest(".task-card").style.display = "none";
+        }
+    });
+}
+

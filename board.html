@@ -11,34 +11,51 @@
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <link rel="stylesheet" href="./css/board.css">
     <link rel="stylesheet" href="./css/add_task.css">
-    <title>board</title>
+    <link rel="stylesheet" href="./css/responsive.css">
+    <title>Join</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon_package/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon_package/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon_package/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon_package/site.webmanifest">
+    <link rel="mask-icon" href="./assets/favicon_package/safari-pinned-tab.svg" color="#9ba7b3">
+    <meta name="msapplication-TileColor" content="#f6f7f8">
+    <meta name="theme-color" content="#f6f7f8">
     <script src="./js/utils.js"></script>
     <script src="./js/templates.js"></script>
+    <script src="./js/desktop_templates.js"></script>
     <script src="./script.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/add_task.js"></script>
     <script src="./js/board.js"></script>
+    <script src="./js/responsiveScript.js"></script>
 </head>
 
-<body onload="init()">
-    <div w3-include-html="assets/templates/desktop_templates.html"></div>
-    <div w3-include-html="assets/templates/task_form_templates.html" class="task-delivery d-none"></div>
+<body onload="initBoard()">
+    <div w3-include-html="assets/templates/desktop_templates.html" id="w3-board"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
-
+        <div id="sreen-task-form" class="board-form-position d-none">
+            <div id="task-form-w3" w3-include-html="assets/templates/task_form_templates.html"></div>
+        </div>
+        <div id="pop-up-added-task" class="d-none">
+            <span>Task added to board</span>
+            <img src="./assets/img/board-img.png">
+        </div>
         <div id="main-board">
             <div>
                 <div id="search-board-bar">
                     <div>
                         <div id="board-headline">
+                            <p class="kanban-text">Kanban Project Management Tool</p>
                             <span>Board</span>
                         </div>
                         <div id="search-add-board-container">
                             <div id="search-task-board">
                                 <div>
                                     <div>
-                                        <input id="input-search-task-board" placeholder="Find Task" type="text">
+                                        <input id="input-search-task-board" oninput="searchText()"
+                                            placeholder="Find Task" type="text">
                                     </div>
                                     <div>
                                         <img id="search-line-board" src="./assets/img/vertical-line-search.png">
@@ -48,20 +65,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="btn-add-task-board">
-                                <span>Add task</span>
-                                <img src="./assets/img/plus-task-icon.png">
-                            </button>
-
+                            <div class="prelativ">
+                                <button onclick="showScreenWithTaskForm()" id="btn-add-task-board">
+                                    <span>Add task</span>
+                                    <img src="./assets/img/plus-task-icon.png">
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div id="board-content">
                     <div class="b-c-container" id="todo-container">
                         <div class="b-c-headline" id="todo-headline">
                             <span>To do</span>
-                            <button>
+                            <button onclick="showScreenWithTaskForm()">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
@@ -69,11 +86,10 @@
                         </div>
                         <div id="to-do" class="tasks-container"></div>
                     </div>
-
                     <div class="b-c-container" id="in-progress-container">
                         <div class="b-c-headline" id="in-progress-headline">
                             <span>In progress</span>
-                            <button>
+                            <button onclick="showScreenWithTaskForm()">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
@@ -81,11 +97,10 @@
                         </div>
                         <div id="in-progress" class="tasks-container"></div>
                     </div>
-
                     <div class="b-c-container" id="awaiting-feedback-container">
                         <div class="b-c-headline" id="awaiting-feedback-headline">
                             <span>Awaiting Feedback</span>
-                            <button>
+                            <button onclick="showScreenWithTaskForm()">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
@@ -93,71 +108,28 @@
                         </div>
                         <div id="awaiting-feedback" class="tasks-container"></div>
                     </div>
-
                     <div class="b-c-container" id="done-container">
                         <div class="b-c-headline" id="done-headline">
                             <span>Done</span>
-                            <button>
+                            <button onclick="showScreenWithTaskForm()">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div id="done" class="tasks-container">
-                            <!-- task-card -->
-                            <!-- <div class="task-card">
-                                <div>
-                                    <div class="task-type bg-color-type-6">
-                                        <span>Marketing</span>
-                                    </div>
-                                    <div class="task-content">
-                                        <div>
-                                            <span class="task-title">Social media strategy</span>
-                                            <span class="task-text">Develop an ad campaign for brand positioning</span>
-                                        </div>
-                                    </div>
-                                    <div class="task-progress">
-                                        <div class="task-progress-bar bg-color-progress-bar"></div>
-                                        <span>3/3 Done</span>
-                                    </div>
-                                    <div class="task-footer">
-                                        <div class="task-responsible">
-                                            <div class="responsible bg-color-9">
-                                                <span>BZ</span>
-                                            </div>
-                                            <div class="responsible bg-color-10">
-                                                <span>RS</span>
-                                            </div>
-                                        </div>
-                                        <div class="prio-symbol">
-                                            <img src="./assets/img/prio-baja-lime-green.png" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!--  -->
-                            <!-- empty-space-task -->
-                            <!-- <div class="empty-space-task d-none"></div> -->
-                            <!--  -->
-                        </div>
+                        <div id="done" class="tasks-container"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div id="opened-task-container" class="d-none">
-
-        <div id="opened-task" class="d-none"></div><!-- opened task -->
-
-
-        <!-- opened task edit -->
+        <div id="opened-task" class="d-none"></div>
         <div id="opened-task-edit" class="d-none">
             <form id="form-edit-task" onsubmit="saveEditedTask(); return false;">
-                <img onclick="closeEditedTask()" class="o-t-close-img" src="./assets/img/o-t-close.png">
-                <button id="o-t-btn-confirm">
-                    <span>OK</span>
-                    <img src="./assets/img/ok-icon.png" alt="">
-                </button>
+                <div id="close-task-form-res">
+                    <img onclick="closeEditedTask()" class="o-t-close-img" src="./assets/img/o-t-close.png">
+                </div>
                 <div id="o-t-edit-content">
                     <div id="o-t-edit-title" class="edit-task-title">
                         <label for="o-t-input-edit-title">Title</label>
@@ -180,24 +152,24 @@
                         <span>Prio</span>
                         <div class="o-t-edit-button-container">
                             <div>
-                                <button type="button" class="o-t-edit-priority-button o-t-edit-urgent"
-                                    data-priority-edit="urgent">
+                                <button onclick="settaskPrioValue(event)" type="button"
+                                    class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
                                     <span>Urgent</span>
                                     <img src="./assets/img/prio-baja-urgent.png">
                                     <img src="./assets/img/prio-baja-white-urgent.png">
                                 </button>
                             </div>
                             <div>
-                                <button type="button" class="o-t-edit-priority-button o-t-edit-medium"
-                                    data-priority-edit="medium">
+                                <button onclick="settaskPrioValue(event)" type="button"
+                                    class="o-t-edit-priority-button o-t-edit-medium" data-priority="medium">
                                     <span>Medium</span>
                                     <img src="./assets/img/prio-baja-medium.png">
                                     <img src="./assets/img/prio-baja-white-medium.png">
                                 </button>
                             </div>
                             <div>
-                                <button type="button" class="o-t-edit-priority-button o-t-edit-low"
-                                    data-priority-edit="low">
+                                <button onclick="settaskPrioValue(event)" type="button"
+                                    class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
                                     <span>Low</span>
                                     <img src="./assets/img/prio-baja-low.png">
                                     <img src="./assets/img/prio-baja-white-low.png">
@@ -233,13 +205,16 @@
                         <p id="assigned-edit-wrong" class="wrong d-none">This field is required</p>
                     </div>
                 </div>
+                <div id="div-btn-res">
+                    <button id="o-t-btn-confirm">
+                        <span>OK</span>
+                        <img src="./assets/img/ok-icon.png" alt="">
+                    </button>
+                </div>
             </form>
         </div>
-        <!--  -->
     </div>
 
-
-    <script src="./js/desktop_templates.js"></script>
 </body>
 
 </html>

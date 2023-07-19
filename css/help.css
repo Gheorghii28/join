@@ -20,10 +20,8 @@
 
 #help-headline>h1 {
     color: #000;
-
-    /* Version 2/t1 */
     font-size: 61px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
@@ -79,7 +77,7 @@
     flex-direction: column;
     color: #000;
     font-size: 27px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
@@ -90,18 +88,17 @@
     flex-direction: column;
     color: #000;
     font-size: 27px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
 
 #help-text-1>p {
     display: flex;
-    /* width: 969px; */
     flex-direction: column;
     color: #000;
     font-size: 16px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     line-height: 120%;
 }
 
@@ -114,17 +111,27 @@
 #help-text-2>div>span {
     color: #000;
     font-size: 27px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
 
 #help-text-2>div>p {
     display: flex;
-    /* width: 915px; */
     flex-direction: column;
     color: #000;
     font-size: 16px;
-    font-family: Poppins;
+    font-family: 'Poppins', sans-serif;
     line-height: 120%;
+}
+
+#impressum {
+    width: calc(100% - 232px);
+    height: calc(100vh - 89px);
+    position: absolute;
+    top: 89px;
+    left: 232px;
+    padding: 30px;
+    line-height: 30px;
+    overflow-y: scroll;
 }

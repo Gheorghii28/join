@@ -1,3 +1,28 @@
+.bg-li {
+    background: var(--version-2-main-color, #2A3647) !important;
+}
+
+.bg-li .bg-name {
+    color: white !important;
+}
+
+#btn-to-contact {
+    position: absolute;
+    bottom: auto;
+    top: 107px;
+    right: 24px;
+}
+
+.p-u-contact-form>img:nth-of-type(2) {
+    display: none;
+}
+
+#btn-to-contact>img {
+    width: 36.901px;
+    height: 36.901px;
+    flex-shrink: 0;
+}
+
 #contacts-div {
     position: absolute;
     left: 232px;
@@ -192,6 +217,7 @@
     bottom: 67px;
     transition: all 100ms ease-in-out;
     cursor: pointer;
+    z-index: 5;
 }
 
 #btn-new-contact:hover {
@@ -482,6 +508,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 10;
+    overflow-x: hidden;
 }
 
 #p-u-add-contact,
@@ -492,8 +519,16 @@
     background: #FFF;
     position: absolute;
     top: calc((100vh - 594px) / 2);
-    right: calc((100% - 1212px) / 2);
+    right: -1212px;
     display: flex;
+}
+
+.animation-move-contactForm {
+    animation: contactFormMoveLeft 500ms ease-in-out 100ms forwards;
+}
+
+.animation-move-reverse-contactForm {
+    animation: contactFormMoveRight 500ms ease-in-out 0ms forwards;
 }
 
 .pop-up-headline {
@@ -753,8 +788,6 @@
 
 .btn-default:active {
     border: 1px solid #091931;
-
-    /* stronger */
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -822,7 +855,7 @@
 .btn-valid>span {
     color: #FFF;
     font-size: 21px;
-    font-family: Inter;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     line-height: 120%;
 }
@@ -845,4 +878,37 @@
     ;
     background: #091931;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#contact-succes-created {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    position: absolute;
+    bottom: -74px;
+    left: calc((100% - 326px) / 2);
+    z-index: 120;
+
+}
+
+#contact-succes-created>div {
+    display: flex;
+    width: 326px;
+    height: 74px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: #2A3647;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+#contact-succes-created>div>span {
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
 }

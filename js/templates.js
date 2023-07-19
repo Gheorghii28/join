@@ -134,10 +134,11 @@ function generateAssignedListHtml() {
 
 function generateAssigned() {
     const contacts = currentUser[`contacts`];
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
     let assignedListeHtml = "";
     contacts.forEach(contact => {
         assignedListeHtml += `
-        <li data-value="${contact[`name`]}" data-custom-status="false">
+        <li data-value="${contact[`id`]}" data-custom-status="false">
             <span>${contact[`name`]}</span>
             <div class="check-container">
                 <label>
@@ -162,14 +163,14 @@ function generateLetterHTML(letter) {
 
 function generateContactHTML(contact) {
     return `
-      <li onclick="showChosenContact(${contact[`id`]})" onclick="showChosenContact()" class="contact">
+      <li id="contact-li-${contact[`id`]}" onclick="showChosenContact(${contact[`id`]})" class="contact">
         <div class="initials" style="background-color: ${contact[`color`]}">
             <div>
                 <span>${contact[`initials`]}</span>
             </div>
         </div>
         <div class="contact-name">
-            <span>${contact[`name`]}</span>
+            <span class="bg-name">${contact[`name`]}</span>
             <span>${contact[`email`]}</span>
         </div>
       </li>
@@ -187,7 +188,8 @@ function generateInfoContainerHtml(contactId) {
 }
 
 function generateContactHeadlineHtml(contactId) {
-    const contact = currentUser[`contacts`][contactId];
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contact = currentUser[`contacts`][contactIndex];
     return `
     <div>
         <div id="contact-initials">
@@ -200,7 +202,7 @@ function generateContactHeadlineHtml(contactId) {
                 <span>${contact[`name`]}</span>
             </div>
             <div>
-                <button id="btn-add-task" type="button">
+                <button onclick="showScreenWithTaskForm()" id="btn-add-task" type="button">
                     <img src="./assets/img/add-contact.png">
                     <img src="./assets/img/add-contact-hover.png">
                     <span>Add Task</span>
@@ -211,12 +213,13 @@ function generateContactHeadlineHtml(contactId) {
 }
 
 function generateContactEditHtml(contactId) {
-    const contact = currentUser[`contacts`][contactId];
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contact = currentUser[`contacts`][contactIndex];
     return `            
     <div>
         <span>Contact Information</span>
         <div>
-            <button id="btn-edit-info">
+            <button onclick="openEditContactForm(${contactId})" type="button" id="btn-edit-info">
                 <img src="./assets/img/edit.png">
                 <img src="./assets/img/edit-blue.png">
                 <span>Edit</span>
@@ -226,7 +229,8 @@ function generateContactEditHtml(contactId) {
 }
 
 function generateContactInfoHtml(contactId) {
-    const contact = currentUser[`contacts`][contactId];
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contact = currentUser[`contacts`][contactIndex];
     return `
     <div>
         <div id="email-info">
@@ -237,5 +241,89 @@ function generateContactInfoHtml(contactId) {
             <span>Phone</span>
             <span>${contact[`phone`]}</span>
         </div>
+    </div>`;
+}
+
+function generateTasksBtnsHtml(tasksCount, inProgressCount, feedbackCount) {
+    return `
+    <div>
+        <a href="board.html">
+            <div id="tasksInBoard" class="task-btn">
+                <div>
+                    <span>${tasksCount}</span>
+                    <span>Tasks in Board</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div>
+        <a href="board.html">
+            <div id="tasksInProgress" class="task-btn">
+                <div>
+                    <span>${inProgressCount}</span>
+                    <span>Tasks In Progress</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div>
+        <a href="board.html">
+            <div id="awaitingFeedback" class="task-btn">
+                <div>
+                    <span>${feedbackCount}</span>
+                    <span>Awaiting Feedback</span>
+                </div>
+            </div>
+        </a>
+    </div>`;
+}
+
+function generateUrgentBtnHtml(urgentCount, date) {
+    return `
+    <div>
+        <a href="board.html">
+            <div id="urgent">
+                <div id="urgent-left">
+                    <img src="./assets/img/ellipse 4.png">
+                    <div>
+                        <span>${urgentCount}</span>
+                        <span>Urgent</span>
+                    </div>
+                </div>
+                <img src="./assets/img/vertical-line-gray.png">
+                <div id="urgent-right">
+                    <span>${date}</span>
+                    <span>Upcoming Deadline</span>
+                </div>
+            </div>
+        </a>
+    </div>`;
+}
+
+function generateStatusContainerHtml(todoCount, doneCount) {
+    return `
+    <div>
+        <a href="board.html">
+            <div id="todo-sumarry">
+                <img src="./assets/img/todo.png">
+                <img src="./assets/img/todo-white.png">
+                <div>
+                    <span>${todoCount}</span>
+                    <span>To-do</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div>
+        <a href="board.html">
+            <div id="done-summary">
+                <img src="./assets/img/done.png">
+                <img src="./assets/img/done-white.png">
+                <div>
+                    <span>${doneCount}</span>
+                    <span>Done</span>
+                </div>
+            </div>
+        </a>
     </div>`;
 }

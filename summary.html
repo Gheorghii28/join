@@ -10,119 +10,50 @@
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <link rel="stylesheet" href="./css/summary.css">
-    <title>summary</title>
+    <link rel="stylesheet" href="./css/responsive.css">
+    <title>Join</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon_package/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon_package/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon_package/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon_package/site.webmanifest">
+    <link rel="mask-icon" href="./assets/favicon_package/safari-pinned-tab.svg" color="#9ba7b3">
+    <meta name="msapplication-TileColor" content="#f6f7f8">
+    <meta name="theme-color" content="#f6f7f8">
     <script src="js/utils.js"></script>
+    <script src="js/templates.js"></script>
     <script src="./script.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/summary.js"></script>
+    <script src="./js/responsiveScript.js"></script>
+
 </head>
 
-<body onload="init()">
-    <div w3-include-html="assets/templates/desktop_templates.html"></div>
+<body onload="initSummary()">
+    <div w3-include-html="assets/templates/desktop_templates.html" id="w3-summary"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
         <div id="summary-container">
             <div id="summary-content">
                 <div id="summary-info">
                     <div id="summary-headline">
+                        <span class="kanban-text">Kanban Project Management Tool</span>
                         <h1>Summary</h1>
-                        <img src="./assets/img/vertical-line.png" alt="">
+                        <img src="./assets/img/vertical-line.png" class="r1410none">
                         <div id="summary-headline-text">
                             <span>Everything in a nutshell!</span>
                         </div>
+                        <img class="r1410initial" src="./assets/img/contact-line.png">
                     </div>
                     <div id="taskSummary">
-                        <div id="tasksContainer">
-                            <div>
-                                <a href="board.html">
-                                    <div id="tasksInBoard" class="task-btn">
-                                        <!-- Hier kommt der Inhalt für "Tasks in Board" -->
-                                        <div>
-                                            <span>5</span>
-                                            <span>Tasks in Board</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="board.html">
-                                    <div id="tasksInProgress" class="task-btn">
-                                        <!-- Hier kommt der Inhalt für "Tasks in Progress" -->
-                                        <div>
-                                            <span>2</span>
-                                            <span>Tasks In Progress</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="board.html">
-                                    <div id="awaitingFeedback" class="task-btn">
-                                        <!-- Hier kommt der Inhalt für "Awaiting Feedback" -->
-                                        <div>
-                                            <span>2</span>
-                                            <span>Awaiting Feedback</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div id="urgentContainer">
-                            <div>
-                                <a href="board.html">
-                                    <div id="urgent">
-                                        <!-- Hier kommt der Inhalt für "Urgent" -->
-                                        <div id="urgent-left">
-                                            <img src="./assets/img/ellipse 4.png">
-                                            <div>
-                                                <span>1</span>
-                                                <span>Urgent</span>
-                                            </div>
-                                        </div>
-                                        <img src="./assets/img/vertical-line-gray.png">
-                                        <div id="urgent-right">
-                                            <span>October 16, 2022</span>
-                                            <span>Upcoming Deadline</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div id="statusContainer">
-                            <div>
-                                <a href="board.html">
-                                    <div id="todo-sumarry">
-                                        <!-- Hier kommt der Inhalt für "To-do" -->
-                                        <img src="./assets/img/todo.png">
-                                        <img src="./assets/img/todo-white.png">
-                                        <div>
-                                            <span>1</span>
-                                            <span>To-do</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="board.html">
-                                    <div id="done-summary">
-                                        <!-- Hier kommt der Inhalt für "Done" -->
-                                        <img src="./assets/img/done.png">
-                                        <img src="./assets/img/done-white.png">
-                                        <div>
-                                            <span>1</span>
-                                            <span>Done</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        <div id="tasksContainer"></div>
+                        <div id="urgentContainer"></div>
+                        <div id="statusContainer"></div>
                     </div>
-
                 </div>
-                <div id="greeting-container">
+                <div id="greeting-container" class="greeting-position">
                     <div>
-                        <span>Good morning, </span>
+                        <span id="greeting-day"></span>
                         <span id="greeting-name"></span>
                     </div>
                 </div>

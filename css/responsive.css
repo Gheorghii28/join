@@ -1,0 +1,1016 @@
+@media (max-width: 1410px) {
+    .greeting-position {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 26px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F6F7F8;
+        animation: opacityAnimation 1000ms ease-in-out 1000ms forwards;
+        z-index: 20;
+    }
+
+    .greeting-position>div {
+        margin-right: 0px !important;
+        align-items: center !important;
+    }
+
+    .greeting-position #greeting-name {
+        width: max-content !important;
+    }
+
+    .responsive-display {
+        display: none !important;
+    }
+
+    #help-headline {
+        left: 16px;
+        top: 121px;
+    }
+
+    #help-content {
+        left: 16px;
+        top: 242px;
+        right: 0px;
+        padding-right: 29px;
+    }
+
+    #help-back {
+        right: 19px;
+        top: 115px;
+    }
+
+    #impressum {
+        left: 0px;
+        width: 100%;
+    }
+
+    .w1410 {
+        width: 100%;
+    }
+
+    #desktop_templates {
+        flex-direction: initial;
+        width: 100%;
+        height: 80px;
+        top: initial;
+        bottom: 0px;
+        padding: 0px 16px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #menu {
+        flex-direction: initial;
+        list-style: none;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #desktop_templates>img {
+        width: 32px;
+        height: 39.016px;
+        position: absolute;
+        bottom: calc(100vh - 58.016px);
+    }
+
+    .r1410initial {
+        display: initial;
+    }
+
+    .r1410none {
+        display: none;
+    }
+
+    #summary-container {
+        padding-left: initial;
+        padding-top: 95px;
+    }
+
+    #summary-info {
+        padding-left: initial;
+        padding-top: 25px;
+    }
+
+    #summary-content {
+        justify-content: center;
+        height: calc(100vh - 138px);
+    }
+
+    #top-headline {
+        display: none;
+    }
+
+    #top-right>a {
+        display: none;
+    }
+
+    #summary-headline>h1 {
+        font-size: 47px;
+    }
+
+    #summary-headline-text>span {
+        font-size: 20px;
+    }
+
+    #summary-headline>img {
+        width: 90px;
+        height: 3px;
+    }
+
+    #summary-headline-text>span {
+        position: initial;
+    }
+
+    #summary-headline {
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        margin: 0px;
+        gap: 25px;
+    }
+
+    #tasksContainer>div {
+        width: 110px !important;
+        height: 110px !important;
+    }
+
+    .task-btn {
+        width: 110px !important;
+        height: 110px !important;
+    }
+
+    .task-btn>div>span:nth-of-type(1),
+    #todo-sumarry>div>span:nth-of-type(1),
+    #done-summary>div>span:nth-of-type(1) {
+        font-size: 47px;
+    }
+
+    .task-btn>div>span:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    .task-btn:hover {
+        width: 115px;
+        height: 115px;
+    }
+
+    #urgent,
+    #urgent:hover {
+        width: 360px;
+        height: 110px;
+        padding: 28px 0px;
+        gap: 20px;
+    }
+
+    #tasksContainer {
+        gap: 15px;
+    }
+
+    #statusContainer {
+        gap: 15px;
+    }
+
+    #statusContainer>div:nth-last-of-type(1),
+    #statusContainer>div:nth-last-of-type(2),
+    #todo-sumarry,
+    #done-summary,
+    #todo-sumarry:hover,
+    #done-summary:hover {
+        width: 177.5px !important;
+        height: 110px !important;
+    }
+
+    #urgent-left>img,
+    #todo-sumarry>img,
+    #done-summary>img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    #todo-sumarry>div>span:nth-of-type(2),
+    #done-summary>div>span:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    #urgent>img {
+        height: 68px;
+    }
+
+    #taskSummary {
+        gap: 24px;
+        margin: 30px 0px 0px 0px;
+    }
+
+    #urgentContainer>div:nth-of-type(1) {
+        width: initial;
+        height: initial;
+    }
+
+    #menu>li {
+        display: flex;
+        width: 80px;
+        height: 76px;
+        padding: 8px 0px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        border-radius: 16px;
+    }
+
+    #menu a {
+        flex-direction: column !important;
+        gap: 4px !important;
+        width: 76px !important;
+        height: 76px !important;
+        padding: 15px 0px !important;
+        border-radius: 8px !important;
+        align-items: center !important;
+    }
+
+
+    #menu a>div {
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+
+    #menu span {
+        color: var(--white, #FFF);
+        font-family: Open Sans;
+        font-size: 14px !important;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        text-align: center;
+    }
+
+    #top {
+        padding: 0px;
+        justify-content: end;
+        padding-right: 25px;
+    }
+
+    #btn-log-out>a:nth-of-type(1),
+    #btn-log-out>a:nth-of-type(2) {
+        display: initial !important;
+    }
+
+    #btn-log-out {
+        display: inline-flex;
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 20px 0px 20px 20px;
+        background: var(--version-2-main-color, #2A3647);
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    }
+
+    #btn-log-out a {
+        display: flex;
+        padding: 8px;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #btn-log-out a span {
+        font-size: 15px;
+    }
+
+    .kanban-text {
+        display: block;
+        color: #000;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 120%;
+        width: max-content;
+    }
+
+    #search-board-bar {
+        position: initial;
+        padding: 0px;
+        padding-top: 114px;
+    }
+
+    #main-board {
+        position: initial;
+        width: 100%;
+        padding-left: 33px;
+    }
+
+    #board-headline {
+        gap: 25px;
+    }
+
+    #search-board-bar>div {
+        flex-direction: column;
+        align-items: start;
+        gap: 41px;
+    }
+
+    #board-content {
+        position: initial;
+        padding-right: 33px;
+        gap: 10px;
+    }
+
+    #main-board>div {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    #search-add-board-container {
+        justify-content: space-between;
+        width: 100%;
+        gap: 0px;
+    }
+
+    .prelativ {
+        position: relative;
+    }
+
+    #btn-add-task-board {
+        position: absolute;
+        right: 0px;
+        bottom: 53px;
+        display: flex;
+        width: 40px;
+        height: 40px;
+        padding: 3px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: var(--version-2-main-color, #2A3647);
+    }
+
+    #btn-add-task-board>span {
+        display: none;
+    }
+
+    #search-task-board {
+        width: 100%;
+    }
+
+    #search-task-board>div {
+        width: 100%;
+    }
+
+    #input-search-task-board {
+        width: 100%;
+    }
+
+    #board-headline>span {
+        font-size: 47px;
+    }
+
+    #addtask-form {
+        padding: 0px !important;
+        padding-top: 114px !important;
+        position: initial !important;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #a-t-form-headline>h1 {
+        text-align: center;
+        font-size: 47px !important;
+        width: 100%;
+    }
+
+    #a-t-form-content {
+        justify-content: center;
+    }
+
+    #form-btns {
+        justify-content: end;
+    }
+
+    #addtask-form>form {
+        padding: 0px 20px;
+    }
+
+    #contacts-div {
+        left: 0px;
+    }
+
+    #contact-headline {
+        left: 500px;
+    }
+
+
+    @keyframes contactMoveLeft {
+        from {
+            right: 0px;
+        }
+
+        to {
+            left: 500px;
+        }
+    }
+
+    #contact-headline>h1 {
+        font-size: 47px;
+    }
+
+    #contact-headline>span {
+        font-size: 20px;
+    }
+
+    #contact-name>div:nth-of-type(1)>span {
+        font-size: 36px;
+    }
+
+    #contact-initials>div>span {
+        font-size: 27px;
+    }
+
+    #contact-initials>div,
+    #contact-initials {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    #btn-new-contact {
+        bottom: 95px;
+    }
+
+    #contactList {
+        padding-bottom: 90px;
+    }
+
+}
+
+@media (max-width: 1250px) {
+
+    #p-u-add-contact,
+    #p-u-edit-contact {
+        width: 1000px;
+    }
+
+    .div-user-icon {
+        left: -60px;
+        top: 20px;
+    }
+
+    @keyframes contactFormMoveLeft {
+        0% {
+            right: -1212px;
+        }
+
+        100% {
+            right: calc((100% - 1000px) / 2);
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    #login-container>img {
+        width: 64px;
+        height: 78.031px;
+        z-index: 100;
+        animation: logoAnimation 1000ms ease-in-out 200ms forwards, hideAnimation 200ms ease-in-out 0ms forwards;
+    }
+
+    @keyframes logoAnimation {
+        from {
+            top: calc((100vh - 64px) / 2);
+            left: calc((100% - 78.031px) / 2);
+        }
+
+        to {
+            top: 37px;
+            left: 38px;
+        }
+    }
+
+    #not-user {
+        bottom: 59px;
+        right: 79px;
+        top: auto;
+    }
+
+    .login-div-style {
+        width: 396px !important;
+        padding: 35px 0px;
+    }
+
+    .input-div>div {
+        width: 364px;
+    }
+
+    .input-imitation {
+        width: 330px;
+    }
+
+    #bg-mobil {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #2A3647;
+        opacity: 1;
+    }
+
+    .action-info {
+        width: auto;
+    }
+
+    #opened-task {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0px;
+    }
+
+    #opened-task-content {
+        width: 100%;
+        padding-bottom: 40px;
+    }
+
+    #o-t-text,
+    #o-t-title>span {
+        width: auto;
+    }
+
+    #opened-task-edit {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0px;
+        padding-right: 0px;
+    }
+
+    #p-u-add-contact,
+    #p-u-edit-contact {
+        width: 374px !important;
+        height: calc(100vh - 40px);
+        top: 20px;
+        flex-direction: column;
+        max-height: 860px;
+    }
+
+    @keyframes contactFormMoveLeft {
+        0% {
+            right: -1212px;
+        }
+
+        100% {
+            right: calc((100% - 374px) / 2);
+        }
+    }
+
+    .pop-up-headline {
+        height: 351px;
+        width: 100%;
+        border-top-right-radius: 30px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .pop-up-headline>h2 {
+        font-size: 47px;
+    }
+
+    .pop-up-headline>img:nth-of-type(1) {
+        display: none;
+    }
+
+    .pop-up-headline>span {
+        font-size: 20px;
+    }
+
+    .p-u-contact-form {
+        width: 100%;
+        height: calc(100% - 351px);
+    }
+
+    .btn-default {
+        display: none;
+    }
+
+    .div-user-icon {
+        top: -60px !important;
+        right: 127px !important;
+        left: auto;
+    }
+
+    .p-u-contact-form>img:nth-of-type(2) {
+        display: initial;
+        top: -326px;
+        right: 21px;
+    }
+
+    .p-u-contact-form>img:nth-of-type(1) {
+        display: none;
+    }
+
+    .p-u-contact-form form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 70px 0px 30px;
+        justify-content: space-between;
+    }
+
+    .form-inputs {
+        position: initial;
+    }
+
+    .form-btns {
+        position: initial;
+    }
+
+    .form-inputs .div-input {
+        width: 327px;
+    }
+
+
+    @media (min-height: 1000px) {
+
+        #p-u-add-contact,
+        #p-u-edit-contact {
+            top: calc((100vh - 860px) / 2) !important;
+        }
+    }
+
+    #opened-task-edit>form {
+        padding-top: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #div-btn-res {
+        display: flex;
+        width: 100%;
+        justify-content: end;
+        padding-right: 24px;
+    }
+
+    #close-task-form-res {
+        display: flex;
+        justify-content: end;
+        padding-right: 24px;
+    }
+
+    #close-task-form-res .o-t-close-img {
+        position: initial;
+    }
+
+    #o-t-btn-confirm {
+        position: initial;
+        width: 85px;
+        border-radius: 10px;
+    }
+
+    #opened-task-edit {
+        padding: 0px;
+        padding-left: 50px;
+    }
+
+}
+
+@media (max-width: 1000px) {
+
+    .none1000px {
+        display: none !important;
+    }
+
+    .flex1000px {
+        display: flex !important;
+    }
+
+    #contact-headline {
+        display: none;
+        width: 100%;
+        left: auto;
+        display: flex;
+        justify-content: center;
+        padding: 0px 24px;
+    }
+
+    #container-detailed-info {
+        display: none;
+        display: flex;
+        gap: 0px;
+        width: 100%;
+        align-items: center;
+        left: 0px;
+        right: auto;
+        padding: 0px 24px;
+    }
+
+    #contacts-div {
+        width: 100%;
+    }
+
+    #btn-new-contact {
+        bottom: auto;
+        top: 107px;
+        right: 24px;
+    }
+
+    #contactList {
+        margin-top: 80px;
+    }
+
+    @keyframes contactMoveLeft {
+        0% {
+            right: 0px;
+        }
+
+        100% {
+            left: 0px;
+        }
+    }
+
+    #container-detailed-info>div:nth-of-type(3) {
+        width: 327.13px;
+    }
+
+
+}
+
+@media (max-width: 916px) {
+    #form-btns {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 700px) {
+    #opened-task-edit {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    #o-t-edit-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .board-form-position {
+        height: calc(100vh - 91px);
+        top: 91px;
+    }
+
+    #task-form-w3 {
+        width: 100%;
+        height: 100%;
+        position: initial;
+        background-color: #F6F7F8;
+    }
+
+    .board-form-position #addtask-form {
+        background-color: #F6F7F8;
+        border-radius: 0px;
+        padding-top: 30px !important;
+    }
+
+    .login-headline>span,
+    .password-div-style>.login-headline>span {
+        font-size: 47px;
+        width: max-content;
+    }
+
+    .login-headline>img {
+        width: 88px;
+    }
+
+    .input-imitation>input,
+    .input-imitation>input::placeholder,
+    .action-info,
+    #btn-forgot-password,
+    #btn-reset-password,
+    #btn-register {
+        font-size: 16px;
+    }
+
+    #login-subtitle {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    #login-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #btn-login,
+    #btn-guest-login {
+        width: 180px;
+        font-size: 16px;
+    }
+
+
+}
+
+@media (max-width: 470px) {
+    #addtask-form {
+        overflow-x: hidden;
+    }
+}
+
+@media (max-width: 450px) {
+
+    #a-t-left>div,
+    #a-t-right>div,
+    .task-invite-input,
+    .o-t-e-select-trigger,
+    .o-t-e-select-options>li,
+    .task-date>input {
+        width: 350px !important;
+    }
+
+    #a-t-left>div textarea {
+        min-width: 350px !important;
+        max-width: 350px !important;
+    }
+
+    .o-t-edit-button-container>div {
+        display: flex;
+        width: 111px;
+        height: 41px;
+        padding: 18px 0px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .o-t-edit-priority-button {
+        display: flex;
+        width: 111px;
+        height: 41px;
+        padding: 18px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .o-t-edit-priority-button>span {
+        font-size: 16px;
+    }
+
+    .o-t-edit-priority-button>img {
+        width: 20px;
+        height: 14.51px;
+        flex-shrink: 0;
+    }
+
+    .o-t-edit-medium>img {
+        width: 20px;
+        height: 7.451px;
+    }
+
+    #form-btns {
+        position: absolute;
+        top: 20px;
+        z-index: 10;
+        justify-content: end;
+        padding-right: 24px;
+    }
+
+    #btn-clear-task {
+        display: none;
+    }
+
+    #btn-create-task>img {
+        display: none;
+    }
+
+    #btn-create-task {
+        display: flex;
+        height: 51px;
+        padding: 18px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        background: #2A3647;
+    }
+
+    #addtask-form * {
+        font-size: 16px !important;
+    }
+
+    #task-form-w3 #btn-create-task {
+        top: -92px;
+        position: relative;
+        right: 56px;
+    }
+
+    #task-form-w3 #form-btns {
+        width: 0px;
+        right: 0px;
+    }
+
+    #task-form-w3 #form-btns>div>div {
+        width: 0px;
+    }
+
+    #addtask-form>form {
+        padding-bottom: 30px;
+    }
+
+    #img-close-res {
+        width: 100%;
+        display: flex;
+        justify-content: end;
+        padding-right: 20px;
+    }
+
+    #img-close-res>img {
+        position: initial;
+    }
+
+
+    .task-description>textarea {
+        width: 350px !important;
+        max-width: 350px;
+        min-width: 350px;
+    }
+
+    .edit-task-title>input,
+    .edit-task-title,
+    .task-description,
+    .task-prio-choise {
+        width: 350px;
+    }
+
+    #opened-task-edit>form *,
+    #opened-task-edit>form input::placeholder,
+    #opened-task-edit>form textarea::placeholder {
+        font-size: 16px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 580px) {
+    .b-c-container {
+        width: 100%;
+    }
+}
+
+@media (max-width: 390px) {
+    .contact {
+        width: 300px;
+    }
+
+    #menu>li {
+        scale: 0.8;
+    }
+
+    #menu {
+        gap: 0px;
+    }
+
+    #a-t-form-content {
+        scale: 0.9;
+    }
+
+    #addtask-form {
+        gap: 0px;
+    }
+}

@@ -8,36 +8,52 @@
     <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/animations.css">
     <link rel="stylesheet" href="./css/contacts.css">
+    <link rel="stylesheet" href="./css/add_task.css">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
-    <title>contacts</title>
+    <link rel="stylesheet" href="./css/responsive.css">
+    <title>Join</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon_package/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon_package/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon_package/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon_package/site.webmanifest">
+    <link rel="mask-icon" href="./assets/favicon_package/safari-pinned-tab.svg" color="#9ba7b3">
+    <meta name="msapplication-TileColor" content="#f6f7f8">
+    <meta name="theme-color" content="#f6f7f8">
+    <script src="./js/utils.js"></script>
+    <script src="./js/templates.js"></script>
+    <script src="./js/desktop_templates.js"></script>
     <script src="./script.js"></script>
     <script src="./js/storage.js"></script>
     <script src="./js/register.js"></script>
-    <script src="./js/templates.js"></script>
-    <script src="./js/utils.js"></script>
+    <script src="./js/pageTransitionUtils.js"></script>
+    <script src="./js/add_task.js"></script>
     <script src="./js/contacts.js"></script>
+    <script src="./js/responsiveScript.js"></script>
 </head>
 
 <body onload="initContact()">
-    <div w3-include-html="assets/templates/desktop_templates.html"></div>
+    <div w3-include-html="assets/templates/desktop_templates.html" id="w3-contacts"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
         <div id="contacts-div">
             <ul id="contactList"></ul>
         </div>
-        <div id="contact-headline">
+        <div id="contact-headline" class="none1000px">
             <h1>Contacts</h1>
             <img src="./assets/img/line-vertical-blue.png">
             <span>Better with a team</span>
         </div>
-        <button id="btn-new-contact" type="button">
+        <button onclick="openAddContactForm()" id="btn-new-contact" type="button">
             <span>New contact</span>
             <img src="./assets/img/new-contact.png">
         </button>
-        <div id="container-detailed-info"></div>
-        <div id="pop-up-contact">
+        <a class="none1000px d-none" id="btn-to-contact" href="contacts.html">
+            <img src="./assets/img/img-back-blue.png">
+        </a>
+        <div id="container-detailed-info" class="none1000px"></div>
+        <div id="pop-up-contact" class="d-none">
             <div id="p-u-add-contact" class="d-none">
                 <div class="pop-up-headline">
                     <img src="./assets/img/logo-joi-white.png">
@@ -46,17 +62,18 @@
                     <img src="assets/img/contact-line.png">
                 </div>
                 <div class="p-u-contact-form">
-                    <img src="./assets/img/close-form.png">
+                    <img onclick="closeAddContactForm()" src="./assets/img/close-form.png">
+                    <img onclick="closeAddContactForm()" src="./assets/img/close-white.png">
                     <div class="div-user-icon">
                         <div>
                             <img src="./assets/img/user-white.png">
                         </div>
                     </div>
-                    <form>
+                    <form onsubmit="addContact(); return false;">
                         <div class="form-inputs">
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="text" placeholder="Name">
+                                    <input id="add-contact-name" class="input" type="text" placeholder="Name" required>
                                     <img class="input-img-1" src="./assets/img/user-line.png">
                                 </div>
                                 <div class="span">
@@ -65,7 +82,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="email" placeholder="Email">
+                                    <input id="add-contact-email" class="input" type="email" placeholder="Email" required>
                                     <img class="input-img-2" src="./assets/img/email.png">
                                 </div>
                                 <div class="span">
@@ -74,7 +91,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="text" placeholder="Phone">
+                                    <input id="add-contact-phone" class="input" type="text" placeholder="Phone" required>
                                     <img class="input-img-3" src="./assets/img/phone-line.png">
                                 </div>
                                 <div class="span">
@@ -84,7 +101,7 @@
                         </div>
                         <div class="form-btns">
                             <div>
-                                <button type="button" class="btn-default">
+                                <button onclick="closeAddContactForm()" type="button" class="btn-default">
                                     <span>Cancel</span>
                                     <img src="/assets/img/cancel-normal.png">
                                     <img src="/assets/img/cancel-hover.png">
@@ -99,24 +116,25 @@
                     </form>
                 </div>
             </div>
-            <div id="p-u-edit-contact">
+            <div id="p-u-edit-contact" class="d-none">
                 <div class="pop-up-headline">
                     <img src="assets/img/logo-joi-white.png" alt="">
                     <h2>Edit contact</h2>
                     <img src="assets/img/contact-line.png" alt="">
                 </div>
                 <div class="p-u-contact-form">
-                    <img src="./assets/img/close-form.png">
+                    <img onclick="closeEditContactForm()" src="./assets/img/close-form.png">
+                    <img onclick="closeEditContactForm()" src="./assets/img/close-white.png">
                     <div class="div-user-icon">
                         <div class="user-bg">
                             <span>AW</span>
                         </div>
                     </div>
-                    <form>
+                    <form id="edit-contact-form" data-id="" onsubmit="saveEditedContact(); return false;">
                         <div class="form-inputs">
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="text" placeholder="Name">
+                                    <input id="edit-contact-name" class="input" type="text" placeholder="Name">
                                     <img class="input-img-1" src="./assets/img/user-line.png">
                                 </div>
                                 <div class="span">
@@ -125,7 +143,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="email" placeholder="Email">
+                                    <input id="edit-contact-email" class="input" type="email" placeholder="Email">
                                     <img class="input-img-2" src="./assets/img/email.png">
                                 </div>
                                 <div class="span">
@@ -134,7 +152,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input class="input" type="text" placeholder="Phone">
+                                    <input id="edit-contact-phone" class="input" type="text" placeholder="Phone">
                                     <img class="input-img-3" src="./assets/img/phone-line.png">
                                 </div>
                                 <div class="span">
@@ -144,7 +162,7 @@
                         </div>
                         <div class="form-btns">
                             <div>
-                                <button type="button" class="btn-default btn-delete">
+                                <button onclick="deleteContact()" type="button" class="btn-default btn-delete">
                                     <span>Delete</span>
                                 </button>
                                 <button class="btn-valid btn-save">
@@ -156,9 +174,21 @@
                 </div>
             </div>
         </div>
+        <div id="sreen-task-form" class="board-form-position d-none">
+            <div id="task-form-w3" w3-include-html="assets/templates/task_form_templates.html"></div>
+        </div>
+        <div id="pop-up-added-task" class="d-none">
+            <span>Task added to board</span>
+            <img src="./assets/img/board-img.png">
+        </div>
+        <div id="contact-succes-created" class="d-none">
+            <div>
+                <span>Contact succesfully created </span>
+            </div>
+        </div>
     </div>
 
-    <script src="./js/desktop_templates.js"></script>
+
 </body>
 
 </html>

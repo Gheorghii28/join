@@ -10,47 +10,80 @@
     <link rel="stylesheet" href="./css/top_templates.css">
     <link rel="stylesheet" href="./css/desktop_templates.css">
     <link rel="stylesheet" href="./css/help.css">
-    <title>Help</title>
+    <link rel="stylesheet" href="./css/responsive.css">
+    <title>Join</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon_package/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon_package/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon_package/favicon-16x16.png">
+    <link rel="manifest" href="./assets/favicon_package/site.webmanifest">
+    <link rel="mask-icon" href="./assets/favicon_package/safari-pinned-tab.svg" color="#9ba7b3">
+    <meta name="msapplication-TileColor" content="#f6f7f8">
+    <meta name="theme-color" content="#f6f7f8">
+    <script src="./js/utils.js"></script>
     <script src="./script.js"></script>
+    <script src="./js/responsiveScript.js"></script>
 </head>
 
 <body onload="includeHTML()">
     <div w3-include-html="assets/templates/desktop_templates.html"></div>
     <div class="main-div">
         <div w3-include-html="assets/templates/top_templates.html"></div>
-        <img id="help-back" src="./assets/img/help-back.png">
+        <a href="summary.html">
+            <img id="help-back" src="./assets/img/help-back.png">
+        </a>
         <div id="help-headline">
             <h1>Help</h1>
         </div>
         <div id="help-content">
             <div id="help-text-1">
                 <h2>What is Join?</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut massa
-                    eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla convallis.
-                    Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. Sed turpis ipsum,
-                    condimentum quis nulla at, lobortis facilisis ipsum. Nunc erat justo, hendrerit vel enim vitae,
-                    feugiat mattis dui. In auctor dignissim luctus. Mauris ornare ipsum at ultrices eleifend. Praesent
-                    tempus congue magna. Quisque libero erat, pharetra a neque et, imperdiet semper justo.
+                <p>
+                    Join is a project management methodology that originated in the manufacturing industry and has
+                    since been adopted in various fields, including software development, product management, and other
+                    knowledge-based projects.
+
+                    At its core, Join is focused on visualizing work and workflow to improve efficiency, productivity,
+                    and collaboration within a team. It uses a visual board, often divided into columns, to represent
+                    different stages of work. Tasks or work items are represented by cards or sticky notes, which are
+                    moved across the board as they progress through the workflow.
                 </p>
             </div>
             <h2>How to use it</h2>
             <div id="help-text-2">
                 <div>
                     <span>1.</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
-                        massa eget, ornare lacinia urna. In dignissim justo eu velit sagittis, in scelerisque nulla
-                        convallis. Vestibulum eros lorem, sollicitudin eget eros non, varius aliquam mauris. </p>
+                    <p>
+                        Visualize the workflow: Create a visual representation of the work stages, typically using a
+                        Join board, to provide a clear overview of the tasks and their progress.
+                    </p>
                 </div>
                 <div>
                     <span>2.</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque odio felis, iaculis ut
-                        massa eget, ornare lacinia urna. </p>
+                    <p>
+                        Limit work in progress (WIP): Set explicit limits on the number of tasks that can be in progress
+                        simultaneously. This helps prevent overloading the team and promotes a focus on completing work
+                        before starting new tasks.
+                    </p>
                 </div>
                 <div>
                     <span>3.</span>
-                    <p>Nunc erat justo, hendrerit vel enim vitae, feugiat mattis dui. In auctor dignissim luctus. Mauris
-                        ornare ipsum at ultrices eleifend. Praesent tempus congue magna. Quisque libero erat, pharetra a
-                        neque et, imperdiet semper justo.
+                    <p>
+                        Manage flow: Aim to have a smooth and continuous flow of work through the system, avoiding
+                        bottlenecks and minimizing delays.
+                    </p>
+                </div>
+                <div>
+                    <span>4.</span>
+                    <p>
+                        Make policies explicit: Clearly define the rules, policies, and criteria for moving tasks
+                        through different stages. This ensures transparency and consistency in the workflow.
+                    </p>
+                </div>
+                <div>
+                    <span>5.</span>
+                    <p>
+                        Continuously improve: Encourage ongoing reflection, analysis, and optimization of the workflow
+                        and processes to achieve higher efficiency and quality.
                     </p>
                 </div>
             </div>

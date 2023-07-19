@@ -22,6 +22,10 @@ body {
     display: none !important;
 }
 
+#bg-mobil {
+    display: none;
+}
+
 .main-div {
     position: relative;
     width: 100%;
@@ -340,6 +344,10 @@ body {
     color: var(--ligth-blue, #29ABE2);
 }
 
+.kanban-text {
+    display: none;
+}
+
 #btn-guest-login:active {
     border-radius: 8px;
     border: 1px solid #091931;
@@ -356,6 +364,10 @@ body {
     top: calc((100vh - 274px) / 2);
     left: calc((100% - 334.072px) / 2);
     opacity: 0;
+}
+
+.r1410initial {
+    display: none;
 }
 
 #not-user {
@@ -892,7 +904,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* border-radius: 10px; */
     background: var(--white, #FFF);
     max-height: 300px;
     overflow-y: scroll;
@@ -1187,8 +1198,6 @@ body {
 
 .user-invite,
 .new-category {
-    /* border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px; */
     justify-content: space-between;
 }
 
@@ -1235,9 +1244,6 @@ body {
 }
 
 #task-assigned-div>ul>li>div {
-    /* width: 30px;
-    height: 30px;
-    border-radius: 50%; */
     display: flex;
     width: 35px;
     height: 35px;
@@ -1253,8 +1259,6 @@ body {
 
 #task-assigned-div>ul>li>div>span {
     color: #FFF;
-
-    /* Version 2/t7 */
     font-size: 12px;
     font-family: 'Inter', sans-serif;
     line-height: 120%;
@@ -1334,6 +1338,7 @@ body {
     border-radius: 20px;
     background: #2A3647;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    z-index: 120;
 }
 
 #pop-up-added-task>span {
@@ -1351,10 +1356,83 @@ body {
 #pop-up-added-task>img {
     width: 22px;
     height: 26px;
-    /* transform: rotate(-90deg); */
     flex-shrink: 0;
 }
 
 .animation-added-task {
     animation: addedTaskAnimation 300ms ease-out 0ms forwards;
+}
+
+.board-form-position {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.board-form-position #addtask-form {
+    width: 100%;
+    max-width: 1116px;
+    max-height: 914px;
+    border-radius: 30px;
+    background: #FFF;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    padding: 63px 65px 63px 74px;
+    position: relative;
+}
+
+.board-form-position #form-btns {
+    justify-content: flex-end;
+}
+
+.board-form-position>div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 89px);
+    width: calc(100% - 232px);
+    position: absolute;
+}
+
+
+.animation-move-taskForm {
+    animation: taskFormMoveLeft 500ms ease-in-out 0ms forwards;
+}
+
+
+.animation-move-reverse-tasktForm {
+    animation: taskFormMoveRight 500ms ease-in-out 0ms forwards;
+}
+
+#task-form-w3 {
+    right: calc((100% - 232px) * -1);
+}
+
+#w3-add-task #menu>li:nth-of-type(3) {
+    background-color: #091931;
+}
+
+#w3-board #menu>li:nth-of-type(2) {
+    background-color: #091931;
+}
+
+#w3-summary #menu>li:nth-of-type(1) {
+    background-color: #091931;
+}
+
+#w3-contacts #menu>li:nth-of-type(4) {
+    background-color: #091931;
+}
+
+#w3-legal-notice #legal-notice {
+    background-color: #091931;
+}
+
+.animatio-opacity {
+    animation: opacityAnimation 500ms ease-in 300ms forwards;
 }

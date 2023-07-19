@@ -17,18 +17,14 @@ let currentUser;
 
 /**
 
-A guest object that contains the name of the guest.
-*/
-let guest = {
-    name: "Guest"
-}
-
 /**
 
 Initializes the application by loading users.
 */
 async function init() {
     await loadUsers();
+    bgAnimation();
+    logoAnimation();
 }
 
 /**
@@ -74,7 +70,7 @@ async function register() {
         email: userEmail.value,
         password: userPassword.value,
         contacts: userContacts,
-        tasks: []
+        tasks: createTasks(userContacts)
     });
     await setItem('users', JSON.stringify(users));
     resetForm(registrBtn);
@@ -115,6 +111,12 @@ async function login() {
 Logs in a user as a guest by redirecting them to the summary page.
 */
 async function guestLogin() {
+    let guestContacts = createContacts();
+    let guest = {
+        name: "Guest",
+        contacts: guestContacts,
+        tasks: createTasks(guestContacts)
+    }
     await setItem('currentUser', JSON.stringify(guest));
     window.location.href = "summary.html";
 }

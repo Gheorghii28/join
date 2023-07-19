@@ -8,6 +8,16 @@
     }
 }
 
+@keyframes opacityAnimation {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes logoAnimation {
     from {
         width: 274px;
@@ -53,3 +63,45 @@
         left: 750px;
     }
 }
+
+@keyframes contactFormMoveLeft {
+    from {
+        right: -1212px;
+    }
+
+    to {
+        right: calc((100% - 1212px) / 2);
+    }
+}
+
+@keyframes contactFormMoveRight {
+    from {
+        right: calc((100% - 1212px) / 2);
+    }
+
+    to {
+        right: -1212px;
+    }
+}
+
+@keyframes taskFormMoveLeft {
+    from {
+        right: calc((100% - 232px) * -1);
+    }
+
+    to {
+        right: calc((100% - (100% - 232px)) / 2);
+    }
+}
+
+@keyframes taskFormMoveRight {
+    from {
+        right: calc((100% - (100% - 232px)) / 2);
+    }
+
+    to {
+        right: calc((100% - 232px) * -1);
+    }
+}
+
+

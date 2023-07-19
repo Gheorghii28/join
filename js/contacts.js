@@ -6,8 +6,8 @@ async function initContact() {
     includeHTML();
     await loadUsers();
     await loadCurrentUser();
-    userContacts = currentUser[`contacts`];
     showContactListe();
+    initializeAddTaskForm();
 }
 
 function createContacts() {
@@ -16,7 +16,6 @@ function createContacts() {
         let contact = generateRandomContact();
         contacts.push(contact);
     }
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
     setContactId(contacts);
     return contacts;
 }
@@ -28,21 +27,25 @@ function setContactId(contacts) {
 }
 
 function generateRandomContact() {
-    let firstName = generateFirstName();
-    let lasttName = generateLastName();
-    let contactName = `${firstName} ${lasttName}`;
-    let contactEmail = `${firstName.toLowerCase()}${lasttName.toLowerCase()}@gmail.com`;
-    let contactPhone = generateRandomPhone();
-    let contactColor = getRandomRGBColor();
-    let contactInitials = getInitials(contactName);
-    let contact = {
+    const firstName = generateFirstName();
+    const lasttName = generateLastName();
+    const contactName = `${firstName} ${lasttName}`;
+    const contactEmail = `${firstName.toLowerCase()}${lasttName.toLowerCase()}@gmail.com`;
+    const contactPhone = generateRandomPhone();
+    const contactColor = getRandomRGBColor();
+    const contactInitials = getInitials(contactName);
+    const contact = contactObj(contactName, contactEmail, contactPhone, contactColor, contactInitials);
+    return contact;
+}
+
+function contactObj(contactName, contactEmail, contactPhone, contactColor, contactInitials) {
+    return {
         name: contactName,
         email: contactEmail,
         phone: contactPhone,
         color: contactColor,
         initials: contactInitials
     }
-    return contact;
 }
 
 function generateRandomPhone() {
@@ -59,9 +62,12 @@ function generateLastName() {
 }
 
 function showContactListe() {
+    userContacts = currentUser[`contacts`];
     const contactList = document.getElementById("contactList");
     const letters = userContacts.map(contact => contact.name.charAt(0).toUpperCase());
+    letters.sort((a, b) => a.localeCompare(b));
     const uniqueLetters = [...new Set(letters)];
+    contactList.innerHTML = "";
     uniqueLetters.forEach(letter => {
         const letterHTML = generateLetterHTML(letter);
         contactList.innerHTML += letterHTML;
@@ -74,8 +80,180 @@ function showContactListe() {
 }
 
 function showChosenContact(contactId) {
-    console.log(currentUser[`contacts`][contactId]);
     const infoContainer = document.getElementById("container-detailed-info");
     infoContainer.innerHTML = generateInfoContainerHtml(contactId);
     infoContainer.classList.add("animation-move-contact");
+    setBgColorToChosedContact(contactId);
+    modifyClassById("add", "none1000px", ["contacts-div"]);
+    modifyClassById("remove", "flex1000px", ["contacts-div"]);
+    modifyClassById("add", "none1000px", ["btn-new-contact"]);
+    modifyClassById("remove", "flex1000px", ["btn-new-contact"]);
+
+    modifyClassById("remove", "none1000px", ["btn-to-contact"]);
+    modifyClassById("add", "flex1000px", ["btn-to-contact"]);
+    modifyClassById("remove", "none1000px", ["contact-headline"]);
+    modifyClassById("add", "flex1000px", ["contact-headline"]);
+    modifyClassById("remove", "none1000px", ["container-detailed-info"]);
+    modifyClassById("add", "flex1000px", ["container-detailed-info"]);
+}
+
+function setBgColorToChosedContact(contactId) {
+    document.querySelectorAll(".contact").forEach(li => {
+        li.classList.remove("bg-li");
+        modifyClassById("add", "bg-li", [`contact-li-${contactId}`]);
+    });
+}
+
+function openEditContactForm(contactId) {
+    setContactValueToEditForm(contactId);
+    showEditContactForm();
+    setDataIdForm(contactId);
+}
+
+function setDataIdForm(contactId) {
+    document.getElementById("edit-contact-form").setAttribute("data-id", contactId);
+}
+
+function setContactValueToEditForm(contactId) {
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contact = currentUser[`contacts`][contactIndex];
+    setInputValue("edit-contact-name", contact[`name`]);
+    setInputValue("edit-contact-email", contact[`email`]);
+    setInputValue("edit-contact-phone", contact[`phone`]);
+}
+
+function closeEditContactForm() {
+    clearInputValueFromEditContactForm();
+    hideEditContactForm();
+}
+
+function clearInputValueFromEditContactForm() {
+    clearInputValues(["edit-contact-name"]);
+    clearInputValues(["edit-contact-email"]);
+    clearInputValues(["edit-contact-phone"]);
+}
+
+function openAddContactForm() {
+    showAddContactForm();
+}
+
+function closeAddContactForm() {
+    clearInputValueFromAddContactForm();
+    hideAddContactForm();
+}
+
+function clearInputValueFromAddContactForm() {
+    clearInputValues(["add-contact-name"]);
+    clearInputValues(["add-contact-email"]);
+    clearInputValues(["add-contact-phone"]);
+}
+
+function addContact() {
+    const newContact = createNewContact();
+    setUniqueIdToNewContact(newContact)
+    saveNewContact(newContact);
+    showContactListe();
+    closeAddContactForm();
+    showChosenContact(newContact[`id`]);
+    scrollToSelected(newContact[`id`]);
+    setTimeout(() => {
+        modifyClassById("remove", "d-none", ["contact-succes-created"]);
+        modifyClassById("add", "animation-added-task", ["contact-succes-created"]);
+        setTimeout(() => {
+            modifyClassById("add", "d-none", ["contact-succes-created"]);
+            modifyClassById("remove", "animation-added-task", ["contact-succes-created"]);
+        }, 500);
+    }, 500);
+}
+
+function createNewContact() {
+    const contactName = getInputValue("add-contact-name");
+    const contactEmail = getInputValue("add-contact-email");
+    const contactPhone = getInputValue("add-contact-phone");
+    const contactColor = getRandomRGBColor();
+    const contactInitials = getInitials(contactName);
+    const contact = contactObj(contactName, contactEmail, contactPhone, contactColor, contactInitials);
+    return contact;
+}
+
+function setUniqueIdToNewContact(contact) {
+    const userContacts = currentUser[`contacts`];
+    const usedIds = new Set(userContacts.map(contact => contact[`id`]));
+    const newIndex = 0;
+    let newId = newIndex;
+    while (usedIds.has(newId)) {
+        newId++;
+    }
+    contact[`id`] = newId;
+}
+
+async function saveNewContact(newContact) {
+    await updateAddedContactToCurrentUser(newContact, currentUser);
+    await updateCurrentUserFromUsers(users, currentUser);
+    await loadCurrentUser();
+    await loadUsers();
+}
+
+function saveEditedContact() {
+    const contactId = getContactId();
+    const editedContact = newEditedContact(contactId);
+    const contactIndex = getContactIndex(contactId, currentUser);
+    currentUser[`contacts`][contactIndex] = editedContact;
+    updateEditedContact();
+    showContactListe();
+    closeEditContactForm();
+    showChosenContact(contactId);
+}
+
+async function updateEditedContact() {
+    await updateCurrentUser(currentUser);
+    await updateCurrentUserFromUsers(users, currentUser);
+    await loadCurrentUser();
+    await loadUsers();
+}
+
+function getContactId() {
+    const contactId = document.getElementById("edit-contact-form").getAttribute("data-id");
+    return parseInt(contactId);
+}
+
+function newEditedContact(contactId) {
+    const contactName = getInputValue("edit-contact-name");
+    const contactEmail = getInputValue("edit-contact-email");
+    const contactPhone = getInputValue("edit-contact-phone");
+    const contactInitials = getInitials(contactName);
+    const contact = changeEditedContact(contactId, contactName, contactEmail, contactPhone, contactInitials);
+    return contact;
+}
+
+function changeEditedContact(contactId, contactName, contactEmail, contactPhone, contactInitials) {
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contact = currentUser[`contacts`][contactIndex];
+    contact[`name`] = contactName;
+    contact[`email`] = contactEmail;
+    contact[`phone`] = contactPhone;
+    contact[`initials`] = contactInitials;
+    return contact;
+}
+
+function deleteContact() {
+    const contactId = getContactId();
+    const contacts = currentUser[`contacts`];
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i][`id`] === contactId) {
+            contacts.splice(i, 1);
+            break;
+        }
+    }
+    updateDeletedContacts();
+    showContactListe();
+    closeEditContactForm();
+    document.getElementById("container-detailed-info").innerHTML = "";
+}
+
+async function updateDeletedContacts() {
+    await updateCurrentUser(currentUser);
+    await updateCurrentUserFromUsers(users, currentUser);
+    await loadCurrentUser();
+    await loadUsers();
 }
