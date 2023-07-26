@@ -1,3 +1,9 @@
+/**
+ * Generates an HTML list item representing an assigned task with the given name and background color.
+ * @param {string} assignedName - The name of the person assigned to the task.
+ * @param {string} rgbColor - The background color in the format "rgb(red, green, blue)".
+ * @returns {string} The HTML markup for the assigned task list item.
+ */
 function taskAssigned(assignedName, rgbColor) {
     return `
     <li>
@@ -7,6 +13,12 @@ function taskAssigned(assignedName, rgbColor) {
     </li>`;
 }
 
+/**
+ * Generates an HTML list item representing a subtask with the given subTask string and index.
+ * @param {string} subTask - The description of the subtask.
+ * @param {number} index - The index of the subtask, used as a unique identifier for the subtask.
+ * @returns {string} The HTML markup for the subtask list item.
+ */
 function subTaskAssigned(subTask, index) {
     return `
     <li>
@@ -20,18 +32,26 @@ function subTaskAssigned(subTask, index) {
     </li>`;
 }
 
+/**
+ * Generates HTML markup for displaying a task card with various details.
+ * @param {Object} task - An object representing a task with properties like id, title, description, category, status, color, assigned, prio, etc.
+ * @returns {string} The HTML markup for the task card.
+ */
 function generateTaskHTML(task) {
     const assigneds = generateAssignedHtml(task[`assigned`]);
+    let description = getLimitedtext(task[`description`], 100);
     return `
-    <div onclick="openTask(${task[`id`]})" draggable="true" ondragstart="startDragging(${task[`id`]})" class="task-card">
+    <div onclick="taskEvent(event, ${task[`id`]})" draggable="true" ondragstart="startDragging(event ,${task[`id`]})" class="task-card">
         <div>
+            <img class="btn-direction" data-status="${task[`status`]}" data-direction="top" src="./assets/img/direction-top.png">
+            <img class="btn-direction" data-status="${task[`status`]}" data-direction="bottom" src="./assets/img/direction-bottom.png">
             <div class="task-type" style="background-color: ${task[`color`]};">
                 <span>${task[`category`]}</span>
             </div>
             <div class="task-content">
                 <div>
                     <span class="task-title">${task[`title`]}</span>
-                    <span class="task-text">${task[`description`]}</span>
+                    <span class="task-text">${description}</span>
                 </div>
             </div>
             <div class="task-progress">
@@ -50,6 +70,11 @@ function generateTaskHTML(task) {
     </div>`;
 }
 
+/**
+ * Generates HTML elements representing assigned individuals with their initials and background color.
+ * @param {Array} assigneds - An array of objects representing assigned individuals with properties like name and color.
+ * @returns {string} The HTML markup for the assigned individuals.
+ */
 function generateAssignedHtml(assigneds) {
     let assignedHtml = "";
     assigneds.forEach(assigned => {
@@ -62,15 +87,25 @@ function generateAssignedHtml(assigneds) {
     return assignedHtml;
 }
 
-function generateEmtptySpaceForTask(taskStatus) {
+/**
+ * Generates an HTML <div> element with the class "empty-space-task" and the class "d-none".
+ * @returns {string} The HTML markup for the empty space element.
+ */
+function generateEmtptySpaceForTask() {
     return `
-    <div class="empty-space-task d-none" ondrop="moveTo('${taskStatus}')" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>`;
+    <div class="empty-space-task d-none"></div>`;
 }
 
+/**
+ * Generates HTML markup for displaying an opened task with its details.
+ * @param {Object} task - The task object containing details of the opened task.
+ * @returns {string} The HTML markup for the opened task view.
+ */
 function generateOpenedTaskHtml(task) {
     const date = task[`date`];
     const parts = date.split("-");
     const formattedDate = parts.reverse().join("-");
+    const subtasks = generateSubTaskHtml(task[`subTasks`]);
     const assigneds = generateOpenedTaskAssignedHtml(task[`assigned`]);
     return `            
     <div id="o-t-type" style="background-color: ${task[`color`]};">
@@ -89,6 +124,11 @@ function generateOpenedTaskHtml(task) {
             <span>Priority: </span>
             <img src="./assets/img/btn-prio-${task[`prio`]}.png">
         </div>
+        <div id="o-t-subtasks">
+            <ul>
+                ${subtasks}
+            </ul>
+        </div>
         <span id="o-t-assigned">Assigned To:</span>
         ${assigneds}
     </div>
@@ -105,6 +145,24 @@ function generateOpenedTaskHtml(task) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying a list of subtasks as list items.
+ * @param {Array} subtasks - An array of subtask strings to be displayed.
+ * @returns {string} The HTML markup for the list of subtasks.
+ */
+function generateSubTaskHtml(subtasks) {
+    let li = "";
+    subtasks.forEach(subtask => {
+        li += `<li>${subtask}</li>`;
+    });
+    return li;
+}
+
+/**
+ * Generates HTML markup for displaying assigned individuals with initials, name, and background color within an opened task view.
+ * @param {Array} assigneds - An array of objects representing assigned individuals with properties like name and color.
+ * @returns {string} The HTML markup for the assigned individuals in the opened task view.
+ */
 function generateOpenedTaskAssignedHtml(assigneds) {
     let assignedHtml = "";
     assigneds.forEach(assigned => {
@@ -120,6 +178,10 @@ function generateOpenedTaskAssignedHtml(assigneds) {
     return assignedHtml;
 }
 
+/**
+ * Generates HTML markup for displaying a list of assigned contacts, including an option to invite a new contact.
+ * @returns {string} The HTML markup for the list of assigned contacts.
+ */
 function generateAssignedListHtml() {
     const assigned = generateAssigned();
     return `
@@ -132,6 +194,10 @@ function generateAssignedListHtml() {
     ${assigned}`;
 }
 
+/**
+ * Generates HTML markup for displaying a list of contacts with checkboxes for selection.
+ * @returns {string} The HTML markup for the list of contacts.
+ */
 function generateAssigned() {
     const contacts = currentUser[`contacts`];
     contacts.sort((a, b) => a.name.localeCompare(b.name));
@@ -151,6 +217,11 @@ function generateAssigned() {
     return assignedListeHtml;
 }
 
+/**
+ * Generates HTML markup for displaying a letter and a separate line image.
+ * @param {string} letter - The letter to be displayed.
+ * @returns {string} The HTML markup for the letter and the separate line.
+ */
 function generateLetterHTML(letter) {
     return `
     <li class="letter">
@@ -161,6 +232,11 @@ function generateLetterHTML(letter) {
     </li>`;
 }
 
+/**
+ * Generates HTML markup for displaying a contact in a list.
+ * @param {Object} contact - The contact object containing details of the contact.
+ * @returns {string} The HTML markup for the contact's display in the list.
+ */
 function generateContactHTML(contact) {
     return `
       <li id="contact-li-${contact[`id`]}" onclick="showChosenContact(${contact[`id`]})" class="contact">
@@ -177,6 +253,11 @@ function generateContactHTML(contact) {
     `;
 }
 
+/**
+ * Generates HTML markup for displaying an information container for a specific contact.
+ * @param {string} contactId - The unique identifier of the contact.
+ * @returns {string} The HTML markup for the contact information container.
+ */
 function generateInfoContainerHtml(contactId) {
     const headline = generateContactHeadlineHtml(contactId);
     const edit = generateContactEditHtml(contactId);
@@ -187,6 +268,11 @@ function generateInfoContainerHtml(contactId) {
     ${contactInfo}`;
 }
 
+/**
+ * Generates HTML markup for displaying the headline of a specific contact.
+ * @param {number} contactId - The ID of the contact for which the headline is generated.
+ * @returns {string} The HTML markup for the contact's headline.
+ */
 function generateContactHeadlineHtml(contactId) {
     const contactIndex = getContactIndex(contactId, currentUser);
     const contact = currentUser[`contacts`][contactIndex];
@@ -202,7 +288,7 @@ function generateContactHeadlineHtml(contactId) {
                 <span>${contact[`name`]}</span>
             </div>
             <div>
-                <button onclick="showScreenWithTaskForm()" id="btn-add-task" type="button">
+                <button onclick="showScreenWithTaskForm('${statusTask}')" id="btn-add-task" type="button">
                     <img src="./assets/img/add-contact.png">
                     <img src="./assets/img/add-contact-hover.png">
                     <span>Add Task</span>
@@ -212,6 +298,11 @@ function generateContactHeadlineHtml(contactId) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying the contact information section along with an "Edit" button for a specific contact.
+ * @param {number} contactId - The ID of the contact for which the contact information section is generated.
+ * @returns {string} The HTML markup for the contact information section and the "Edit" button.
+ */
 function generateContactEditHtml(contactId) {
     const contactIndex = getContactIndex(contactId, currentUser);
     const contact = currentUser[`contacts`][contactIndex];
@@ -228,6 +319,11 @@ function generateContactEditHtml(contactId) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying the contact information (email and phone) for a specific contact.
+ * @param {number} contactId - The ID of the contact for which the contact information is generated.
+ * @returns {string} The HTML markup for displaying the contact information (email and phone).
+ */
 function generateContactInfoHtml(contactId) {
     const contactIndex = getContactIndex(contactId, currentUser);
     const contact = currentUser[`contacts`][contactIndex];
@@ -244,6 +340,13 @@ function generateContactInfoHtml(contactId) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying task buttons representing different categories of tasks.
+ * @param {number} tasksCount - The count of tasks in the "Tasks in Board" category.
+ * @param {number} inProgressCount - The count of tasks in the "Tasks in Progress" category.
+ * @param {number} feedbackCount - The count of tasks in the "Awaiting Feedback" category.
+ * @returns {string} The HTML markup for displaying task buttons with task category counts.
+ */
 function generateTasksBtnsHtml(tasksCount, inProgressCount, feedbackCount) {
     return `
     <div>
@@ -278,6 +381,12 @@ function generateTasksBtnsHtml(tasksCount, inProgressCount, feedbackCount) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying a button representing urgent tasks with their count and an upcoming deadline date.
+ * @param {number} urgentCount - The count of urgent tasks.
+ * @param {string} date - The upcoming deadline date.
+ * @returns {string} The HTML markup for the urgent tasks button.
+ */
 function generateUrgentBtnHtml(urgentCount, date) {
     return `
     <div>
@@ -300,6 +409,12 @@ function generateUrgentBtnHtml(urgentCount, date) {
     </div>`;
 }
 
+/**
+ * Generates HTML markup for displaying status containers for "To-do" and "Done" tasks.
+ * @param {number} todoCount - The count of "To-do" tasks.
+ * @param {number} doneCount - The count of "Done" tasks.
+ * @returns {string} The HTML markup for the status containers.
+ */
 function generateStatusContainerHtml(todoCount, doneCount) {
     return `
     <div>

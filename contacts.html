@@ -91,7 +91,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input id="add-contact-phone" class="input" type="text" placeholder="Phone" required>
+                                    <input id="add-contact-phone" class="input" type="number" placeholder="Phone" required>
                                     <img class="input-img-3" src="./assets/img/phone-line.png">
                                 </div>
                                 <div class="span">
@@ -127,7 +127,7 @@
                     <img onclick="closeEditContactForm()" src="./assets/img/close-white.png">
                     <div class="div-user-icon">
                         <div class="user-bg">
-                            <span>AW</span>
+                            <span id="c-initials"></span>
                         </div>
                     </div>
                     <form id="edit-contact-form" data-id="" onsubmit="saveEditedContact(); return false;">
@@ -152,7 +152,7 @@
                             </div>
                             <div>
                                 <div class="div-input">
-                                    <input id="edit-contact-phone" class="input" type="text" placeholder="Phone">
+                                    <input id="edit-contact-phone" class="input" type="number" placeholder="Phone">
                                     <img class="input-img-3" src="./assets/img/phone-line.png">
                                 </div>
                                 <div class="span">

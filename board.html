@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class="prelativ">
-                                <button onclick="showScreenWithTaskForm()" id="btn-add-task-board">
+                                <button onclick="showScreenWithTaskForm(`to-do`)" id="btn-add-task-board">
                                     <span>Add task</span>
                                     <img src="./assets/img/plus-task-icon.png">
                                 </button>
@@ -78,46 +78,46 @@
                     <div class="b-c-container" id="todo-container">
                         <div class="b-c-headline" id="todo-headline">
                             <span>To do</span>
-                            <button onclick="showScreenWithTaskForm()">
+                            <button onclick="showScreenWithTaskForm(`to-do`)">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div id="to-do" class="tasks-container"></div>
+                        <div id="to-do" class="tasks-container" ondrop="moveTo(`to-do`)" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>
                     </div>
                     <div class="b-c-container" id="in-progress-container">
                         <div class="b-c-headline" id="in-progress-headline">
                             <span>In progress</span>
-                            <button onclick="showScreenWithTaskForm()">
+                            <button onclick="showScreenWithTaskForm(`in-progress`)">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div id="in-progress" class="tasks-container"></div>
+                        <div id="in-progress" class="tasks-container" ondrop="moveTo(`in-progress`)" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>
                     </div>
                     <div class="b-c-container" id="awaiting-feedback-container">
                         <div class="b-c-headline" id="awaiting-feedback-headline">
                             <span>Awaiting Feedback</span>
-                            <button onclick="showScreenWithTaskForm()">
+                            <button onclick="showScreenWithTaskForm(`awaiting-feedback`)">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div id="awaiting-feedback" class="tasks-container"></div>
+                        <div id="awaiting-feedback" class="tasks-container" ondrop="moveTo(`awaiting-feedback`)" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>
                     </div>
                     <div class="b-c-container" id="done-container">
                         <div class="b-c-headline" id="done-headline">
                             <span>Done</span>
-                            <button onclick="showScreenWithTaskForm()">
+                            <button onclick="showScreenWithTaskForm(`done`)">
                                 <img src="./assets/img/plus-capa.png">
                                 <img src="./assets/img/plus-capa-blue.png">
                                 <img src="./assets/img/plus-capa-gray.png">
                             </button>
                         </div>
-                        <div id="done" class="tasks-container"></div>
+                        <div id="done" class="tasks-container" ondrop="moveTo(`done`)" ondragleave="removeHighlight(event)" ondragover="allowDrop(event); highlight(event)"></div>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                         <div class="o-t-edit-button-container">
                             <div>
                                 <button onclick="settaskPrioValue(event)" type="button"
-                                    class="o-t-edit-priority-button o-t-edit-urgent" data-priority="urgent">
+                                    class="o-t-edit-priority-button o-t-edit-urgent" data-priority-edit="urgent">
                                     <span>Urgent</span>
                                     <img src="./assets/img/prio-baja-urgent.png">
                                     <img src="./assets/img/prio-baja-white-urgent.png">
@@ -161,7 +161,7 @@
                             </div>
                             <div>
                                 <button onclick="settaskPrioValue(event)" type="button"
-                                    class="o-t-edit-priority-button o-t-edit-medium" data-priority="medium">
+                                    class="o-t-edit-priority-button o-t-edit-medium" data-priority-edit="medium">
                                     <span>Medium</span>
                                     <img src="./assets/img/prio-baja-medium.png">
                                     <img src="./assets/img/prio-baja-white-medium.png">
@@ -169,7 +169,7 @@
                             </div>
                             <div>
                                 <button onclick="settaskPrioValue(event)" type="button"
-                                    class="o-t-edit-priority-button o-t-edit-low" data-priority="low">
+                                    class="o-t-edit-priority-button o-t-edit-low" data-priority-edit="low">
                                     <span>Low</span>
                                     <img src="./assets/img/prio-baja-low.png">
                                     <img src="./assets/img/prio-baja-white-low.png">
@@ -180,7 +180,7 @@
                     </div>
                     <div id="o-t-edit-assigned" class="task-assigned">
                         <div id="o-t-e-label" class="assigned-label">Assigned to</div>
-                        <div class="o-t-e-custom-select">
+                        <div class="o-t-e-custom-select w450">
                             <div id="user-invite-div" class="task-invite-input d-none">
                                 <input id="user-invite-input" type="email" placeholder="Contact email">
                                 <div>

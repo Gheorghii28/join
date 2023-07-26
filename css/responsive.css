@@ -1,4 +1,8 @@
 @media (max-width: 1410px) {
+    #greeting-container>div>span:nth-of-type(1) {
+        text-align: center;
+    }
+
     .greeting-position {
         position: absolute !important;
         top: 0;
@@ -106,6 +110,18 @@
 
     #top-right>a {
         display: none;
+    }
+
+    #o-t-type>span {
+        font-size: 20px;
+    }
+
+    #opened-task-content * {
+        font-size: 16px !important;
+    }
+
+    #o-t-title>span {
+        font-size: 36px !important;
     }
 
     #summary-headline>h1 {
@@ -475,6 +491,15 @@
 }
 
 @media (max-width: 1100px) {
+    .btn-direction {
+        display: initial;
+    }
+
+    #opened-task-container .o-t-close-img {
+        right: 24px;
+        top: 15px;
+    }
+
     #login-container>img {
         width: 64px;
         height: 78.031px;
@@ -532,11 +557,13 @@
         width: 100%;
         height: 100vh;
         border-radius: 0px;
+        padding-right: 0px
     }
 
     #opened-task-content {
         width: 100%;
         padding-bottom: 40px;
+        padding-right: 20px;
     }
 
     #o-t-text,
@@ -820,56 +847,21 @@
 
 }
 
+@media (max-width: 580px) {
+    .b-c-container {
+        width: 100%;
+    }
+}
+
 @media (max-width: 470px) {
     #addtask-form {
         overflow-x: hidden;
     }
 }
 
-@media (max-width: 450px) {
-
-    #a-t-left>div,
-    #a-t-right>div,
-    .task-invite-input,
-    .o-t-e-select-trigger,
-    .o-t-e-select-options>li,
-    .task-date>input {
-        width: 350px !important;
-    }
-
-    #a-t-left>div textarea {
-        min-width: 350px !important;
-        max-width: 350px !important;
-    }
-
-    .o-t-edit-button-container>div {
-        display: flex;
-        width: 111px;
-        height: 41px;
-        padding: 18px 0px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .o-t-edit-priority-button {
-        display: flex;
-        width: 111px;
-        height: 41px;
-        padding: 18px 10px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-
+@media screen and (max-width: 450px) {
     .o-t-edit-priority-button>span {
         font-size: 16px;
-    }
-
-    .o-t-edit-priority-button>img {
-        width: 20px;
-        height: 14.51px;
-        flex-shrink: 0;
     }
 
     .o-t-edit-medium>img {
@@ -904,10 +896,6 @@
         background: #2A3647;
     }
 
-    #addtask-form * {
-        font-size: 16px !important;
-    }
-
     #task-form-w3 #btn-create-task {
         top: -92px;
         position: relative;
@@ -938,18 +926,726 @@
         position: initial;
     }
 
+    #login-container>img {
+        width: 100px;
+        height: auto;
+        top: calc((100vh - 100px) / 2);
+        left: calc((100% - 122.26px) / 2);
+        z-index: 100;
+        animation: logoAnimation 500ms ease-in-out 500ms forwards, hideAnimation 500ms ease-in-out 0ms forwards;
+    }
 
-    .task-description>textarea {
-        width: 350px !important;
-        max-width: 350px;
-        min-width: 350px;
+    @keyframes logoAnimation {
+        from {
+            width: 100px;
+            height: auto;
+            top: calc((100vh - 100px) / 2);
+            left: calc((100% - 122.26px) / 2);
+        }
+
+        to {
+            top: 10px;
+            left: 10px;
+            width: 35px;
+            height: auto;
+        }
+    }
+
+    #bg-mobil {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #2A3647;
+        opacity: 1;
+    }
+
+    #not-user {
+        position: absolute;
+        top: auto;
+        bottom: 30px;
+        width: 100%;
+        right: 0px;
+        justify-content: center;
+    }
+
+    #login,
+    #signup,
+    #forgot-password,
+    #reset-password {
+        width: 330px !important;
+        height: 440px;
+        padding: 20px 0px !important;
+    }
+
+    .login-headline>span {
+        font-size: 40px !important;
+        width: auto;
+    }
+
+    .login-headline>img {
+        width: 75px;
+    }
+
+    .login-inputs {
+        width: calc(100% - 50px);
+    }
+
+    .login-div-style>form {
+        width: 100%;
+    }
+
+    .input-div {
+        width: 100%;
+    }
+
+    .input-div>div {
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+    .input-imitation {
+        width: 100%;
+    }
+
+    .input-imitation>input {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .input-imitation>input::placeholder {
+        font-size: 16px;
+    }
+
+    .login-headline {
+        gap: 10px;
+    }
+
+    .input-imitation>img,
+    .img-password {
+        width: 16px !important;
+        height: auto !important;
+    }
+
+    #login-subtitle {
+        font-size: 16px;
+        flex-direction: column-reverse;
+        gap: 14px;
+        align-items: start;
+        justify-content: start;
+        width: calc(100% - 50px);
+    }
+
+    #login-subtitle>div {
+        gap: 10px;
+    }
+
+    #login-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 0px;
+        position: relative;
+    }
+
+    #login-btns>button {
+        font-size: 16px;
+        width: 145px;
+        height: 40px;
+        font-weight: 500;
+        position: absolute;
+    }
+
+    #btn-register {
+        font-size: 16px;
+        width: 145px;
+        height: 40px;
+        font-weight: 500;
+    }
+
+    #btn-forgot-password,
+    #btn-reset-password {
+        font-size: 16px;
+        width: 170px;
+        height: 40px;
+        font-weight: 500;
+    }
+
+    #btn-guest-login {
+        top: 35px;
+    }
+
+    .action-info {
+        font-size: 16px;
+        width: calc(100% - 50px);
+    }
+
+    #forgot-password>.login-headline>span,
+    #reset-password>.login-headline>span {
+        width: 190px !important;
+    }
+
+    #reset-password {
+        gap: 20px;
+    }
+
+    .back-blue-position {
+        top: 10px;
+        left: 10px;
+    }
+
+    #summary-headline {
+        gap: 10px;
+        width: 300px;
+    }
+
+    #summary-info {
+        padding-top: 10px;
+    }
+
+    #summary-headline>h1 {
+        font-size: 36px;
+    }
+
+    #summary-headline-text>span {
+        font-size: 18px;
+    }
+
+    #summary-headline>img {
+        height: 2px;
+    }
+
+    #tasksContainer>div {
+        width: 90px !important;
+        height: 90px !important;
+        border-radius: 20px;
+    }
+
+    .task-btn {
+        width: 90px !important;
+        height: 90px !important;
+        border-radius: 20px;
+    }
+
+    .task-btn>div>span:nth-of-type(1),
+    #todo-sumarry>div>span:nth-of-type(1),
+    #done-summary>div>span:nth-of-type(1),
+    #urgent-left>div>span:nth-of-type(1) {
+        font-size: 30px;
+    }
+
+    #urgent,
+    #urgent:hover {
+        width: 300px;
+        height: 80px;
+        border-radius: 20px;
+        padding: 28px 0px;
+        gap: 20px;
+    }
+
+    #urgent-left>div>span:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    #urgent-left>img, #todo-sumarry>img, #done-summary>img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    #urgent-left {
+        gap: 6px;
+    }
+
+    #urgent-right>span:nth-of-type(1) {
+        font-size: 16px;
+    }
+
+    #urgent-right>span:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    #statusContainer {
+        gap: 10px;
+    }
+
+    #statusContainer>div:nth-last-of-type(1),
+    #statusContainer>div:nth-last-of-type(2),
+    #todo-sumarry, #done-summary, #todo-sumarry:hover,
+    #done-summary:hover {
+        width: 145px !important;
+        height: 80px !important;
+        border-radius: 20px;
+    }
+
+    #taskSummary {
+        gap: 15px;
+        margin: 30px 0px 0px 0px;
+        align-items: center;
+    }
+
+    #greeting-container>div>span:nth-of-type(1) {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    #greeting-container>div>span:nth-of-type(2) {
+        font-size: 47px;
+        text-align: center;
+    }
+
+    #summary-content {
+        justify-content: center;
+        height: calc(100vh - 180px);
+    }
+
+    #summary-content {
+        overflow-x: hidden;
+        margin-top: 10px;
+    }
+
+    #main-board {
+        padding: 0px;
+    }
+
+    #main-board>div::-webkit-scrollbar,
+    #summary-content::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        background-color: #F5F5F5;
+    }
+
+    #main-board>div {
+        align-items: center;
+        gap: 15px;
+    }
+
+    #search-board-bar {
+        width: 300px;
+    }
+
+    #board-headline>span {
+        font-size: 36px;
+    }
+
+    #btn-add-task-board {
+        width: 30px;
+        height: 30px;
+    }
+
+    #board-headline {
+        width: 100px;
+    }
+
+    #search-add-board-container {
+        padding: 0px;
+    }
+
+    #search-task-board {
+        padding: 10px 15px;
+    }
+
+    #board-headline {
+        gap: 10px;
+    }
+
+    #btn-add-task-board {
+        bottom: 27px;
+    }
+
+    #search-board-bar>div {
+        gap: 20px;
+    }
+
+    #board-content {
+        padding: 0px;
+    }
+
+    .b-c-headline {
+        width: 300px;
+    }
+
+    .b-c-container {
+        gap: 15px;
+    }
+
+    .task-card {
+        width: 300px;
+    }
+
+    .task-content .task-text {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .task-progress {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .task-footer {
+        width: 100%;
+    }
+
+    #o-t-title>span {
+        font-size: 24px !important;
+    }
+
+    #addtask-form::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        background-color: transparent;
+    }
+
+    #a-t-form-headline>h1 {
+        font-size: 36px !important;
+        height: auto;
+        text-align: start;
+    }
+
+    #addtask-form *,
+    .task-description>textarea,
+    #o-t-textarea-description::placeholder {
+        font-size: 16px !important;
+    }
+
+    input,
+    input::placeholder {
+        font-size: 16px !important;
+    }
+
+    #menu {
+        gap: 0px;
+    }
+
+    #addtask-form {
+        gap: 0px;
+    }
+
+    #addtask-form>form {
+        padding: 10px 0px 0px;
+        width: 300px;
+    }
+
+    #a-t-form-headline {
+        width: 300px;
+    }
+
+    #form-btns {
+        right: 0px;
+    }
+
+    #a-t-left,
+    #a-t-right {
+        width: 100%;
+    }
+
+    #a-t-left>div,
+    #a-t-right>div,
+    #a-t-left>div>input,
+    #a-t-right>div>input,
+    #selected-category-div,
+    #selected-assigned-div,
+    #new-subtask-div,
+    .o-t-edit-button-container,
+    .o-t-e-select-options>li,
+    #category-option,
+    #assigned-option,
+    #task-assigned-edit-div,
+    .o-t-e-custom-select {
+        width: 100% !important;
+    }
+
+    #o-t-textarea-description {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .o-t-edit-priority-button>img {
+        width: 16px;
+        height: auto;
+    }
+
+    .o-t-edit-button-container {
+        gap: 6px;
+    }
+
+    .o-t-edit-button-container>div {
+        display: flex;
+        width: 98px;
+        height: 41px;
+        padding: 18px 0px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .o-t-edit-priority-button {
+        display: flex;
+        width: 98px;
+        height: 41px;
+        padding: 18px 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact {
+        padding: 15px 0px;
+        ;
+    }
+
+    #btn-new-contact {
+        padding: 10px;
+        height: auto;
+        right: 15px;
+        top: auto;
+        bottom: 100px;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    #btn-new-contact>span {
+        display: none;
+    }
+
+    #contactList {
+        margin-top: 0px;
+    }
+
+    #contactList>li,
+    .separate-line>img {
+        width: 300px;
+    }
+
+    .contact-name>span:nth-of-type(1) {
+        font-size: 16px;
+    }
+
+    .contact-name>span:nth-of-type(2) {
+        font-size: 14px;
+    }
+
+    #p-u-add-contact,
+    #p-u-edit-contact {
+        width: 330px !important;
+        height: 460px !important;
+        top: calc((100vh - 460px) / 2);
+    }
+
+    @keyframes contactFormMoveLeft {
+        from {
+            right: -1212px;
+        }
+
+        to {
+            right: calc((100% - 330px) / 2);
+        }
+    }
+
+    .pop-up-headline>h2 {
+        font-size: 30px;
+    }
+
+    .pop-up-headline>span {
+        font-size: 16px;
+    }
+
+    .pop-up-headline>img {
+        height: 2px;
+    }
+
+    .pop-up-headline {
+        justify-content: start;
+        padding: 20px 30px;
+        height: 160px;
+    }
+
+    .div-user-icon,
+    .div-user-icon>div {
+        width: 80px;
+        height: 80px;
+        top: -40px !important;
+        right: 125px !important;
+    }
+
+    .div-user-icon>div>img {
+        width: 40px;
+        height: auto;
+    }
+
+    .form-inputs .div-input {
+        width: 300px;
+        padding: 10px 15px;
+    }
+
+    .form-inputs .div-input>img {
+        width: 16px;
+        height: auto;
+    }
+
+    .form-inputs {
+        gap: 0px;
+    }
+
+    .p-u-contact-form form {
+        padding: 45px 0px;
+        gap: 10px;
+    }
+
+    .btn-valid {
+        font-size: 16px;
+        height: 43px;
+        width: 174px;
+    }
+
+    .btn-valid>span {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .btn-valid>img {
+        width: 16px;
+        height: auto;
+    }
+
+    .p-u-contact-form>img {
+        top: -145px !important;
+        right: 15px !important;
+    }
+
+    .div-user-icon>div>span {
+        font-size: 24px;
+    }
+
+    #contact-headline>h1 {
+        font-size: 36px;
+    }
+
+    #contact-headline>span {
+        font-size: 16px;
+    }
+
+    #contact-headline>img {
+        height: 40px;
+        width: 2px;
+    }
+
+    #btn-to-contact>img {
+        width: 24px;
+        height: auto;
+    }
+
+    #contact-name>div:nth-of-type(1)>span {
+        font-size: 24px;
+    }
+
+    #container-detailed-info>div:nth-of-type(1) {
+        gap: 20px;
+        width: 100%;
+    }
+
+    #container-detailed-info>div:nth-of-type(2) {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0px;
+    }
+
+    #container-detailed-info>div:nth-of-type(3) {
+        width: 100%;
+    }
+
+    #contact-headline {
+        top: 140px;
+    }
+
+    #container-detailed-info {
+        top: 205px;
+    }
+
+    #message-reset-password>span,
+    #message-signed-succes>span {
+        font-size: 16px;
+    }
+
+    #message-reset-password,
+    #pop-up-added-task,
+    #message-signed-succes {
+        width: 230px;
+        height: 50px;
+        left: calc((100% - 230px) / 2);
+    }
+
+    #message-confirmation>span,
+    #pop-up-added-task>span,
+    #contact-succes-created>div>span {
+        font-size: 16px;
+    }
+
+    #message-confirmation>img,
+    #pop-up-added-task>img {
+        width: 20px;
+        height: auto;
+    }
+
+    #message-confirmation,
+    #pop-up-added-task,
+    #contact-succes-created>div {
+        height: 50px;
+    }
+
+    #pop-up-added-task>span {
+        width: 170px;
+    }
+
+    #contact-succes-created>div {
+        width: 250px;
+    }
+
+    #contact-succes-created {
+        left: calc((100% - 250px) / 2);
+    }
+
+    #help-text-1>h2 {
+        width: auto;
+    }
+
+    #opened-task {
+        padding: 20px 0px 0px 20px;
+    }
+
+    #o-t-btns-container {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    #o-t-btn-delete>img {
+        width: 24px;
+        height: auto;
+    }
+
+    #o-t-btn-edit>img {
+        height: 24px;
+        width: auto;
+    }
+
+    #o-t-btns-container {
+        width: 80px;
+        height: 40px;
+    }
+
+    #o-t-btn-delete,
+    #o-t-btn-edit {
+        width: 40px;
+        height: 40px;
     }
 
     .edit-task-title>input,
     .edit-task-title,
     .task-description,
-    .task-prio-choise {
-        width: 350px;
+    .task-prio-choise,
+    #o-t-textarea-edit-description {
+        max-width: 300px;
+        min-width: 300px;
     }
 
     #opened-task-edit>form *,
@@ -957,60 +1653,34 @@
     #opened-task-edit>form textarea::placeholder {
         font-size: 16px !important;
     }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@media (max-width: 580px) {
-    .b-c-container {
-        width: 100%;
-    }
-}
-
-@media (max-width: 390px) {
-    .contact {
+    #o-t-edit-date-input,
+    #o-t-edit-assigned,
+    #user-invite-div,
+    #selected-assigned-edit-div {
         width: 300px;
     }
 
-    #menu>li {
-        scale: 0.8;
+    #task-assigned-edit-ul {
+        overflow-x: scroll;
     }
 
-    #menu {
-        gap: 0px;
+
+    #task-assigned-edit-ul::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        background-color: #F5F5F5;
     }
 
-    #a-t-form-content {
-        scale: 0.9;
+    #opened-task-edit>form {
+        padding-bottom: 25px;
     }
 
-    #addtask-form {
-        gap: 0px;
+    .w450 {
+        width: 300px !important;
+    }
+
+    #assigned-edit-option {
+        width: 100%;
     }
 }

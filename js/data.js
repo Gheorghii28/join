@@ -1,3 +1,8 @@
+/**
+ * Creates an array of tasks with specific properties based on the provided userContacts.
+ * @param {Array} userContacts - An array of user contacts used to assign tasks.
+ * @returns {Array} An array of tasks with various properties.
+ */
 function createTasks(userContacts) {
     return [
         {
@@ -74,5 +79,3 @@ function createTasks(userContacts) {
         }
     ];
 }
-
-

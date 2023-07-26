@@ -1,13 +1,22 @@
+/**
+ * Initializes the summary view.
+ * Includes HTML templates, loads user data, sets greetings, updates the summary HTML, and applies name animation.
+ */
 async function initSummary() {
     await includeHTML();
     await loadUsers();
     await loadCurrentUser();
-    document.getElementById("greeting-day").textContent = "Good morning, ";
+    document.getElementById("greeting-day").textContent = getGreeting();
     document.getElementById("greeting-name").textContent = currentUser.name;
     updateSummaryHtml();
     nameAnimation();
 }
 
+/**
+ * Gets the formatted date of the earliest urgent task.
+ * @param {Array} urgentTasks - Array of tasks with "urgent" priority.
+ * @returns {string} - The formatted date of the earliest urgent task or an empty string if no urgent tasks are found.
+ */
 function getDate(urgentTasks) {
     if (urgentTasks.length > 0) {
         const earliestDate = urgentTasks.reduce((minDate, obj) => {
@@ -25,6 +34,11 @@ function getDate(urgentTasks) {
     return "";
 }
 
+/**
+ * Updates the summary view HTML with task-related information.
+ * Calculates and counts various types of tasks (to-do, in-progress, awaiting-feedback, done, and urgent).
+ * Dynamically generates the HTML for the tasks, urgent tasks, and task status containers.
+ */
 function updateSummaryHtml() {
     const tasks = currentUser[`tasks`];
     const tasksCount = tasks.length;

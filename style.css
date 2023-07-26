@@ -18,6 +18,10 @@ body {
     box-sizing: border-box;
 }
 
+input {
+    font-family: 'Inter', sans-serif;
+}
+
 .d-none {
     display: none !important;
 }
@@ -366,6 +370,10 @@ body {
     opacity: 0;
 }
 
+#not-user>span {
+    font-family: 'Inter', sans-serif;
+}
+
 .r1410initial {
     display: none;
 }
@@ -561,7 +569,8 @@ body {
     justify-content: center;
 }
 
-#message-reset-password {
+#message-reset-password,
+#message-signed-succes {
     display: flex;
     width: 326px;
     height: 74px;
@@ -574,7 +583,8 @@ body {
     bottom: -74px;
 }
 
-#message-reset-password>span {
+#message-reset-password>span,
+#message-signed-succes>span {
     color: #FFF;
     font-size: 23px;
     font-family: 'Open Sans', sans-serif;

@@ -1,3 +1,9 @@
+/**
+ * This variable stores the initial status of a task.
+ * The default status is set to "to-do".
+ */
+let statusTask = "to-do";
+
 /**Asynchronous function to include HTML files into the current page */
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
