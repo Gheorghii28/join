@@ -301,9 +301,9 @@ function setTaskInputsValue(taskId) {
  * @param {number} taskId - The ID of the task being edited.
  */
 function setPrioBtn(taskId) {
-    let btns = document.querySelectorAll('[data-priority-edit]');
+    let btns = document.querySelectorAll('[data-priority]');
     btns.forEach(btn => {
-        const attributValue = btn.getAttribute("data-priority-edit");
+        const attributValue = btn.getAttribute("data-priority");
         const taskPrio = currentUser[`tasks`][taskId][`prio`];
         btn.classList.remove("active");
         if (attributValue == taskPrio) {
