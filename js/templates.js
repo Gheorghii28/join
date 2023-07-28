@@ -190,15 +190,15 @@ function generateSubTaskHtml(task) {
  * @returns {string} The HTML markup for the single subtask list item.
  */
 function generateSubTaskListItem(taskId, subTask, index) {
-    const idNr = `${taskId}${index}`;
-    const defaultDisplay = subTask.status === "opened" ? "d-none" : "";
-    const validDisplay = subTask.status === "closed" ? "d-none" : "";
+    const idNr = `1${taskId}${index}`;
+    const defaultDisplay = subTask.status === "opened" ? "" : "d-none";
+    const validDisplay = subTask.status === "closed" ? "" : "d-none";
     return `
     <li>
         <div class="">
             <div class="label-style">
-                <img id="subtask-default${idNr}" onclick="openSubTask(${taskId}, ${idNr}, ${index})" class="image-1 w16-h16 ${defaultDisplay}" src="./assets/img/check-default.png">
-                <img id="subtask-valid${idNr}" onclick="closeSubTask(${taskId}, ${idNr}, ${index})" class="image-2 w16-h16 ${validDisplay}" src="./assets/img/check-valid.png">
+                <img id="subtask-default${idNr}" onclick="closeSubTask(${taskId}, ${idNr}, ${index})" class="image-1 w16-h16 ${defaultDisplay}" src="./assets/img/check-default.png">
+                <img id="subtask-valid${idNr}"  onclick="openSubTask(${taskId}, ${idNr}, ${index})" class="image-2 w16-h16 ${validDisplay}" src="./assets/img/check-valid.png">
             </div>
         </div>
         <span>${subTask.value}</span>

@@ -245,3 +245,15 @@ function getBottomImageClass(status) {
     }
     return "";
 }
+
+/**
+* Formats a given date object into a string with the format "YYYY-MM-DD".
+* @param {Date} date - The date object to be formatted.
+* @returns {string} The formatted date string in "YYYY-MM-DD" format.
+*/
+function formatDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}

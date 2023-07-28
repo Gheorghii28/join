@@ -653,8 +653,8 @@ function addContactsToAssignedList(listId) {
 */
 function openSubTask(taskId, idNr, index) {
     updateSubTaskStatus("opened", taskId, index);
-    modifyClassById("remove", "d-none", [`subtask-valid${idNr}`]);
-    modifyClassById("add", "d-none", [`subtask-default${idNr}`]);
+    modifyClassById("add", "d-none", [`subtask-valid${idNr}`]);
+    modifyClassById("remove", "d-none", [`subtask-default${idNr}`]);
 }
 
 /**
@@ -666,8 +666,8 @@ function openSubTask(taskId, idNr, index) {
 */
 function closeSubTask(taskId, idNr, index) {
     updateSubTaskStatus("closed", taskId, index);
-    modifyClassById("add", "d-none", [`subtask-valid${idNr}`]);
-    modifyClassById("remove", "d-none", [`subtask-default${idNr}`]);
+    modifyClassById("remove", "d-none", [`subtask-valid${idNr}`]);
+    modifyClassById("add", "d-none", [`subtask-default${idNr}`]);
 }
 
 /**
