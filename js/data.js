@@ -15,7 +15,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Startseite-Design",
             status: "in-progress",
-            id: 1001
+            id: 1001,
+            closedSubTasks: 0,
+            progress: 0
         },
         {
             assigned: [userContacts[3], userContacts[5]],
@@ -27,7 +29,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Logo-Design",
             status: "to-do",
-            id: 1002
+            id: 1002,
+            closedSubTasks: 0,
+            progress: 0
         },
         {
             assigned: [userContacts[10], userContacts[12]],
@@ -39,7 +43,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Benutzerverwaltung",
             status: "done",
-            id: 1003
+            id: 1003,
+            closedSubTasks: 0,
+            progress: 0
         },
         {
             assigned: [userContacts[5]],
@@ -51,7 +57,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Frontend-Entwicklung",
             status: "in-progress",
-            id: 1004
+            id: 1004,
+            closedSubTasks: 0,
+            progress: 0
         },
         {
             assigned: [userContacts[15]],
@@ -63,7 +71,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Wireframes & Prototypen",
             status: "to-do",
-            id: 1005
+            id: 1005,
+            closedSubTasks: 0,
+            progress: 0
         },
         {
             assigned: [userContacts[4]],
@@ -75,7 +85,9 @@ function createTasks(userContacts) {
             subTasks: [],
             title: "Backend-Optimierung",
             status: "done",
-            id: 1006
+            id: 1006,
+            closedSubTasks: 0,
+            progress: 0
         }
     ];
 }

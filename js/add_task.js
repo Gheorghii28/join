@@ -400,12 +400,25 @@ function showSubTask() {
 }
 
 /**
+* Creates a new subtask object with the given subtask value and sets its status to "open".
+* @param {string} subTaskValue - The value of the new subtask.
+* @returns {Object} A new subtask object with properties value and status.
+*/
+function newSubTask(subTaskValue) {
+    return {
+        value: subTaskValue,
+        status: "opened"
+    }
+}
+
+/**
  * Function that saves the subtask input value and adds it to the subTasks array.
  * Clears the subtask input value after saving.
  */
 function saveSubTask() {
-    let subTask = document.getElementById("subtask-input").value;
-    if (subTask.length > 0) {
+    let subTaskValue = document.getElementById("subtask-input").value;
+    let subTask = newSubTask(subTaskValue);
+    if (subTask[`value`].length > 0) {
         addUniqueElement(subTasks, subTask);
     }
     clearInputValues(["subtask-input"]);
@@ -430,8 +443,8 @@ function cancelInputSubTask() {
  * @param {string} subTask - The subtask to be filtered.
  * @returns {Array} - The filtered array of subtasks.
  */
-function filterSubTasks(array, subTask) {
-    return array.filter(el => el !== subTask);
+function filterSubTasks(array, subTaskValue) {
+    return array.filter(el => el.value !== subTaskValue);
 }
 
 /**
@@ -439,8 +452,8 @@ function filterSubTasks(array, subTask) {
  * @param {string} subTask - The subtask to be removed.
  * @param {number} index - The index of the subtask in the array.
  */
-function removeSubTask(subTask, index) {
-    subTasks = filterSubTasks(subTasks, subTask);
+function removeSubTask(subTaskValue, index) {
+    subTasks = filterSubTasks(subTasks, subTaskValue);
     modifyClassById("add", "d-none", [`img-valid-${index}`]);
     modifyClassById("remove", "d-none", [`img-default-${index}`]);
 }
@@ -450,7 +463,8 @@ function removeSubTask(subTask, index) {
  * @param {string} subTask - The subtask to be added.
  * @param {number} index - The index of the subtask in the array.
  */
-function addSubtask(subTask, index) {
+function addSubtask(subTaskValue, index) {
+    let subTask = newSubTask(subTaskValue);
     subTasks.push(subTask);
     modifyClassById("remove", "d-none", [`img-valid-${index}`]);
     modifyClassById("add", "d-none", [`img-default-${index}`]);
@@ -612,7 +626,9 @@ function newTask(title, description, date) {
         prio: taskPrio,
         subTasks: subTasks,
         title: title,
-        status: statusTask
+        status: statusTask,
+        progress: 0,
+        closedSubTasks: 0
     };
 }
 
@@ -623,5 +639,54 @@ function newTask(title, description, date) {
  */
 function addContactsToAssignedList(listId) {
     const list = document.getElementById(listId);
-    list.innerHTML = generateAssignedListHtml();
+    if (list) {
+        list.innerHTML = generateAssignedListHtml();
+    }
+}
+
+/**
+* Opens a subtask in the specified task.
+* Updates the subtask status to "opened" and modifies the corresponding HTML elements to reflect the change.
+* @param {number} taskId - The ID of the task containing the subtask.
+* @param {string} idNr - The ID number of the subtask element in the HTML markup.
+* @param {number} index - The index of the subtask in the array of subtasks.
+*/
+function openSubTask(taskId, idNr, index) {
+    updateSubTaskStatus("opened", taskId, index);
+    modifyClassById("remove", "d-none", [`subtask-valid${idNr}`]);
+    modifyClassById("add", "d-none", [`subtask-default${idNr}`]);
+}
+
+/**
+* Closes a subtask in the specified task.
+* Updates the subtask status to "closed" and modifies the corresponding HTML elements to reflect the change.
+* @param {number} taskId - The ID of the task containing the subtask.
+* @param {string} idNr - The ID number of the subtask element in the HTML markup.
+* @param {number} index - The index of the subtask in the array of subtasks.
+*/
+function closeSubTask(taskId, idNr, index) {
+    updateSubTaskStatus("closed", taskId, index);
+    modifyClassById("add", "d-none", [`subtask-valid${idNr}`]);
+    modifyClassById("remove", "d-none", [`subtask-default${idNr}`]);
+}
+
+/**
+* Updates the status of a subtask in the specified task.
+* @param {string} status - The new status of the subtask ("opened" or "closed").
+* @param {number} taskId - The ID of the task containing the subtask.
+* @param {number} index - The index of the subtask in the array of subtasks.
+*/
+function updateSubTaskStatus(status, taskId, index) {
+    let closedSubTask = currentUser[`tasks`][taskId][`closedSubTasks`];
+    let progress = currentUser[`tasks`][taskId][`progress`];
+    let subTasks = currentUser[`tasks`][taskId][`subTasks`];
+    if (status === "closed") {
+        closedSubTask++;
+    } else if (status === "opened") {
+        closedSubTask--;
+    }
+    progress = closedSubTask / subTasks.length * 100;
+    currentUser[`tasks`][taskId][`closedSubTasks`] = closedSubTask;
+    currentUser[`tasks`][taskId][`progress`] = progress;
+    currentUser[`tasks`][taskId][`subTasks`][index][`status`] = status;
 }

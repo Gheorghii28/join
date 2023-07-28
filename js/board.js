@@ -196,7 +196,12 @@ function openTask(taskId) {
 /**
  * Closes the details of the currently opened task.
  */
-function closeOpenedTask() {
+async function closeOpenedTask() {
+    await updateCurrentUser(currentUser);
+    await updateCurrentUserFromUsers(users, currentUser);
+    await loadCurrentUser();
+    await loadUsers();
+    updateHTML();
     modifyClassById("add", "d-none", ["opened-task-container", "opened-task", "opened-task-edit"]);
 }
 
@@ -208,10 +213,6 @@ async function deleteTask(taskId) {
     if (!isLoading) {
         isLoading = true;
         await updateRemovedTaskCurrentUser(taskId);
-        await updateCurrentUserFromUsers(users, currentUser);
-        await loadCurrentUser();
-        await loadUsers();
-        updateHTML();
         closeOpenedTask();
         isLoading = false;
     }
@@ -387,7 +388,9 @@ async function saveEditedTask() {
     const taskTitle = document.getElementById("o-t-input-edit-title").value;
     const taskDescription = document.getElementById("o-t-textarea-edit-description").value;
     const taskDate = document.getElementById("o-t-edit-date-input").value;
-    currentUser[`tasks`][taskId] = newEditedTask(taskId, taskTitle, taskDescription, taskDate);
+    const closedSubTasks = currentUser[`tasks`][taskId][`closedSubTasks`];
+    const progress = currentUser[`tasks`][taskId][`progress`];
+    currentUser[`tasks`][taskId] = newEditedTask(taskId, taskTitle, taskDescription, taskDate, closedSubTasks, progress);
     updateEditedTasks();
     updateHTML();
     modifyClassById("add", "d-none", ["opened-task-container", "opened-task-edit"]);
@@ -411,7 +414,7 @@ async function updateEditedTasks() {
  * @param {string} taskDate - The due date of the edited task.
  * @returns {Object} - The new task object with edited task information.
  */
-function newEditedTask(taskId, taskTitle, taskDescription, taskDate) {
+function newEditedTask(taskId, taskTitle, taskDescription, taskDate, closedSubTasks, progress) {
     return {
         id: currentUser[`tasks`][taskId][`id`],
         assigned: assignedPersons,
@@ -422,7 +425,9 @@ function newEditedTask(taskId, taskTitle, taskDescription, taskDate) {
         prio: taskPrio,
         subTasks: subTasks,
         title: taskTitle,
-        status: currentUser[`tasks`][taskId][`status`]
+        status: currentUser[`tasks`][taskId][`status`],
+        progress: progress,
+        closedSubTasks: closedSubTasks
     };
 }
 

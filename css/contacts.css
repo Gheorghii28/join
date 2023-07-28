@@ -598,10 +598,6 @@
     right: 559px;
 }
 
-.user-bg {
-    background-color: #FF7A00 !important;
-}
-
 .div-user-icon>div {
     display: inline-flex;
     justify-content: center;

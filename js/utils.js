@@ -203,3 +203,45 @@ function getConvertedInputValue(inputId) {
     }
     return phoneNumber;
 }
+
+/**
+ * Function to set the background color of an element based on the color of a specific contact.
+ * It retrieves the contact's color based on the provided contact ID from the current user's contacts.
+ * Then, it sets the background color of the specified element to the contact's color.
+ * @param {number} contactId - The ID of the contact whose color will be used.
+ * @param {string} elId - The ID of the element to which the background color will be applied.
+ * @param {object} currentUser - The object representing the current user.
+ */
+function setContactColorToElement(contactId, elId, currentUser) {
+    const contactIndex = getContactIndex(contactId, currentUser);
+    const contactColor = currentUser[`contacts`][contactIndex][`color`];
+    document.getElementById(elId).style.backgroundColor = contactColor;
+}
+
+/**
+ * Determines the top image class based on the task status.
+ * @param {string} status - The status of the task ("to-do" or "done").
+ * @returns {string} The class name for the top image.
+ */
+function getTopImageClass(status) {
+    if (status === "to-do") {
+        return "todo-img-top";
+    } else if (status === "done") {
+        return "done-img-top";
+    }
+    return "";
+}
+
+/**
+ * Determines the bottom image class based on the task status.
+ * @param {string} status - The status of the task ("to-do" or "done").
+ * @returns {string} The class name for the bottom image.
+ */
+function getBottomImageClass(status) {
+    if (status === "to-do") {
+        return "todo-img-bottom";
+    } else if (status === "done") {
+        return "done-img-bottom";
+    }
+    return "";
+}

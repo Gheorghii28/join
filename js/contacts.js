@@ -186,10 +186,15 @@ function showChosenContact(contactId) {
 }
 
 /**
- * Sets the background color for the chosen contact.
+ * Function to set the background color of the chosen contact and its related list item.
+ * It sets the background color of the specified element with ID "contact-initials"
+ * to the color of the contact with the provided contactId from the currentUser's contacts.
+ * Additionally, it removes the "bg-li" class from all ".contact" list items and adds the "bg-li" class
+ * to the list item with the class "contact-li-{contactId}" to highlight the chosen contact in the list.
  * @param {number} contactId - The ID of the chosen contact.
  */
 function setBgColorToChosedContact(contactId) {
+    setContactColorToElement(contactId, "contact-initials", currentUser);
     document.querySelectorAll(".contact").forEach(li => {
         li.classList.remove("bg-li");
         modifyClassById("add", "bg-li", [`contact-li-${contactId}`]);
@@ -197,10 +202,18 @@ function setBgColorToChosedContact(contactId) {
 }
 
 /**
- * Opens the edit contact form for a selected contact.
- * @param {number} contactId - The ID of the selected contact.
+ * Function to open the edit contact form and pre-fill it with the details of the specified contact.
+ * It sets the background color of the element with ID "user-bg" to the color of the contact
+ * with the provided contactId from the currentUser's contacts.
+ * Then, it pre-fills the edit contact form fields with the details of the chosen contact using
+ * the setContactValueToEditForm function.
+ * After that, it displays the edit contact form by calling the showEditContactForm function.
+ * Finally, it sets the data-id attribute of the edit contact form to the provided contactId
+ * using the setDataIdForm function.
+ * @param {number} contactId - The ID of the contact to be edited.
  */
 function openEditContactForm(contactId) {
+    setContactColorToElement(contactId, "user-bg", currentUser);
     setContactValueToEditForm(contactId);
     showEditContactForm();
     setDataIdForm(contactId);

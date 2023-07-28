@@ -24,11 +24,11 @@ function subTaskAssigned(subTask, index) {
     <li>
         <div class="">
             <div class="label-style">
-                <img id="img-default-${index}" onclick="addSubtask('${subTask}', ${index})" class="image-1 w16-h16 d-none" src="./assets/img/check-default.png">
-                <img id="img-valid-${index}" onclick="removeSubTask('${subTask}', ${index})" class="image-2 w16-h16" src="./assets/img/check-valid.png">
+                <img id="img-default-${index}" onclick="addSubtask('${subTask[`value`]}', ${index})" class="image-1 w16-h16 d-none" src="./assets/img/check-default.png">
+                <img id="img-valid-${index}" onclick="removeSubTask('${subTask[`value`]}', ${index})" class="image-2 w16-h16" src="./assets/img/check-valid.png">
             </div>
         </div>
-        <span>${subTask}</span>
+        <span>${subTask[`value`]}</span>
     </li>`;
 }
 
@@ -39,12 +39,15 @@ function subTaskAssigned(subTask, index) {
  */
 function generateTaskHTML(task) {
     const assigneds = generateAssignedHtml(task[`assigned`]);
+    const taskProgresBar = generateTaskProgresBarHtml(task);
     let description = getLimitedtext(task[`description`], 100);
+    let topImgClass = getTopImageClass(task[`status`]);
+    let bottomImgClass = getBottomImageClass(task[`status`]);
     return `
     <div onclick="taskEvent(event, ${task[`id`]})" draggable="true" ondragstart="startDragging(event ,${task[`id`]})" class="task-card">
         <div>
-            <img class="btn-direction" data-status="${task[`status`]}" data-direction="top" src="./assets/img/direction-top.png">
-            <img class="btn-direction" data-status="${task[`status`]}" data-direction="bottom" src="./assets/img/direction-bottom.png">
+            <img class="btn-direction ${topImgClass}" data-status="${task[`status`]}" data-direction="top" src="./assets/img/direction-top.png">
+            <img class="btn-direction ${bottomImgClass}" data-status="${task[`status`]}" data-direction="bottom" src="./assets/img/direction-bottom.png">
             <div class="task-type" style="background-color: ${task[`color`]};">
                 <span>${task[`category`]}</span>
             </div>
@@ -54,10 +57,7 @@ function generateTaskHTML(task) {
                     <span class="task-text">${description}</span>
                 </div>
             </div>
-            <div class="task-progress">
-                <div class="task-progress-bar"></div>
-                <span>1/2 Done</span>
-            </div>
+            ${taskProgresBar}
             <div class="task-footer">
                 <div class="task-responsible">
                     ${assigneds}
@@ -67,6 +67,29 @@ function generateTaskHTML(task) {
                 </div>
             </div>
         </div>
+    </div>`;
+}
+
+/**
+ * Generates HTML markup for displaying the task progress bar, showing the number of done subtasks out of the total subtasks.
+ * @param {Object} task - An object representing a task with properties like id, title, description, category, status, color, assigned, prio, etc.
+ * @returns {string} The HTML markup for the task progress bar.
+ */
+function generateTaskProgresBarHtml(task) {
+    const subTasks = task[`subTasks`];
+    const subTaskCount = subTasks.length;
+    const progress = task[`progress`];
+    const closedSubTask = task[`closedSubTasks`];
+    let display = "d-none";
+    if (subTaskCount > 0) {
+        display = "";
+    }
+    return `
+    <div class="task-progress ${display}">
+        <div class="task-progress-bar">
+            <div style="width: ${progress}%;"></div>
+        </div>
+        <span>${closedSubTask}/${subTaskCount} Done</span>
     </div>`;
 }
 
@@ -105,7 +128,7 @@ function generateOpenedTaskHtml(task) {
     const date = task[`date`];
     const parts = date.split("-");
     const formattedDate = parts.reverse().join("-");
-    const subtasks = generateSubTaskHtml(task[`subTasks`]);
+    const subtasks = generateSubTaskHtml(task);
     const assigneds = generateOpenedTaskAssignedHtml(task[`assigned`]);
     return `            
     <div id="o-t-type" style="background-color: ${task[`color`]};">
@@ -147,15 +170,39 @@ function generateOpenedTaskHtml(task) {
 
 /**
  * Generates HTML markup for displaying a list of subtasks as list items.
- * @param {Array} subtasks - An array of subtask strings to be displayed.
+ * @param {Object} task - An object representing a task with properties like id and subTasks.
  * @returns {string} The HTML markup for the list of subtasks.
  */
-function generateSubTaskHtml(subtasks) {
+function generateSubTaskHtml(task) {
     let li = "";
-    subtasks.forEach(subtask => {
-        li += `<li>${subtask}</li>`;
+    let subTasks = task.subTasks;
+    subTasks.forEach((subTask, index) => {
+        li += generateSubTaskListItem(task.id, subTask, index);
     });
     return li;
+}
+
+/**
+ * Generates HTML markup for a single subtask list item.
+ * @param {number} taskId - The ID of the parent task.
+ * @param {Object} subTask - An object representing a subtask with properties like value and status.
+ * @param {number} index - The index of the subtask in the parent task's subTasks array.
+ * @returns {string} The HTML markup for the single subtask list item.
+ */
+function generateSubTaskListItem(taskId, subTask, index) {
+    const idNr = `${taskId}${index}`;
+    const defaultDisplay = subTask.status === "opened" ? "d-none" : "";
+    const validDisplay = subTask.status === "closed" ? "d-none" : "";
+    return `
+    <li>
+        <div class="">
+            <div class="label-style">
+                <img id="subtask-default${idNr}" onclick="openSubTask(${taskId}, ${idNr}, ${index})" class="image-1 w16-h16 ${defaultDisplay}" src="./assets/img/check-default.png">
+                <img id="subtask-valid${idNr}" onclick="closeSubTask(${taskId}, ${idNr}, ${index})" class="image-2 w16-h16 ${validDisplay}" src="./assets/img/check-valid.png">
+            </div>
+        </div>
+        <span>${subTask.value}</span>
+    </li>`;
 }
 
 /**
@@ -185,7 +232,7 @@ function generateOpenedTaskAssignedHtml(assigneds) {
 function generateAssignedListHtml() {
     const assigned = generateAssigned();
     return `
-    <li data-value="user-invite" data-custom-status="false"  class="user-invite">
+    <li data-value="user-invite" data-custom-status="false"  class="user-invite d-none">
         <span>Invite new contact </span>
         <div class="user-icon">
             <img src="./assets/img/user-icon.png">

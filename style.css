@@ -42,6 +42,22 @@ input {
     overflow-y: hidden;
 }
 
+.todo-img-top {
+    display: none !important;
+}
+
+.todo-img-bottom {
+    top: auto !important;
+}
+
+.done-img-top {
+    top: auto !important;
+}
+
+.done-img-bottom {
+    display: none !important;
+}
+
 #login-container {
     width: 100%;
     height: 100%;

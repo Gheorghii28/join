@@ -418,6 +418,16 @@
     word-break: break-word;
 }
 
+#task-assigned-edit-div {
+    overflow-x: scroll;
+    width: 422px;
+}
+
+#task-assigned-edit-div::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
 .task-progress {
     display: flex;
     justify-content: center;
@@ -430,6 +440,12 @@
     height: 8px;
     border-radius: 2px;
     background: #F4F4F4;
+}
+
+.task-progress-bar>div {
+    height: 100%;
+    width: 0%;
+    background-color: #29ABE2;
 }
 
 .task-progress>span {
@@ -482,7 +498,7 @@
 
 .responsible {
     display: flex;
-    width: 35px;
+    min-width: 35px;
     height: 35px;
     padding: 10px 8px;
     flex-direction: column;
@@ -732,6 +748,8 @@
 #o-t-subtasks>ul>li {
     width: 100%;
     word-break: break-all;
+    display: flex;
+    gap: 10px;
 }
 
 #o-t-prio {
