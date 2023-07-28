@@ -997,6 +997,14 @@
         width: 100%;
     }
 
+    #reset-password>form {
+        gap: 20px;
+    }
+
+    #login>form {
+        gap: 30px;
+    }
+
     .input-div {
         width: 100%;
     }
@@ -1309,6 +1317,10 @@
         font-size: 16px !important;
     }
 
+    .task-invite-input {
+        width: 100%;
+    }
+
     input,
     input::placeholder {
         font-size: 16px !important;
@@ -1354,6 +1366,14 @@
     #task-assigned-edit-div,
     .o-t-e-custom-select {
         width: 100% !important;
+    }
+
+    #wrong-not-matches {
+        width: 100% !important;
+    }
+
+    #selected-category-div {
+        gap: 0px;
     }
 
     #o-t-textarea-description {
