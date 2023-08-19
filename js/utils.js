@@ -186,7 +186,7 @@ function convertPhoneNumber(phoneNumber) {
     if (phoneNumber.startsWith('+')) {
         return '00' + phoneNumber.slice(1);
     }
-    return JSON.parse(phoneNumber);
+    return phoneNumber;
 }
 
 /**
